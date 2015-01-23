@@ -18,3 +18,7 @@ Incorporated city geojson<br>
 This version tests the leaflet search plugin by stefanocudini<br>
 So far it only searches the geojson containing cities, but each marker is a circleMarker where the color is styled according to whether the city has a website for their GIS dept or section.<br>
 Test demo here,  <a href="http://bit.ly/17uFks5">Pizza</a><br>
+
+1.23.2015<br>
+=========<br>
+Updated files to reflect current demo <a href="http://bit.ly/17uFks5">Pizza</a><br>
