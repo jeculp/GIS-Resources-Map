@@ -112,7 +112,7 @@ map.addLayer(citysim);
 //This loads the map    
 var map = L.map('map')
     .setView([36.745487, -119.553223], 6);
-
+map.options.maxZoom = 6;
 var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
 attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
 }).addTo(map).setOpacity(.75);
