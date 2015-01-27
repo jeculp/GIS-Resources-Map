@@ -160,7 +160,7 @@ var citysim = new L.geoJson.ajax("data/cities.geojson", {
 			}
     }).addTo(map);  
 
-map.addControl( new L.Control.Search({layer: citysim, propertyName: 'name', zoom:11}) ); // This creates a control to search within the geojson  
+map.addControl( new L.Control.Search({layer: citysim, propertyName: 'name', zoom:6}) ); // This creates a control to search within the geojson  
     
 var info = L.control();
 
