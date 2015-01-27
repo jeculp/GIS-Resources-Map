@@ -69,41 +69,6 @@
 			};
 		}
 
-    function highlightFeature(e) {
-			var layer = e.target;
-
-			layer.setStyle({
-				weight: 5,
-				color: '#666',
-				dashArray: '',
-				fillOpacity: 0.7
-			});
-
-			if (!L.Browser.ie && !L.Browser.opera) {
-				layer.bringToFront();
-			}
-		}
-
-		function resetHighlight(e) {
-			countysim.resetStyle(e.target);
-
-		}
-
-		function zoomToFeature(e) {
-			map.fitBounds(e.target.getBounds());
-            
-            zoomloadlayer();
-		}
-
-    		function onEachFeature(feature, layer) {
-			layer.on({
-				mouseover: highlightFeature,
-				mouseout: resetHighlight,
-				click: zoomToFeature
-			});
-		}
-//end of Hover over features
-    
 //Test Function for adding layer at fitBounds    
 function zoomloadlayer(){
 map.addLayer(citysim);
@@ -130,7 +95,6 @@ attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under 
     
 var countysim = new L.geoJson.ajax("data/countysimple.geojson", {
     style: countylines,
-    //onEachFeature: onEachFeature //This enables the hightlighting function
     }).addTo(map);  
 
     
@@ -160,7 +124,7 @@ var citysim = new L.geoJson.ajax("data/cities.geojson", {
 			}
     }).addTo(map);  
 
-map.addControl( new L.Control.Search({layer: citysim, propertyName: 'name', zoom:6}) ); // This creates a control to search within the geojson  
+map.addControl( new L.Control.Search({layer: citysim, propertyName: 'name', zoom:11}) ); // This creates a control to search within the geojson  
     
 var info = L.control();
 
