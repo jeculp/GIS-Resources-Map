@@ -2,8 +2,8 @@
 <html lang="en" class="no-js">
 	<head>
 		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>GIS Contacts Map for California</title>
 		<meta name="description" content="Blueprint: Tooltip Menu" />
 		<meta name="keywords" content="Tooltip Menu, navigation, tooltip, menu, css, web development, template" />
@@ -11,35 +11,15 @@
 		<link rel="shortcut icon" href="../favicon.ico">
 		<link rel="stylesheet" type="text/css" href="css/default.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
-        <link rel="stylesheet" type="text/css" href="css/leaflet-search.css" />
-        <link rel="stylesheet" type="text/css" href="css/leaflet.css" />
-        <script src="js/leaflet.js"></script>
-        <script src="js/modernizr.custom.js"></script>
-        <script src="js/leaflet.ajax.min.js"></script>
-        <script src="js/leaflet-search.js"></script>
-        <style>
-            body { margin:0; padding:0; }
-            #map { position:fixed; top:150px; bottom:0; width:100%; }
-            .info {
-                padding: 6px 8px;
-                font: 14px/16px Arial, Helvetica, sans-serif;
-                background: white;
-                background: rgba(255,255,255,0.8);
-                box-shadow: 0 0 15px rgba(0,0,0,0.2);
-                border-radius: 5px;
-                }
-                .info h4 {
-                margin: 0 0 5px;
-                color: #777;
-                }  
-            .info i {
-                width: 18px;
-                height: 18px;
-                float: left;
-                margin-right: 8px;
-                opacity: 0.7;
-            }
-        </style>
+		<link rel="stylesheet" type="text/css" href="css/leaflet-search.css" />
+		<link rel="stylesheet" type="text/css" href="css/leaflet.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="http://www.javascriptoo.com/application/html/js/jsoma/tabletop/tabletop.js"></script>
+		<script src="js/tabletop.js"></script>
+		<script src="js/leaflet.js"></script>
+		<script src="js/modernizr.custom.js"></script>
+		<script src="js/leaflet.ajax.min.js"></script>
+		<script src="js/leaflet-search.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -52,96 +32,97 @@
 					<a href="http://tympanus.net/codrops/?p=15212" class="bp-icon bp-icon-drop" data-info="back to the Codrops article"><span>back to the Codrops article</span></a>
 					<a href="http://tympanus.net/codrops/category/blueprints/" class="bp-icon bp-icon-archive" data-info="Blueprints archive"><span>Go to the archive</span></a-->
 				</nav>
-			</header>	
-<!--map loads here-->        
-<div id='map'></div>
-<script>
+			</header>
 
-//This Controls the hover over feature functions    
-    function style(feature) {
-			return {
-				weight: 2,
-				opacity: 1,
-				color: 'white',
-				dashArray: '3',
-				fillOpacity: 0.7,
-				fillColor: '#47a3da'
-			};
-		}
+			<!--map loads here-->
+			<div id='map'></div>
 
-//Test Function for adding layer at fitBounds    
-function zoomloadlayer(){
-map.addLayer(citysim);
-}
-    
-//This loads the map    
-var map = L.map('map')
-    .setView([36.745487, -119.553223], 6);
-map.options.minZoom = 6;
-var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
-attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
-}).addTo(map).setOpacity(.75);
-    
-            var countylines = {
-			"clickable": true,
-			"color": "#47a3da",
-			"fill": false,
-            "dashArray" : '3',
-			"weight":.5,
-			"opacity": 1,
-			"fillOpacity": 0.2
-			};     
+			<script>
+				//This Controls the hover over feature functions
+				function style(feature) {
+					return {
+						weight: 2,
+						opacity: 1,
+						color: 'white',
+						dashArray: '3',
+						fillOpacity: 0.7,
+						fillColor: '#47a3da'
+					};
+				}
 
-    
-var countysim = new L.geoJson.ajax("data/countysimple.geojson", {
-    style: countylines,
-    }).addTo(map);  
+				//Test Function for adding layer at fitBounds
+				function zoomloadlayer(){
+					map.addLayer(citysim);
+				}
 
-    
-//Gets and returns colors for Cities that have a web page link in geojson file
-function getcitycolor(d) {
-		var d = String(d);	
-   		return 	d ==  'null' ? '#C26263' :
-					 '#47a3da';
-}
+				//This loads the map
+				var map = L.map('map')
+						.setView([36.745487, -119.553223], 6);
+				map.options.minZoom = 6;
+				var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
+				attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
+				}).addTo(map).setOpacity(.75);
 
-//Adds a layer with Incorporated Cities onto map, styling performed within    
-var citysim = new L.geoJson.ajax("data/cities.geojson", {
-    pointToLayer: function (feature, latlng) {
-			return L.circleMarker(latlng,{
-                    radius:5,
-				    color: '#bb4c3c',
-					weight:0.0,
-				    fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
-				    fillOpacity: .5
-				}).bindPopup("<b>City:</b> "+ feature.properties.name+ "<br> " +
-                             "<b>Name:</b> "+ feature.properties["First Name"]+" "+feature.properties["Last Name"]+ "<br> " +
-                             "<b>Title:</b> "+ feature.properties["Title"]+ "<br> " +
-                             "<b>Agency:</b> "+ feature.properties["Agency"]+ "<br> " +
-                             "<b>email:</b> "+ feature.properties["e-mail"]+ "<br> " +
-                             "<b>Phone:</b> "+ feature.properties["Phone"]+ "<br> " +
-                             "<b>GIS Page:</b> " +'<a href="' +feature.properties["GIS Page"]+'">Link</a>');
-			}
-    }).addTo(map);  
+										var countylines = {
+							"clickable": true,
+							"color": "#47a3da",
+							"fill": false,
+										"dashArray" : '3',
+							"weight":.5,
+							"opacity": 1,
+							"fillOpacity": 0.2
+							};
 
-map.addControl( new L.Control.Search({layer: citysim, propertyName: 'name', zoom:11}) ); // This creates a control to search within the geojson  
-    
-var info = L.control();
 
-info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this.update();
-    return this._div;
-};
+				var countysim = new L.geoJson.ajax("data/countysimple.geojson", {
+					style: countylines,
+					}).addTo(map);
 
-// method that we will use to update the control based on feature properties passed
-info.update = function (props) {
-    this._div.innerHTML = '<h4>Legend</h4><i style="background:#bb4c3c"></i><h4>City has no website</h4><i style="background:#47a3da"></i><h4>City has website</h4><br><h4>Click on topleft to search for a city!</h4>';
-};
 
-info.addTo(map);
-    
-</script>
+				//Gets and returns colors for Cities that have a web page link in geojson file
+				function getcitycolor(d) {
+						var d = String(d);
+							return  d ==  'null' ? '#C26263' :
+									 '#47a3da';
+				}
+
+				//Adds a layer with Incorporated Cities onto map, styling performed within
+				var citysim = new L.geoJson.ajax("data/cities.geojson", {
+						pointToLayer: function (feature, latlng) {
+							return L.circleMarker(latlng,{
+														radius:5,
+										color: '#bb4c3c',
+									weight:0.0,
+										fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
+										fillOpacity: .5
+								}).bindPopup("<b>City:</b> "+ feature.properties.name+ "<br> " +
+																		 "<b>Name:</b> "+ feature.properties["First Name"]+" "+feature.properties["Last Name"]+ "<br> " +
+																		 "<b>Title:</b> "+ feature.properties["Title"]+ "<br> " +
+																		 "<b>Agency:</b> "+ feature.properties["Agency"]+ "<br> " +
+																		 "<b>email:</b> "+ feature.properties["e-mail"]+ "<br> " +
+																		 "<b>Phone:</b> "+ feature.properties["Phone"]+ "<br> " +
+																		 "<b>GIS Page:</b> " +'<a href="' +feature.properties["GIS Page"]+'">Link</a>');
+							}
+						}).addTo(map);
+
+				map.addControl( new L.Control.Search({layer: citysim, propertyName: 'name', zoom:11}) ); // This creates a control to search within the geojson
+
+				var info = L.control();
+
+				info.onAdd = function (map) {
+						this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+						this.update();
+						return this._div;
+				};
+
+				// method that we will use to update the control based on feature properties passed
+				info.update = function (props) {
+						this._div.innerHTML = '<h4>Legend</h4><i style="background:#bb4c3c"></i><h4>City has no website</h4><i style="background:#47a3da"></i><h4>City has website</h4><br><h4>Click on topleft to search for a city!</h4>';
+				};
+
+				info.addTo(map);
+			</script>
+
 			<ul id="cbp-tm-menu" class="cbp-tm-menu">
 				<li>
 					<a href="#">Home</a>
@@ -181,7 +162,7 @@ info.addTo(map);
 						<li><a href="#" class="cbp-tm-icon-clock">Name</a></li>
 					</ul>
 				</li>
-                <li>
+						<li>
 					<a href="#">County</a>
 					<ul class="cbp-tm-submenu">
 						<li><a href="#" class="cbp-tm-icon-screen">Los Angeles</a></li>
@@ -193,8 +174,10 @@ info.addTo(map);
 					</ul>
 				</li>
 			</ul>
+
 			<div class="filler-below"></div>
 		</div>
+
 		<script src="js/cbpTooltipMenu.min.js"></script>
 		<script>
 			var menu = new cbpTooltipMenu( document.getElementById( 'cbp-tm-menu' ) );
