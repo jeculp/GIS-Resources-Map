@@ -1,24 +1,33 @@
 Project-Pizza
 =============
-
 Monies for Pizzas
 
-1.10.2015<br>
-=========<br>
-Added v01 to test intial page<br>
-county and city geojson test files used<br>
-hover over features and zoom to feature added<br>
+Directions
+=========
+1. Open Terminal and clone this repository by running `git clone https://github.com/maptimeLA/Project-Pizza.git`
+2. `cd Project-Pizza`
+3. `python -m SimpleHTTPServer 8000`
+4. Go to your browser and open `http://localhost:8000/`
 
+1.10.2015
+=========
+- Added v01 to test intial page
+- county and city geojson test files used
+- hover over features and zoom to feature added
 
-1.21.2015<br>
-=========<br>
-Added v02, removed v01<br>
-Disabled hover over features and zoom to feature, to be enabled when additional layers are made.
-Incorporated city geojson<br>
-This version tests the leaflet search plugin by stefanocudini<br>
-So far it only searches the geojson containing cities, but each marker is a circleMarker where the color is styled according to whether the city has a website for their GIS dept or section.<br>
-Test demo here,  <a href="http://maptimela.github.io/Project-Pizza/">Pizza</a><br>
+1.21.2015
+=========
+- Added v02, removed v01
+- Disabled hover over features and zoom to feature, to be enabled when additional layers are made.
+- Incorporated city geojson
+- This version tests the leaflet search plugin by stefanocudini
+- So far it only searches the geojson containing cities, but each marker is a circleMarker where the color is styled according to whether the city has a website for their GIS dept or section.
+- Test demo [http://maptimela.github.io/Project-Pizza](here)
 
-1.23.2015<br>
-=========<br>
-Updated files to reflect current demo <a href="http://maptimela.github.io/Project-Pizza/">Pizza</a><br>
+1.23.2015
+=========
+- Updated files to reflect current demo [http://maptimela.github.io/Project-Pizza](here)
+
+2.05.2015
+=========
+- Add [https://github.com/jsoma/tabletop](Tabletop.js) to connect Google Spreadsheet to page.
