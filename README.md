@@ -22,12 +22,12 @@ Directions
 - Incorporated city geojson
 - This version tests the leaflet search plugin by stefanocudini
 - So far it only searches the geojson containing cities, but each marker is a circleMarker where the color is styled according to whether the city has a website for their GIS dept or section.
-- Test demo [http://maptimela.github.io/Project-Pizza](here)
+- Test demo (http://maptimela.github.io/Project-Pizza)[here]
 
 1.23.2015
 =========
-- Updated files to reflect current demo [http://maptimela.github.io/Project-Pizza](here)
+- Updated files to reflect current demo (http://maptimela.github.io/Project-Pizza)[here]
 
 2.05.2015
 =========
-- Add [https://github.com/jsoma/tabletop](Tabletop.js) to connect Google Spreadsheet to page.
+- Add (https://github.com/jsoma/tabletop)[Tabletop.js] to connect Google Spreadsheet to page.
