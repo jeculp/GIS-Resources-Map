@@ -6,15 +6,12 @@ body {
 #cbp-tm-menu {
 	display: none;
 }
-
-
 #big-list {
 	float: left;
 	width: 30%;
 	height: 400px;
 	overflow-y: scroll;
 }
-
 #big-list .list-title {
 	width: 100%;
 	text-align: center;
@@ -26,15 +23,20 @@ body {
 	cursor: pointer;
 	border-bottom: 1px solid #fff;
 }
-
 #big-list .list-title:hover {
 	color: #02639d;
 }
-
 #big-list .group-list {
 	display: none;
+	margin: 10px 0 0 0;
+	padding: 0;
 }
-
+#big-list .group-list li {
+	padding: 10px 20px;
+	background: #eee;
+	color: #555;
+	border-bottom: 1px solid #ccc;
+}
 #map {
 	height: 400px;
 	width:70%;
