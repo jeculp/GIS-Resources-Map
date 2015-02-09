@@ -33,7 +33,6 @@ body {
 }
 #big-list .visible-list {
 	display: block;
-	margin: 0;
 }
 #big-list .group-list li {
 	padding: 10px 20px;
