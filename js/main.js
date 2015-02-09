@@ -14,10 +14,27 @@ $(document).ready(function() {
         Tabletop.init({
             key: public_spreadsheet_url,
             callback: function(data, tabletop) {
-                console.log(data)
+                // console.log(data)
+                parseData(data);
             },
             simpleSheet: true
         });
+    }
+
+    function parseData(data) {
+        // log length of data
+        console.log(data.length);
+
+        // loop through and append any federal agencies to federal list
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].type === "Federal") {
+                var node = document.createElement('li');                 // Create a <li> node
+                var textnode = document.createTextNode(data[i].name);         // Create a text node
+                node.appendChild(textnode);                              // Append the text to <li>
+                document.getElementById("federal-list").appendChild(node);     // Append <li> to <ul> with id="myList"
+            }
+        }
+
     }
 
   // map
