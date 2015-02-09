@@ -40,13 +40,13 @@ $(document).ready(function() {
                 addChild(data[i],"federal-list");
             } else if (data[i].type === "State") {
                 addChild(data[i],"state-list");
-            } else if (data[i].type === "Regional") {
+            } else if (data[i].type === "Regional Collaborative") {
                 addChild(data[i],"regional-list");
             } else if (data[i].type === "County") {
                 addChild(data[i],"county-list");
             } else if (data[i].type === "City") {
                 addChild(data[i],"city-list");
-            } else if (data[i].type === "Other") {
+            } else if (data[i].type === "User Group") {
                 addChild(data[i],"other-list");
             }
         }
