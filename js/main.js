@@ -51,6 +51,7 @@ $(document).ready(function() {
             }
         }
 
+        // Appends the items to the list
         function addChild(item,list) {
             var node = document.createElement('li');
             var textnode = document.createTextNode(item.name);
