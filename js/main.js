@@ -4,11 +4,12 @@ $(document).ready(function() {
   // tooltip
     var menu = new cbpTooltipMenu(document.getElementById('cbp-tm-menu'));
 
-  // data with tabletop
-
+    // data with tabletop
     window.onload = function() {
         console.log('window onload');
         init()
+
+
     };
     var public_spreadsheet_url = 'https://docs.google.com/spreadsheet/pub?key=0AgDW4THnpFhkdExhY1hmeXpGc25CYXlOenRGVzZ6YUE&output=html';
 
@@ -16,16 +17,23 @@ $(document).ready(function() {
         Tabletop.init({
             key: public_spreadsheet_url,
             callback: function(data, tabletop) {
+                console.log("spreadsheet loaded");
                 // console.log(data)
-                parseData(data);
+                // parseData(data);
 
                 // loop through and append any federal agencies to federal list
                 for (var i = 0; i < data.length; i++) {
+                    // federal
                     if (data[i].type === "Federal") {
                         var node = document.createElement('li');                 // Create a <li> node
                         var textnode = document.createTextNode(data[i].name);         // Create a text node
                         node.appendChild(textnode);                              // Append the text to <li>
                         document.getElementById("federal-list").appendChild(node);     // Append <li> to <ul> with id="myList"
+                    } else if (data[i].type === "State") {
+                        var node = document.createElement('li');                 // Create a <li> node
+                        var textnode = document.createTextNode(data[i].name);         // Create a text node
+                        node.appendChild(textnode);                              // Append the text to <li>
+                        document.getElementById("state-list").appendChild(node);     // Append <li> to <ul> with id="myList"
                     }
                 }
 
