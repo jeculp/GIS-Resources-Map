@@ -16,6 +16,18 @@ $(document).ready(function() {
             callback: function(data, tabletop) {
                 // console.log(data)
                 parseData(data);
+
+                // loop through and append any federal agencies to federal list
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].type === "Federal") {
+                        var node = document.createElement('li');                 // Create a <li> node
+                        var textnode = document.createTextNode(data[i].name);         // Create a text node
+                        node.appendChild(textnode);                              // Append the text to <li>
+                        document.getElementById("federal-list").appendChild(node);     // Append <li> to <ul> with id="myList"
+                    }
+                }
+
+                
             },
             simpleSheet: true
         });
@@ -25,15 +37,15 @@ $(document).ready(function() {
         // log length of data
         console.log(data.length);
 
-        // loop through and append any federal agencies to federal list
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].type === "Federal") {
-                var node = document.createElement('li');                 // Create a <li> node
-                var textnode = document.createTextNode(data[i].name);         // Create a text node
-                node.appendChild(textnode);                              // Append the text to <li>
-                document.getElementById("federal-list").appendChild(node);     // Append <li> to <ul> with id="myList"
-            }
-        }
+        // // loop through and append any federal agencies to federal list
+        // for (var i = 0; i < data.length; i++) {
+        //     if (data[i].type === "Federal") {
+        //         var node = document.createElement('li');                 // Create a <li> node
+        //         var textnode = document.createTextNode(data[i].name);         // Create a text node
+        //         node.appendChild(textnode);                              // Append the text to <li>
+        //         document.getElementById("federal-list").appendChild(node);     // Append <li> to <ul> with id="myList"
+        //     }
+        // }
 
     }
 
@@ -126,5 +138,11 @@ $(document).ready(function() {
     };
 
     info.addTo(map);
+
+    // expand lists
+    document.getElementById("federal-title").onclick=function() {
+        document.getElementById("federal-list").style.display="block";
+    }
+
 
 });
