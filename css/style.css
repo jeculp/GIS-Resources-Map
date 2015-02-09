@@ -2,12 +2,35 @@ body {
 	margin:0;
 	padding:0;
 }
+#big-list {
+	float: left;
+	width: 40%;
+}
+
+#big-list .list-title {
+	width: 100%;
+	text-align: center;
+	background: #47a3da;
+	color: #fff;
+	height: 50px;
+	line-height: 50px;
+	vertical-align: middle;
+	cursor: pointer;
+	border-bottom: 1px solid #fff;
+}
+
+#big-list .list-title:hover {
+	color: #02639d;
+}
+
+#big-list .group-list {
+	display: none;
+}
+
 #map {
-	/*position:fixed;
-	top:150px;
-	bottom:0;*/
 	height: 400px;
-	width:100%;
+	width:60%;
+	float: right;
 }
 .info {
 	padding: 6px 8px;
