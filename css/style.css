@@ -3,9 +3,10 @@ body {
 	padding:0;
 }
 #map {
-	position:fixed;
+	/*position:fixed;
 	top:150px;
-	bottom:0;
+	bottom:0;*/
+	height: 400px;
 	width:100%;
 }
 .info {
