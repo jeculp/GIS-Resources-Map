@@ -28,8 +28,12 @@ body {
 }
 #big-list .group-list {
 	display: none;
-	margin: 10px 0 0 0;
+	margin: 10px 0 0 0; /* temporary until loading sped up */
 	padding: 0;
+}
+#big-list .visible-list {
+	display: block;
+	margin: 0;
 }
 #big-list .group-list li {
 	padding: 10px 20px;

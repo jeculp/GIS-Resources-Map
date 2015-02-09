@@ -150,9 +150,19 @@ $(document).ready(function() {
     info.addTo(map);
 
     // expand lists
-    document.getElementById("federal-title").onclick=function() {
-        document.getElementById("federal-list").style.display="block";
-    }
+    $(".list-title").click(function () {
+        // gets bit group from id
+        var group = $(this).attr("id").substring(0,$(this).attr("id").indexOf("-"));
+        // check if it already has visible class
+        if ($("#"+group+"-list").hasClass("visible-list")) {
+            $("#"+group+"-list").removeClass("visible-list")
+        } else {
+            // remove visible class from all
+            $(".group-list").removeClass("visible-list");
+            // add the class to the selected one
+            $("#"+group+"-list").addClass("visible-list");
+        }
+    });
 
 
 });
