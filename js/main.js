@@ -19,23 +19,9 @@ $(document).ready(function() {
             callback: function(data, tabletop) {
                 console.log("spreadsheet loaded");
                 // console.log(data)
-                // parseData(data);
+                parseData(data);
 
-                // loop through and append any federal agencies to federal list
-                for (var i = 0; i < data.length; i++) {
-                    // federal
-                    if (data[i].type === "Federal") {
-                        var node = document.createElement('li');                 // Create a <li> node
-                        var textnode = document.createTextNode(data[i].name);         // Create a text node
-                        node.appendChild(textnode);                              // Append the text to <li>
-                        document.getElementById("federal-list").appendChild(node);     // Append <li> to <ul> with id="myList"
-                    } else if (data[i].type === "State") {
-                        var node = document.createElement('li');                 // Create a <li> node
-                        var textnode = document.createTextNode(data[i].name);         // Create a text node
-                        node.appendChild(textnode);                              // Append the text to <li>
-                        document.getElementById("state-list").appendChild(node);     // Append <li> to <ul> with id="myList"
-                    }
-                }
+
 
 
             },
@@ -47,15 +33,22 @@ $(document).ready(function() {
         // log length of data
         console.log(data.length);
 
-        // // loop through and append any federal agencies to federal list
-        // for (var i = 0; i < data.length; i++) {
-        //     if (data[i].type === "Federal") {
-        //         var node = document.createElement('li');                 // Create a <li> node
-        //         var textnode = document.createTextNode(data[i].name);         // Create a text node
-        //         node.appendChild(textnode);                              // Append the text to <li>
-        //         document.getElementById("federal-list").appendChild(node);     // Append <li> to <ul> with id="myList"
-        //     }
-        // }
+        // loop through and append any federal agencies to federal list
+        for (var i = 0; i < data.length; i++) {
+            // federal
+            if (data[i].type === "Federal") {
+                addChild(data[i],"federal-list");
+            } else if (data[i].type === "State") {
+                addChild(data[i],"state-list");
+            }
+        }
+
+        function addChild(item,list) {
+            var node = document.createElement('li');
+            var textnode = document.createTextNode(item.name);
+            node.appendChild(textnode);
+            document.getElementById(list).appendChild(node); 
+        }
 
     }
 
