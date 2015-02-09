@@ -2,9 +2,17 @@ body {
 	margin:0;
 	padding:0;
 }
+/* temp hide */
+#cbp-tm-menu {
+	display: none;
+}
+
+
 #big-list {
 	float: left;
-	width: 40%;
+	width: 30%;
+	height: 400px;
+	overflow-y: scroll;
 }
 
 #big-list .list-title {
@@ -29,7 +37,7 @@ body {
 
 #map {
 	height: 400px;
-	width:60%;
+	width:70%;
 	float: right;
 }
 .info {
