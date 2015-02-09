@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    console.log('document ready');
 
   // tooltip
     var menu = new cbpTooltipMenu(document.getElementById('cbp-tm-menu'));
@@ -6,6 +7,7 @@ $(document).ready(function() {
   // data with tabletop
 
     window.onload = function() {
+        console.log('window onload');
         init()
     };
     var public_spreadsheet_url = 'https://docs.google.com/spreadsheet/pub?key=0AgDW4THnpFhkdExhY1hmeXpGc25CYXlOenRGVzZ6YUE&output=html';
@@ -27,7 +29,7 @@ $(document).ready(function() {
                     }
                 }
 
-                
+
             },
             simpleSheet: true
         });
