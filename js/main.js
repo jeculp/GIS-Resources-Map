@@ -98,11 +98,9 @@ $(document).ready(function() {
         "fillOpacity": 0.2
     };
 
-
     var countysim = new L.geoJson.ajax("data/countysimple.geojson", {
         style: countylines,
     }).addTo(map);
-
 
     //Gets and returns colors for Cities that have a web page link in geojson file
     function getcitycolor(d) {
