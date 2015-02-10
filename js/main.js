@@ -1,7 +1,7 @@
 $(document).ready(function() {
     console.log('document ready');
 
-  // tooltip
+    // tooltip
     var menu = new cbpTooltipMenu(document.getElementById('cbp-tm-menu'));
 
     // data with tabletop
@@ -29,14 +29,15 @@ $(document).ready(function() {
         });
     }
 
+
     function parseData(data) {
         // log length of data
-        console.log(data.length);
-
+        console.log(data.length);   
+             
         // loop through and append any federal agencies to federal list
         for (var i = 0; i < data.length; i++) {
             // federal
-            if (data[i].type === "Federal") {
+            if (data[i].type === "Federal") { 
                 addChild(data[i],"federal-list");
             } else if (data[i].type === "State") {
                 addChild(data[i],"state-list");
@@ -50,6 +51,7 @@ $(document).ready(function() {
                 addChild(data[i],"other-list");
             }
         }
+      
 
         // Appends the items to the list
         function addChild(item,list) {
