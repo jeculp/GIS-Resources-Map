@@ -47,7 +47,7 @@ $(document).ready(function() {
                 addChild(data[i],"county-list");
             } else if (data[i].type === "City") {
                 addChild(data[i],"city-list");
-            } else if (data[i].type === "User Group") {
+            } else if (data[i].type === "Other") {
                 addChild(data[i],"other-list");
             }
         }
@@ -129,6 +129,8 @@ $(document).ready(function() {
                 "<b>GIS Page:</b> " + '<a href="' + feature.properties["GIS Page"] + '">Link</a>');
         }
     }).addTo(map);
+
+    console.log(citysim);
 
     map.addControl(new L.Control.Search({
         layer: citysim,
