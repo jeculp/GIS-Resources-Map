@@ -116,7 +116,7 @@ $(document).ready(function() {
         pointToLayer: function(feature, latlng) {
             
             return L.circleMarker(latlng, {
-                radius: 5,
+                radius: 3,
                 color: '#bb4c3c',
                 weight: 0.0,
                 fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
@@ -135,7 +135,7 @@ $(document).ready(function() {
 
     map.addControl(new L.Control.Search({
         layer: citysim,
-        propertyName: 'name',
+        propertyName: 'NAMELSAD',
         zoom: 11
     })); // This creates a control to search within the geojson
 
