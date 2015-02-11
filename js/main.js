@@ -38,17 +38,17 @@ $(document).ready(function() {
         for (var i = 0; i < data.length; i++) {
             // federal
             if (data[i].type === "Federal") { 
-                addChild(data[i],"federal-list");
+                addChild(data[i].displayname,"federal-list");
             } else if (data[i].type === "State") {
-                addChild(data[i],"state-list");
-            } else if (data[i].type === "Regional Collaborative") {
-                addChild(data[i],"regional-list");
+                addChild(data[i].displayname,"state-list");
+            //} else if (data[i].type === "Regional Collaborative") {
+                //addChild(data[i].displayname,"regional-list");
             } else if (data[i].type === "County") {
-                addChild(data[i],"county-list");
+                addChild(data[i].displayname,"county-list");
             } else if (data[i].type === "City") {
-                addChild(data[i],"city-list");
+                addChild(data[i].displayname,"city-list");
             } else if (data[i].type === "Other") {
-                addChild(data[i],"other-list");
+                addChild(data[i].displayname,"other-list");
             }
         }
       
@@ -56,7 +56,7 @@ $(document).ready(function() {
         // Appends the items to the list
         function addChild(item,list) {
             var node = document.createElement('li');
-            var textnode = document.createTextNode(item.name);
+            var textnode = document.createTextNode(item);
             node.appendChild(textnode);
             document.getElementById(list).appendChild(node); 
         }
@@ -114,14 +114,13 @@ $(document).ready(function() {
     //Adds a layer with Incorporated Cities onto map, styling performed within
     var citysim = new L.geoJson.ajax("data/cities.geojson", {
         pointToLayer: function(feature, latlng) {
-            
             return L.circleMarker(latlng, {
-                radius: 3,
+                radius: 5,
                 color: '#bb4c3c',
                 weight: 0.0,
                 fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
                 fillOpacity: .5
-            }).bindPopup("<b>City:</b> " + feature.properties.NAMELSAD + "<br> " +
+            }).bindPopup("<b>City:</b> " + feature.properties.name + "<br> " +
                 "<b>Name:</b> " + feature.properties["First Name"] + " " + feature.properties["Last Name"] + "<br> " +
                 "<b>Title:</b> " + feature.properties["Title"] + "<br> " +
                 "<b>Agency:</b> " + feature.properties["Agency"] + "<br> " +
@@ -135,7 +134,7 @@ $(document).ready(function() {
 
     map.addControl(new L.Control.Search({
         layer: citysim,
-        propertyName: 'NAMELSAD',
+        propertyName: 'name',
         zoom: 11
     })); // This creates a control to search within the geojson
 
