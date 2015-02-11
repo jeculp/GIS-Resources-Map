@@ -36,7 +36,9 @@ $(document).ready(function() {
              
         // loop through and append any federal agencies to federal list
         for (var i = 0; i < data.length; i++) {
-            // federal
+            if (i === 2) {
+                console.log(data[i]);
+            }
             if (data[i].type === "Federal") { 
                 addChild(data[i],"federal-list");
             } else if (data[i].type === "State") {
@@ -55,10 +57,24 @@ $(document).ready(function() {
 
         // Appends the items to the list
         function addChild(item,list) {
-            var node = document.createElement('li');
+            var listItem = document.createElement('li');
             var textnode = document.createTextNode(item.name);
-            node.appendChild(textnode);
-            document.getElementById(list).appendChild(node); 
+            listItem.appendChild(textnode);
+            // document.getElementById(list).appendChild(listItem); 
+
+            // create the more info box
+            var div = document.createElement('div');
+            div.innerHTML = '<p>' + item.type + '</p>' +
+                            '<p>' + item.firstname + ' ' + item.lastname + '</p>' +
+                            '<p>' + item.title + '</p>' +
+                            '<p>' + item.agencydepartment + '</p>' +
+                            '<p><a href="mailto:' + item.email + '">E-mail</a></p>' +
+                            '<p><a href="' + item.homepage + '">Homepage</a></p>' +
+                            '<p><a href="' + item.gispage + '">GIS page</a></p>' +
+                            '<p><a href="' + item.datapage + '">Data page</a></p>';
+            div.className = 'item-info';
+            listItem.appendChild(div);
+            document.getElementById(list).appendChild(listItem); 
         }
 
     }

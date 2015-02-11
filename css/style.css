@@ -12,6 +12,12 @@ body {
 	height: 400px;
 	overflow-y: scroll;
 }
+#big-list .item-info {
+	display: none;
+}
+#big-list .item-info a {
+	color: #555;
+}
 #list-search {
 	width: 100%;
 	height: 40px;
