@@ -44,22 +44,15 @@ $(document).ready(function() {
         for (var i = 0; i < data.length; i++) {
             // federal
             if (data[i].type === "Federal") { 
-                federalArray.push(data[i]);
-                //addChild(data[i].displayname,"federal-list");
+                federalArray.push(data[i]);                
             } else if (data[i].type === "State") {
                 stateArray.push(data[i]);
-                //addChild(data[i].displayname,"state-list");
-            //} else if (data[i].type === "Regional Collaborative") {
-                //addChild(data[i].displayname,"regional-list");
             } else if (data[i].type === "County") {
                 countyArray.push(data[i]);
-                //addChild(data[i].displayname,"county-list");
             } else if (data[i].type === "City") {
                 cityArray.push(data[i]);
-                //addChild(data[i].displayname,"city-list");
             } else if (data[i].type === "Other") {
                 otherArray.push(data[i]);
-                //addChild(data[i].displayname,"other-list");
             }
         }
 
@@ -94,15 +87,12 @@ $(document).ready(function() {
         function addChild(item,list) {
 
             for (var i = 0; i < item.length; i++){
-
                 var node = document.createElement('li');
                 var textnode = document.createTextNode(item[i].displayname);
                 node.appendChild(textnode);
                 document.getElementById(list).appendChild(node); 
-
             }       
         }
-
     }
 
   // map
