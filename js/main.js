@@ -115,7 +115,7 @@ $(document).ready(function() {
     var citysim = new L.geoJson.ajax("data/cities.geojson", {
         pointToLayer: function(feature, latlng) {
             return L.circleMarker(latlng, {
-                radius: 5,
+                radius: 3,
                 color: '#bb4c3c',
                 weight: 0.0,
                 fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
