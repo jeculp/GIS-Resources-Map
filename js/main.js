@@ -34,31 +34,73 @@ $(document).ready(function() {
         // log length of data
         console.log(data.length);   
              
+        var federalArray = [];
+        var stateArray = [];
+        var countyArray = [];
+        var cityArray = [];
+        var otherArray = [];
+
         // loop through and append any federal agencies to federal list
         for (var i = 0; i < data.length; i++) {
             // federal
             if (data[i].type === "Federal") { 
-                addChild(data[i].displayname,"federal-list");
+                federalArray.push(data[i]);
+                //addChild(data[i].displayname,"federal-list");
             } else if (data[i].type === "State") {
-                addChild(data[i].displayname,"state-list");
+                stateArray.push(data[i]);
+                //addChild(data[i].displayname,"state-list");
             //} else if (data[i].type === "Regional Collaborative") {
                 //addChild(data[i].displayname,"regional-list");
             } else if (data[i].type === "County") {
-                addChild(data[i].displayname,"county-list");
+                countyArray.push(data[i]);
+                //addChild(data[i].displayname,"county-list");
             } else if (data[i].type === "City") {
-                addChild(data[i].displayname,"city-list");
+                cityArray.push(data[i]);
+                //addChild(data[i].displayname,"city-list");
             } else if (data[i].type === "Other") {
-                addChild(data[i].displayname,"other-list");
+                otherArray.push(data[i]);
+                //addChild(data[i].displayname,"other-list");
             }
         }
-      
+
+        //alphabetize arrays & send to addChild function        
+        sortArray(federalArray);
+        sortArray(stateArray);
+        sortArray(countyArray);
+        sortArray(cityArray);
+        sortArray(otherArray);
+        
+        addChild(federalArray,"federal-list");
+        addChild(stateArray,"state-list");
+        addChild(countyArray,"county-list");
+        addChild(cityArray,"city-list");
+        addChild(otherArray,"other-list");
+
+
+        function sortArray(item){
+            return item.sort(function(a,b){
+                var nameA=a.displayname.toLowerCase(), nameB=b.displayname.toLowerCase();
+                if (nameA < nameB){
+                    return -1;
+                }else if(nameA > nameB){
+                    return 1;
+                }else{
+                    return 0;
+                }
+            });
+        }      
 
         // Appends the items to the list
         function addChild(item,list) {
-            var node = document.createElement('li');
-            var textnode = document.createTextNode(item);
-            node.appendChild(textnode);
-            document.getElementById(list).appendChild(node); 
+
+            for (var i = 0; i < item.length; i++){
+
+                var node = document.createElement('li');
+                var textnode = document.createTextNode(item[i].displayname);
+                node.appendChild(textnode);
+                document.getElementById(list).appendChild(node); 
+
+            }       
         }
 
     }
