@@ -107,6 +107,7 @@ $(document).ready(function() {
     //Gets and returns colors for Cities that have a web page link in geojson file
     function getcitycolor(d) {
         var d = String(d);
+        //console.log(d);
         return d == 'null' ? '#C26263' :
             '#47a3da';
     }
@@ -114,6 +115,7 @@ $(document).ready(function() {
     //Adds a layer with Incorporated Cities onto map, styling performed within
     var citysim = new L.geoJson.ajax("data/cities.geojson", {
         pointToLayer: function(feature, latlng) {
+            console.log(feature.properties);
             return L.circleMarker(latlng, {
                 radius: 5,
                 color: '#bb4c3c',
