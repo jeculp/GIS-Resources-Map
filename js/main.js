@@ -1,6 +1,9 @@
 $(document).ready(function() {
     console.log('document ready');
 
+    // tooltip
+    var menu = new cbpTooltipMenu(document.getElementById('cbp-tm-menu'));
+
     // data with tabletop
     window.onload = function() {
         console.log('window onload');
@@ -29,53 +32,67 @@ $(document).ready(function() {
 
     function parseData(data) {
         // log length of data
-        console.log(data.length);
+        console.log(data.length);   
+             
+        var federalArray = [];
+        var stateArray = [];
+        var countyArray = [];
+        var cityArray = [];
+        var otherArray = [];
 
         // loop through and append any federal agencies to federal list
         for (var i = 0; i < data.length; i++) {
-            if (data[i].type === "Federal") {
-                addChild(data[i],"federal-list");
+            // federal
+            if (data[i].type === "Federal") { 
+                federalArray.push(data[i]);                
             } else if (data[i].type === "State") {
-                addChild(data[i],"state-list");
-            //} else if (data[i].type === "Regional Collaborative") {
-                //addChild(data[i].displayname,"regional-list");
+                stateArray.push(data[i]);
             } else if (data[i].type === "County") {
-                addChild(data[i],"county-list");
+                countyArray.push(data[i]);
             } else if (data[i].type === "City") {
-                addChild(data[i],"city-list");
+                cityArray.push(data[i]);
             } else if (data[i].type === "Other") {
-                addChild(data[i],"other-list");
+                otherArray.push(data[i]);
             }
         }
 
+        //alphabetize arrays & send to addChild function        
+        sortArray(federalArray);
+        sortArray(stateArray);
+        sortArray(countyArray);
+        sortArray(cityArray);
+        sortArray(otherArray);
+        
+        addChild(federalArray,"federal-list");
+        addChild(stateArray,"state-list");
+        addChild(countyArray,"county-list");
+        addChild(cityArray,"city-list");
+        addChild(otherArray,"other-list");
+
+
+        function sortArray(item){
+            return item.sort(function(a,b){
+                var nameA=a.displayname.toLowerCase(), nameB=b.displayname.toLowerCase();
+                if (nameA < nameB){
+                    return -1;
+                }else if(nameA > nameB){
+                    return 1;
+                }else{
+                    return 0;
+                }
+            });
+        }      
 
         // Appends the items to the list
         function addChild(item,list) {
-            var listItem = document.createElement('li');
-            var textnode = document.createTextNode(item.displayname);
-            listItem.appendChild(textnode);
-            // document.getElementById(list).appendChild(listItem);
 
-            // create the more info box
-            var div = document.createElement('div');
-            div.innerHTML = '<p>' + item.type + '</p>' +
-                            '<p>' + item.firstname + ' ' + item.lastname + '</p>' +
-                            '<p>' + item.title + '</p>' +
-                            '<p>' + item.agencydepartment + '</p>' +
-                            '<p><a href="mailto:' + item.email + '">E-mail</a></p>' +
-                            '<p><a href="' + item.homepage + '">Homepage</a></p>' +
-                            '<p><a href="' + item.gispage + '">GIS page</a></p>' +
-                            '<p><a href="' + item.datapage + '">Data page</a></p>';
-            div.className = 'item-info';
-            listItem.appendChild(div);
-            document.getElementById(list).appendChild(listItem);
-            // var node = document.createElement('li');
-            // var textnode = document.createTextNode(item);
-            // node.appendChild(textnode);
-            // document.getElementById(list).appendChild(node);
-
+            for (var i = 0; i < item.length; i++){
+                var node = document.createElement('li');
+                var textnode = document.createTextNode(item[i].displayname);
+                node.appendChild(textnode);
+                document.getElementById(list).appendChild(node); 
+            }       
         }
-
     }
 
   // map
