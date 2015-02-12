@@ -2,14 +2,10 @@ body {
 	margin:0;
 	padding:0;
 }
-/* temp hide */
-#cbp-tm-menu {
-	display: none;
-}
 #big-list {
 	float: left;
 	width: 30%;
-	height: 400px;
+	height: 80%;
 	overflow-y: scroll;
 }
 #big-list .item-info {
@@ -65,8 +61,8 @@ body {
 	border-bottom: 1px solid #ccc;
 }
 #map {
-	height: 400px;
-	width:70%;
+	height: 80%;
+	width: 70%;
 	float: right;
 }
 .info {

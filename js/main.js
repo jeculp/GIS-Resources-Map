@@ -1,9 +1,6 @@
 $(document).ready(function() {
     console.log('document ready');
 
-    // tooltip
-    var menu = new cbpTooltipMenu(document.getElementById('cbp-tm-menu'));
-
     // data with tabletop
     window.onload = function() {
         console.log('window onload');
@@ -32,11 +29,11 @@ $(document).ready(function() {
 
     function parseData(data) {
         // log length of data
-        console.log(data.length);   
-             
+        console.log(data.length);
+
         // loop through and append any federal agencies to federal list
         for (var i = 0; i < data.length; i++) {
-            if (data[i].type === "Federal") { 
+            if (data[i].type === "Federal") {
                 addChild(data[i],"federal-list");
             } else if (data[i].type === "State") {
                 addChild(data[i],"state-list");
@@ -50,14 +47,14 @@ $(document).ready(function() {
                 addChild(data[i],"other-list");
             }
         }
-      
+
 
         // Appends the items to the list
         function addChild(item,list) {
             var listItem = document.createElement('li');
             var textnode = document.createTextNode(item.displayname);
             listItem.appendChild(textnode);
-            // document.getElementById(list).appendChild(listItem); 
+            // document.getElementById(list).appendChild(listItem);
 
             // create the more info box
             var div = document.createElement('div');
@@ -71,11 +68,11 @@ $(document).ready(function() {
                             '<p><a href="' + item.datapage + '">Data page</a></p>';
             div.className = 'item-info';
             listItem.appendChild(div);
-            document.getElementById(list).appendChild(listItem); 
+            document.getElementById(list).appendChild(listItem);
             // var node = document.createElement('li');
             // var textnode = document.createTextNode(item);
             // node.appendChild(textnode);
-            // document.getElementById(list).appendChild(node); 
+            // document.getElementById(list).appendChild(node);
 
         }
 
