@@ -1,9 +1,6 @@
 $(document).ready(function() {
     console.log('document ready');
 
-    // tooltip
-    var menu = new cbpTooltipMenu(document.getElementById('cbp-tm-menu'));
-
     // data with tabletop
     window.onload = function() {
         console.log('window onload');
