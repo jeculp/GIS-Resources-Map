@@ -84,10 +84,27 @@ $(document).ready(function() {
         function addChild(item,list) {
 
             for (var i = 0; i < item.length; i++){
-                var node = document.createElement('li');
+                var listItem = document.createElement('li');
                 var textnode = document.createTextNode(item[i].displayname);
-                node.appendChild(textnode);
-                document.getElementById(list).appendChild(node); 
+                listItem.appendChild(textnode);
+
+
+                // create the more info box
+                var div = document.createElement('div');
+                div.innerHTML = '<p>' + item.type + '</p>' +
+                                '<p>' + item.firstname + ' ' + item.lastname + '</p>' +
+                                '<p>' + item.title + '</p>' +
+                                '<p>' + item.agencydepartment + '</p>' +
+                                '<p><a href="mailto:' + item.email + '">E-mail</a></p>' +
+                                '<p><a href="' + item.homepage + '">Homepage</a></p>' +
+                                '<p><a href="' + item.gispage + '">GIS page</a></p>' +
+                                '<p><a href="' + item.datapage + '">Data page</a></p>';
+                div.className = 'item-info';
+                listItem.appendChild(div);
+                document.getElementById(list).appendChild(listItem); 
+
+
+
             }       
         }
     }
