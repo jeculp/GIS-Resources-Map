@@ -60,6 +60,7 @@ body {
 	background: #eee;
 	color: #555;
 	border-bottom: 1px solid #ccc;
+	cursor: pointer;
 }
 #map {
 	clear: right;
