@@ -113,8 +113,8 @@ $(document).ready(function() {
         // expand list items
         $(".visible-list li").click(function () {
 
-            if ($(this).hasClass("visible-item")) {
-                $(this).removeClass("visible-item");
+            if ($(this).children("div").hasClass("visible-item")) {
+                $(this).children("div").removeClass("visible-item");
             } else {
                 // hide all 
                 $(".visible-list li div").removeClass("visible-item");
