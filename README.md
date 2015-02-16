@@ -9,6 +9,13 @@ Directions
 3. `python -m SimpleHTTPServer 8000`
 4. Go to your browser and open `http://localhost:8000/`
 
+Install gspread
+=========
+From GitHub
+1. 'git clone https://github.com/burnash/gspread.git'
+2. 'cd gspread'
+3. 'python setup.py install'
+
 1.10.2015
 =========
 - Added v01 to test intial page
