@@ -186,7 +186,7 @@ $(document).ready(function() {
                 color: '#bb4c3c',
                 weight: 0.0,
                 fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
-                fillOpacity: .5
+                fillOpacity: .7
             }).bindPopup("<b>City:</b> " + feature.properties.name + "<br> " +
                 "<b>Name:</b> " + feature.properties["First Name"] + " " + feature.properties["Last Name"] + "<br> " +
                 "<b>Title:</b> " + feature.properties["Title"] + "<br> " +
