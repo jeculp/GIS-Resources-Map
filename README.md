@@ -12,9 +12,9 @@ Directions
 Install gspread
 =========
 From GitHub
-'git clone https://github.com/burnash/gspread.git
-cd gspread
-python setup.py install'
+1. 'git clone https://github.com/burnash/gspread.git'
+2. 'cd gspread'
+3. 'python setup.py install'
 
 1.10.2015
 =========
