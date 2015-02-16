@@ -110,25 +110,21 @@ $(document).ready(function() {
             }       
         } // addChild()
 
-    // expand list items
-    $(".visible-list li").click(function () {
+        // expand list items
+        $(".visible-list li").click(function () {
 
-        if ($(this).hasClass("visible-item")) {
-            $(this).removeClass("visible-item");
-        } else {
-            // hide all 
-            $(".visible-list li div").removeClass("visible-item");
-            // but show this one
-            $(this).children("div").addClass("visible-item");
-        }
-
-
-    });
+            if ($(this).hasClass("visible-item")) {
+                $(this).removeClass("visible-item");
+            } else {
+                // hide all 
+                $(".visible-list li div").removeClass("visible-item");
+                // but show this one
+                $(this).children("div").addClass("visible-item");
+            }
+        });
 
 
     } // parseData()
-
-
 
   // map
 
