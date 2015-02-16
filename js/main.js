@@ -78,36 +78,57 @@ $(document).ready(function() {
                     return 0;
                 }
             });
-        }      
+        } // sortArray()
 
         // Appends the items to the list
-        function addChild(item,list) {
+        function addChild(array,list) {
 
-            for (var i = 0; i < item.length; i++){
+            for (var i = 0; i < array.length; i++){
                 var listItem = document.createElement('li');
-                var textnode = document.createTextNode(item[i].displayname);
+                var textnode = document.createTextNode(array[i].displayname);
                 listItem.appendChild(textnode);
 
-
+                var name = (array[i].firstname.length > 0 && array[i].lastname.length > 0) ? '<p>Contact: ' + array[i].firstname + ' ' + array[i].lastname + '</p>' : '';
+                var title = (array[i].title.length > 0) ? '<p>' + array[i].title + '</p>' : '';
+                var dept = (array[i].agencydepartment.length > 0) ? '<p>' + array[i].agencydepartment + '</p>' : '';
+                var email = (array[i].email.length > 0) ? '<p><a href="mailto:' + array[i].email + '">' + array[i].email + '</a></p>' : '';
+                var homepage = (array[i].homepage.length > 0) ? '<p><a href="' + array[i].homepage + '">Homepage</a></p>' : '';
+                var gis = (array[i].gispage.length > 0) ? '<p><a href="' + array[i].gispage + '">GIS page</a></p>' : '';
+                var data = (array[i].datapage.length > 0) ? '<p><a href="' + array[i].datapage + '">Data page</a></p>' : '';
                 // create the more info box
                 var div = document.createElement('div');
-                div.innerHTML = '<p>' + item.type + '</p>' +
-                                '<p>' + item.firstname + ' ' + item.lastname + '</p>' +
-                                '<p>' + item.title + '</p>' +
-                                '<p>' + item.agencydepartment + '</p>' +
-                                '<p><a href="mailto:' + item.email + '">E-mail</a></p>' +
-                                '<p><a href="' + item.homepage + '">Homepage</a></p>' +
-                                '<p><a href="' + item.gispage + '">GIS page</a></p>' +
-                                '<p><a href="' + item.datapage + '">Data page</a></p>';
+                div.innerHTML = name +
+                                title +
+                                dept +
+                                email +
+                                homepage +
+                                gis +
+                                data;
                 div.className = 'item-info';
                 listItem.appendChild(div);
-                document.getElementById(list).appendChild(listItem); 
-
-
-
+                document.getElementById(list).appendChild(listItem);
             }       
+        } // addChild()
+
+    // expand list items
+    $(".visible-list li").click(function () {
+
+        if ($(this).hasClass("visible-item")) {
+            $(this).removeClass("visible-item");
+        } else {
+            // hide all 
+            $(".visible-list li div").removeClass("visible-item");
+            // but show this one
+            $(this).children("div").addClass("visible-item");
         }
-    }
+
+
+    });
+
+
+    } // parseData()
+
+
 
   // map
 
@@ -213,6 +234,8 @@ $(document).ready(function() {
             $("#"+group+"-list").addClass("visible-list");
         }
     });
+
+
 
 
 });
