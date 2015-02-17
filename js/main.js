@@ -28,7 +28,7 @@ $(document).ready(function() {
         }); */
         $.ajax({
             type: "GET",
-            url: "gis_contacts.csv",
+            url: "/python/gis_contacts.csv",
             dataType: "text",
             success: function(data) {processData(data);}
          });
