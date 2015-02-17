@@ -13,7 +13,7 @@ worksheet = sht1.sheet1
 list_of_lists = worksheet.get_all_values()
 
 #open csv file for writing
-contact_sheet = open(r"gis_contacts.csv","wb")
+contact_sheet = open(r"../data/gis_contacts.csv","wb")
 
 #instantiate csv writer for contact sheet
 writer = csv.writer(contact_sheet,delimiter=',',quotechar="'",quoting=csv.QUOTE_ALL)
