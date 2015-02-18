@@ -18,7 +18,7 @@ Install gspread from GitHub
 Embedding Instructions
 =========
 To embed the map into your own website, you will only need to add one line of code:
-'<iframe src="http://maptimela.github.io/Project-Pizza/" width="100%" height="700px" frameborder="0"></iframe>'
+<iframe src="http://maptimela.github.io/Project-Pizza/" width="100%" height="700px" frameborder="0"></iframe>
 
 1.10.2015
 =========
