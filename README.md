@@ -15,6 +15,11 @@ Install gspread from GitHub
 2. `cd gspread`
 3. `python setup.py install`
 
+Embedding Instructions
+=========
+To embed the map into your own website, you will only need to add one line of code:
+'<iframe src="http://maptimela.github.io/Project-Pizza/" width="100%" height="700px" frameborder="0"></iframe>'
+
 1.10.2015
 =========
 - Added v01 to test intial page
