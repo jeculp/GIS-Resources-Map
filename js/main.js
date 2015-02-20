@@ -23,6 +23,7 @@ $(document).ready(function() {
             header: true
         });
 
+        ALL_CONTACTS.push(csvData.data);
         parseData(csvData.data);
     }
 
