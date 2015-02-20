@@ -23,35 +23,9 @@ $(document).ready(function() {
             header: true
         });
 
-        var keys = Object.keys(csvData);
-        console.log(keys);
-        console.log(csvData.data[0]);
-        //console.log(typeof(csvData.data[0]));
+        //console.log(csvData.data[0].type);
+        parseData(csvData.data);
     }
-
-/*
-    function processData(data){
-
-        var lines=data.split("\n");
-
-        var headers=lines[0].split(",");
-
-        for (var i=1; i<lines.length; i++) {
-
-            var obj = {};
-            var currentline=lines[i].split(",");
-
-            for(var j=0; j<headers.length; j++) {
-                obj[headers[j]] = currentline[j];
-            }
-
-            ALL_CONTACTS.push(obj);
-
-        }
-
-        parseData(ALL_CONTACTS);
-    }
-    */
 
     function parseData(data) {
 
