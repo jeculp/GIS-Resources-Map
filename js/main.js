@@ -23,7 +23,6 @@ $(document).ready(function() {
             header: true
         });
 
-        //console.log(csvData.data[0].type);
         parseData(csvData.data);
     }
 
