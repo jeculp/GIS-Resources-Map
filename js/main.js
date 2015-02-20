@@ -19,6 +19,19 @@ $(document).ready(function() {
 
     function processData(data){
 
+        var csvData = Papa.parse(data, {
+            header: true
+        });
+
+        var keys = Object.keys(csvData);
+        console.log(keys);
+        console.log(csvData.data[0]);
+        //console.log(typeof(csvData.data[0]));
+    }
+
+/*
+    function processData(data){
+
         var lines=data.split("\n");
 
         var headers=lines[0].split(",");
@@ -38,6 +51,7 @@ $(document).ready(function() {
 
         parseData(ALL_CONTACTS);
     }
+    */
 
     function parseData(data) {
 
