@@ -28,7 +28,7 @@ $(document).ready(function() {
         }); */
         $.ajax({
             type: "GET",
-            url: "http://maptimela.github.io/Project-Pizza/data/gis_contacts.csv",
+            url: "data/gis_contacts.csv",
             dataType: "text",
             success: function(data) {processData(data);}
          });
