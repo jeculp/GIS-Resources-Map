@@ -55,10 +55,7 @@ $(document).ready(function() {
             for(var j=0; j<headers.length; j++) {
                 obj[headers[j]] = currentline[j];
             }
-
-            if (i = 70) {
-                console.log(obj);
-            }
+                // console.log(obj);
 
             result.push(obj);
 
