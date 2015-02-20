@@ -28,7 +28,7 @@ $(document).ready(function() {
         }); */
         $.ajax({
             type: "GET",
-            url: "/data/gis_contacts.csv",
+            url: "/data/gis_contacts.csv?asdfa",
             dataType: "text",
             success: function(data) {processData(data);}
          });
@@ -45,23 +45,23 @@ $(document).ready(function() {
 
         var headers=lines[0].split(",");
 
-        console.log(headers);
+        // console.log(headers);
 
-        // for (var i=1; i<lines.length; i++) {
+        for (var i=1; i<lines.length; i++) {
 
-        //     var obj = {};
-        //     var currentline=lines[i].split(",");
+            var obj = {};
+            var currentline=lines[i].split(",");
 
-        //     for(var j=0; j<headers.length; j++) {
-        //         obj[headers[j]] = currentline[j];
-        //     }
-        //         console.log(obj);
+            for(var j=0; j<headers.length; j++) {
+                obj[headers[j]] = currentline[j];
+            }
+                // console.log(obj);
 
-        //     result.push(obj);
+            result.push(obj);
 
-        // }
+        }
 
-        // parseData(result);
+        parseData(result);
     }
 
 
@@ -130,6 +130,7 @@ $(document).ready(function() {
                 var title = (array[i].title.length > 0) ? '<p>' + array[i].title + '</p>' : '';
                 var dept = (array[i].agency_department.length > 0) ? '<p>' + array[i].agency_department + '</p>' : '';
                 var email = (array[i].email.length > 0) ? '<p><a href="mailto:' + array[i].email + '">' + array[i].email + '</a></p>' : '';
+                console.log(i);
                 var homepage = (array[i].homepage.length > 0) ? '<p><a href="' + array[i].homepage + '">Homepage</a></p>' : '';
                 var gis = (array[i].gis_page.length > 0) ? '<p><a href="' + array[i].gis_page + '">GIS page</a></p>' : '';
                 var data = (array[i].data_page.length > 0) ? '<p><a href="' + array[i].data_page + '">Data page</a></p>' : '';
