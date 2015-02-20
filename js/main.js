@@ -28,7 +28,7 @@ $(document).ready(function() {
         }); */
         $.ajax({
             type: "GET",
-            url: "/data/gis_contacts.csv?asdfa",
+            url: "/data/gis_contacts.csv",
             dataType: "text",
             success: function(data) {processData(data);}
          });
