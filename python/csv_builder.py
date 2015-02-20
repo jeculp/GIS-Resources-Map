@@ -16,7 +16,7 @@ list_of_lists = worksheet.get_all_values()
 contact_sheet = open(r"../data/gis_contacts.csv","wb")
 
 #instantiate csv writer for contact sheet
-writer = csv.writer(contact_sheet,delimiter=',',quotechar="'",quoting=csv.QUOTE_ALL)
+writer = csv.writer(contact_sheet,delimiter=',',quotechar='"',quoting=csv.QUOTE_ALL)
 
 #loop through list of lists and output each line to csv
 for row in list_of_lists:
