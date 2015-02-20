@@ -39,8 +39,31 @@ $(document).ready(function() {
 
     function processData(data){
 
-        console.log(data);
+        var lines=data.split("\n");
+
+        var result = [];
+
+        var headers=lines[0].split(",");
+
+        console.log(headers);
+
+        // for (var i=1; i<lines.length; i++) {
+
+        //     var obj = {};
+        //     var currentline=lines[i].split(",");
+
+        //     for(var j=0; j<headers.length; j++) {
+        //         obj[headers[j]] = currentline[j];
+        //     }
+        //         console.log(obj);
+
+        //     result.push(obj);
+
+        // }
+
+        // parseData(result);
     }
+
 
     function parseData(data) {
         // log length of data
@@ -84,7 +107,7 @@ $(document).ready(function() {
 
         function sortArray(item){
             return item.sort(function(a,b){
-                var nameA=a.displayname.toLowerCase(), nameB=b.displayname.toLowerCase();
+                var nameA=a.display_name.toLowerCase(), nameB=b.display_name.toLowerCase();
                 if (nameA < nameB){
                     return -1;
                 }else if(nameA > nameB){
@@ -100,16 +123,16 @@ $(document).ready(function() {
 
             for (var i = 0; i < array.length; i++){
                 var listItem = document.createElement('li');
-                var textnode = document.createTextNode(array[i].displayname);
+                var textnode = document.createTextNode(array[i].display_name);
                 listItem.appendChild(textnode);
 
-                var name = (array[i].firstname.length > 0 && array[i].lastname.length > 0) ? '<p>Contact: ' + array[i].firstname + ' ' + array[i].lastname + '</p>' : '';
+                var name = (array[i].first_name.length > 0 && array[i].last_name.length > 0) ? '<p>Contact: ' + array[i].firstname + ' ' + array[i].lastname + '</p>' : '';
                 var title = (array[i].title.length > 0) ? '<p>' + array[i].title + '</p>' : '';
-                var dept = (array[i].agencydepartment.length > 0) ? '<p>' + array[i].agencydepartment + '</p>' : '';
+                var dept = (array[i].agency_department.length > 0) ? '<p>' + array[i].agency_department + '</p>' : '';
                 var email = (array[i].email.length > 0) ? '<p><a href="mailto:' + array[i].email + '">' + array[i].email + '</a></p>' : '';
                 var homepage = (array[i].homepage.length > 0) ? '<p><a href="' + array[i].homepage + '">Homepage</a></p>' : '';
-                var gis = (array[i].gispage.length > 0) ? '<p><a href="' + array[i].gispage + '">GIS page</a></p>' : '';
-                var data = (array[i].datapage.length > 0) ? '<p><a href="' + array[i].datapage + '">Data page</a></p>' : '';
+                var gis = (array[i].gis_page.length > 0) ? '<p><a href="' + array[i].gis_page + '">GIS page</a></p>' : '';
+                var data = (array[i].data_page.length > 0) ? '<p><a href="' + array[i].data_page + '">Data page</a></p>' : '';
                 // create the more info box
                 var div = document.createElement('div');
                 div.innerHTML = name +
