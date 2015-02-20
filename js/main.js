@@ -6,7 +6,7 @@ $(document).ready(function() {
     function init() {
         $.ajax({
             type: "GET",
-            url: "/data/gis_contacts.csv?asdfa",
+            url: "data/gis_contacts.csv",
             dataType: "text",
             success: function(data) {
                 processData(data);
@@ -90,42 +90,48 @@ $(document).ready(function() {
             });
         } // sortArray()
 
-        // Appends the items to the list
-        function addChild(array,list) {
 
-            for (var i = 0; i < array.length; i++){
-                var listItem = document.createElement('li');
-                var textnode = document.createTextNode(array[i].display_name);
-                listItem.appendChild(textnode);
+        ready();
 
-                var name = (array[i].first_name.length > 0 && array[i].last_name.length > 0) ? '<p>Contact: ' + array[i].firstname + ' ' + array[i].lastname + '</p>' : '';
-                var title = (array[i].title.length > 0) ? '<p>' + array[i].title + '</p>' : '';
-                var dept = (array[i].agency_department.length > 0) ? '<p>' + array[i].agency_department + '</p>' : '';
-                var email = (array[i].email.length > 0) ? '<p><a href="mailto:' + array[i].email + '">' + array[i].email + '</a></p>' : '';
-                // console.log(i);
+    } // parseData()
 
-                // TODO: fixme
-                // var homepage = (array[i].homepage.length > 0) ? '<p><a href="' + array[i].homepage + '">Homepage</a></p>' : '';
-                // var gis = (array[i].gis_page.length > 0) ? '<p><a href="' + array[i].gis_page + '">GIS page</a></p>' : '';
-                // var data = (array[i].data_page.length > 0) ? '<p><a href="' + array[i].data_page + '">Data page</a></p>' : '';
-                // create the more info box
-                var div = document.createElement('div');
-                div.innerHTML = name +
-                                title +
-                                dept +
-                                // email +
-                                email;
-                                // homepage +
-                                // gis +
-                                // data;
-                div.className = 'item-info';
-                listItem.appendChild(div);
-                document.getElementById(list).appendChild(listItem);
-            }
-        } // addChild()
+    // Appends the items to the list
+    function addChild(array,list) {
 
+        for (var i = 0; i < array.length; i++){
+            var listItem = document.createElement('li');
+            var textnode = document.createTextNode(array[i].display_name);
+            listItem.appendChild(textnode);
+            listItem.className = 'list-item';
+
+            var name = (array[i].first_name.length > 0 && array[i].last_name.length > 0) ? '<p>Contact: ' + array[i].firstname + ' ' + array[i].lastname + '</p>' : '';
+            var title = (array[i].title.length > 0) ? '<p>' + array[i].title + '</p>' : '';
+            var dept = "";
+            // var dept = (array[i].agency_department.length > 0) ? '<p>' + array[i].agency_department + '</p>' : '';
+            var email = (array[i].email.length > 0) ? '<p><a href="mailto:' + array[i].email + '">' + array[i].email + '</a></p>' : '';
+            var homepage = (array[i].homepage != undefined && array[i].homepage.length > 0) ? '<p><a href="' + array[i].homepage + '">Homepage</a></p>' : '';
+            var gis = (array[i].gis_page != undefined && array[i].gis_page.length > 0) ? '<p><a href="' + array[i].gis_page + '">GIS page</a></p>' : '';
+            var data = (array[i].data_page != undefined && array[i].data_page.length > 0) ? '<p><a href="' + array[i].data_page + '">Data page</a></p>' : '';
+            // create the more info box
+            var div = document.createElement('div');
+            div.innerHTML = name +
+                            title +
+                            dept +
+                            email +
+                            homepage +
+                            gis +
+                            data;
+            div.className = 'item-info';
+            listItem.appendChild(div);
+            document.getElementById(list).appendChild(listItem);
+        }
+
+    } // addChild()
+
+    function ready() {
         // expand list items
-        $(".visible-list li").click(function () {
+        $(".list-item").click(function () {
+            // console.log("holla");
 
             if ($(this).children("div").hasClass("visible-item")) {
                 $(this).children("div").removeClass("visible-item");
@@ -137,8 +143,9 @@ $(document).ready(function() {
             }
         });
 
+    }
 
-    } // parseData()
+
 
   // map
 
