@@ -11,6 +11,7 @@ $(document).ready(function() {
             success: function(data) {
                 processData(data);
                 createSearchHandler();
+                setNavbarHandlers();
             }
          });
     }
@@ -119,7 +120,6 @@ $(document).ready(function() {
     function ready() {
         // expand list items
         $(".list-item").click(function () {
-            // console.log("holla");
 
             if ($(this).children("div").hasClass("visible-item")) {
                 $(this).children("div").removeClass("visible-item");
@@ -244,24 +244,92 @@ $(document).ready(function() {
 
           var query = $('#list-search').val();
           var check, check_name;
+          var results = [];
+          var listItem, textnode;
 
           if(query.length === 0) {
-            // TODO: handle empty query
-            return;
+            // do nothing here
+          } else {
+            for(var i=0; i<ALL_CONTACTS.length; i++) {
+                check = ALL_CONTACTS[i];
+
+                if(check && check.display_name){
+                    check_name = check.display_name;
+
+                    if (check_name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+                        results.push(ALL_CONTACTS[i]);
+                    }
+                }
+            }
           }
 
-          for(var i=0; i<ALL_CONTACTS.length; i++) {
-            check = ALL_CONTACTS[i];
+          // clear sidebar
+          resetAllSections();
 
-            if(check && check.display_name){
-                check_name = check.display_name;
+          if(results.length === 0) {
+            $('#results .none').removeClass('hide');
+          } else {
 
-                if (check_name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
-                    console.log(check_name);
-                }
+            for(var i=0; i<results.length; i++) {
+                listItem = document.createElement('li');
+                textnode = document.createTextNode(results[i].display_name);
+                listItem.appendChild(textnode);
+                listItem.className = 'list-item';
+                document.getElementById('results-list').appendChild(listItem);
             }
           }
 
         });
     }
+
+    function setNavbarHandlers() {
+        $('nav li.federal').on('click', function(e){
+            e.preventDefault();
+            resetAllSections();
+            $('#federal-title.list-title').addClass('active');
+            $('#federal-list.group-list').addClass("visible-item");
+            $('nav li.federal').addClass('active');
+        });
+
+        $('nav li.state').on('click', function(e){
+            e.preventDefault();
+            resetAllSections();
+            $('#state-title.list-title').addClass('active');
+            $('#state-list.group-list').addClass("visible-item");
+            $('nav li.state').addClass('active');
+        });
+
+        $('nav li.county').on('click', function(e){
+            e.preventDefault();
+            resetAllSections();
+            $('#county-title.list-title').addClass('active');
+            $('#county-list.group-list').addClass("visible-item");
+            $('nav li.county').addClass('active');
+        });
+
+        $('nav li.city').on('click', function(e){
+            e.preventDefault();
+            resetAllSections();
+            $('#city-title.list-title').addClass('active');
+            $('#city-list.group-list').addClass("visible-item");
+            $('nav li.city').addClass('active');
+        });
+
+        $('nav li.other').on('click', function(e){
+            e.preventDefault();
+            resetAllSections();
+            $('#other-title.list-title').addClass('active');
+            $('#other-list.group-list').addClass("visible-item");
+            $('nav li.other').addClass('active');
+        });
+    }
+
+    function resetAllSections() {
+        $('.list-title').removeClass('active');
+        $('.group-list').removeClass('visible-item');
+        $('nav li').removeClass('active');
+        $('#results .none').addClass('hide');
+        $('#results-list').empty();
+    }
+
 });

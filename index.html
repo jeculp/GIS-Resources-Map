@@ -27,10 +27,13 @@
 				<span>maptime:LA's</span>
 				<h1>Spatial List of Pizza</h1>
 				<nav>
-					<!--<a href="http://tympanus.net/Blueprints/ProductGridLayout/" class="bp-icon bp-icon-prev" data-info="previous Blueprint"><span>Previous Blueprint</span></a>
-					<a href="" class="bp-icon bp-icon-next" data-info="next Blueprint"><span>Next Blueprint</span></a>
-					<a href="http://tympanus.net/codrops/?p=15212" class="bp-icon bp-icon-drop" data-info="back to the Codrops article"><span>back to the Codrops article</span></a>
-					<a href="http://tympanus.net/codrops/category/blueprints/" class="bp-icon bp-icon-archive" data-info="Blueprints archive"><span>Go to the archive</span></a-->
+					<ul>
+						<li class='federal'><a href='#'>Federal</a></li>
+						<li class='state'><a href='#'>State</a></li>
+						<li class='county'><a href='#'>County</a></li>
+						<li class='city'><a href='#'>City</a></li>
+						<li class='other'><a href='#'>User Group</a></li>
+					</ul>
 				</nav>
 			</header>
 
@@ -39,16 +42,16 @@
 					<input type="text" id="list-search" placeholder="Search">
 				</form>
 
+				<div id='results'>
+					<p class='none hide'>No results were found. Please try a different query.</p>
+					<ul id="results-list"></ul>
+				</div>
+
 				<div id="federal-title" class="list-title">Federal</div>
 				<ul id="federal-list" class="group-list"></ul>
 
 				<div id="state-title" class="list-title">State</div>
 				<ul id="state-list" class="group-list"></ul>
-
-				<!-- Regional was combined into USER GROUP category
-				<div id="regional-title" class="list-title">Regional</div>
-				<ul id="regional-list" class="group-list"></ul>
-				-->
 
 				<div id="county-title" class="list-title">County</div>
 				<ul id="county-list" class="group-list"></ul>
@@ -61,7 +64,6 @@
 
 			</div>
 
-			<!--map loads here-->
 			<div id='map'></div>
 
 			<script src="js/main.js"></script>
