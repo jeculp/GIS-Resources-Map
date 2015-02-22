@@ -90,6 +90,7 @@ $(document).ready(function() {
         for (var i = 0; i < array.length; i++){
             var listItem = document.createElement('li');
             var textnode = document.createTextNode(array[i].display_name);
+            listItem.id = array[i].display_name; //Add id to li
             listItem.appendChild(textnode);
             listItem.className = 'list-item';
 
@@ -101,6 +102,7 @@ $(document).ready(function() {
             var homepage = (array[i].homepage != undefined && array[i].homepage.length > 0) ? '<p><a href="' + array[i].homepage + '">Homepage</a></p>' : '';
             var gis = (array[i].gis_page != undefined && array[i].gis_page.length > 0) ? '<p><a href="' + array[i].gis_page + '">GIS page</a></p>' : '';
             var data = (array[i].data_page != undefined && array[i].data_page.length > 0) ? '<p><a href="' + array[i].data_page + '">Data page</a></p>' : '';
+            var addcontact = (array[i].first_name.length == 0) ? '<p>This information out of date? Click here!</p>' : '';
             // create the more info box
             var div = document.createElement('div');
             div.innerHTML = name +
@@ -109,7 +111,8 @@ $(document).ready(function() {
                             email +
                             homepage +
                             gis +
-                            data;
+                            data +
+                            addcontact;
             div.className = 'item-info';
             listItem.appendChild(div);
             document.getElementById(list).appendChild(listItem);
@@ -192,7 +195,7 @@ $(document).ready(function() {
                 weight: 0.0,
                 fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
                 fillOpacity: .7
-            }).bindPopup("<b>City:</b> " + feature.properties.name + "<br> " +
+            }).bindPopup("<b>City:</b> " + feature.properties.NAMELSAD + "<br> " +
                 "<b>Name:</b> " + feature.properties["First Name"] + " " + feature.properties["Last Name"] + "<br> " +
                 "<b>Title:</b> " + feature.properties["Title"] + "<br> " +
                 "<b>Agency:</b> " + feature.properties["Agency"] + "<br> " +
@@ -204,7 +207,7 @@ $(document).ready(function() {
 
     map.addControl(new L.Control.Search({
         layer: citysim,
-        propertyName: 'name',
+        propertyName: 'NAMELSAD',
         zoom: 11
     })); // This creates a control to search within the geojson
 
