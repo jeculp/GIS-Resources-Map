@@ -12,7 +12,7 @@ nav ul {
 nav ul li {
 	padding: 0.2em 2em;
 	display: inline;
-	background-color: transparent;
+	background-color: transparent;	
 }
 
 nav ul li.active {
@@ -21,6 +21,7 @@ nav ul li.active {
 
 nav a {
 	text-decoration: none;
+	color: #47A3DA;
 }
 
 /* Sidebar List */
