@@ -1,4 +1,11 @@
-import gspread, csv
+import gspread, csv, datetime, shutil
+from datetime import timedelta, date
+
+#create backup file
+yesterdays_string = r"../data/gis_contacts_"
+yesterday = date.today() - timedelta(1)
+yesterdays_sheet = yesterdays_string + str(yesterday) + ".csv"
+shutil.copyfile(r"../data/gis_contacts.csv",yesterdays_sheet)
 
 #pass credentials to google docs
 gc = gspread.login('chandlersterling1@gmail.com','mhtqwlguwhpxcrux')
