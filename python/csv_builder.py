@@ -2,7 +2,7 @@ import gspread, csv, datetime, shutil
 from datetime import timedelta, date
 
 #create backup file
-yesterdays_string = r"../data/gis_contacts_"
+yesterdays_string = r"../data/backup/gis_contacts_"
 yesterday = date.today() - timedelta(1)
 yesterdays_sheet = yesterdays_string + str(yesterday) + ".csv"
 shutil.copyfile(r"../data/gis_contacts.csv",yesterdays_sheet)
