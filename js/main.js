@@ -131,6 +131,14 @@ $(document).ready(function() {
                 $(".visible-list li div").removeClass("visible-item");
                 // but show this one
                 $(this).children("div").addClass("visible-item");
+                
+                //Matches list id to markermap array
+                var markerId = $(this).attr( 'id' );
+                var marker = markerMap[markerId];
+
+                marker.openPopup(marker.getLatLng()); //Opens popup
+                map.setView(marker.getLatLng(),10); //Zooms to and centers map 
+                e.preventDefault()
             }
         });
 
@@ -179,6 +187,8 @@ $(document).ready(function() {
         style: countylines,
     }).addTo(map);
 
+        
+    
     //Gets and returns colors for Cities that have a web page link in geojson file
     function getcitycolor(d) {
         var d = String(d);
@@ -186,10 +196,15 @@ $(document).ready(function() {
             '#47a3da';
     }
 
+    var markerMap = {}; //Creates marker array to match with list ids
+    
+    var markerlayer = L.layerGroup().addTo(map);
+    
     //Adds a layer with Incorporated Cities onto map, styling performed within
     var citysim = new L.geoJson.ajax("data/cities.geojson", {
         pointToLayer: function(feature, latlng) {
-            return L.circleMarker(latlng, {
+            
+            var marker = new L.circleMarker(latlng, {
                 radius: 3,
                 color: '#bb4c3c',
                 weight: 0.0,
@@ -202,15 +217,13 @@ $(document).ready(function() {
                 "<b>email:</b> " + feature.properties["e-mail"] + "<br> " +
                 "<b>Phone:</b> " + feature.properties["Phone"] + "<br> " +
                 "<b>GIS Page:</b> " + '<a href="' + feature.properties["GIS Page"] + '">Link</a>');
+            markerMap[feature.properties.NAMELSAD] = marker;
+            return marker;
         }
-    }).addTo(map);
-
-    map.addControl(new L.Control.Search({
-        layer: citysim,
-        propertyName: 'NAMELSAD',
-        zoom: 11
-    })); // This creates a control to search within the geojson
-
+    }).addTo(markerlayer);
+    
+    
+    
     var info = L.control();
 
     info.onAdd = function(map) {
