@@ -2,6 +2,9 @@ $(document).ready(function() {
 
     // global
     var ALL_CONTACTS = window.ALL_CONTACTS = [];
+    var markerMap = {}; //Creates marker array to match with list ids
+    var map = L.map('map').setView([36.745487, -119.553223], 6);
+        map.options.minZoom = 6;
 
     function init() {
         $.ajax({
@@ -135,6 +138,7 @@ $(document).ready(function() {
                 
                 //Matches list id to markermap array
                 var markerId = $(this).attr( 'id' );
+                console.log(markerId);
                 var marker = markerMap[markerId];
 
                 marker.openPopup(marker.getLatLng()); //Opens popup
@@ -175,9 +179,7 @@ $(document).ready(function() {
     
     function mapInit(){
         //This loads the map
-        var map = L.map('map')
-            .setView([36.745487, -119.553223], 6);
-        map.options.minZoom = 6;
+
         var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
             attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
         }).addTo(map).setOpacity(.75);
@@ -196,7 +198,7 @@ $(document).ready(function() {
             style: countylines,
         }).addTo(map);
 
-        var markerMap = {}; //Creates marker array to match with list ids
+
         
         var markerlayer = L.layerGroup().addTo(map);
         
