@@ -1,0 +1,14 @@
+/* TEAM */
+MaptimeLA Co-Organizer: Chandler Sterling
+Site: www.chandlersterling.com
+Twitter: @chandlersterlin
+Location: Los Angeles, CA
+ 
+
+/* THANKS */
+Thanks to everyone who helped!
+
+/* SITE */
+Last Update: xx/xx/xxxx
+Standards: ....
+Components: Modernizr, jQuery, Leaflet, Papa Parse
