@@ -211,10 +211,17 @@ $(document).ready(function() {
                     if(ALL_CONTACTS[i].display_name == feature.properties["NAMELSAD"]){                        
                         var firstname = ALL_CONTACTS[i].first_name;
                         var lastname = ALL_CONTACTS[i].last_name;
+                        var title = ALL_CONTACTS[i].title;
                         var agency_department = ALL_CONTACTS[i].agency_department;
                         var email = ALL_CONTACTS[i].email;
                         var phone = ALL_CONTACTS[i].phone;
                         var gisPage  = ALL_CONTACTS[i].gis_page;
+
+                        if (gisPage == ""){
+                            gisPage = "<b>GIS Page:</b> No GIS page available";
+                        }else{
+                            gisPage = "<b>GIS Page:</b> " + '<a target="_blank" href="' + gisPage + '">Link</a>';
+                        }
                     }
                 }
 
@@ -225,12 +232,12 @@ $(document).ready(function() {
                     fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
                     fillOpacity: .7
                 }).bindPopup("<b>City:</b> " + feature.properties.NAMELSAD + "<br> " +
-                    "<b>Name:</b> " + firstname + " " + feature.properties["Last Name"] + "<br> " +
-                    "<b>Title:</b> " + lastname + "<br> " +
+                    "<b>Name:</b> " + firstname + " " + lastname + "<br> " +
+                    "<b>Title:</b> " + title + "<br> " +
                     "<b>Agency:</b> " + agency_department + "<br> " +
                     "<b>email:</b> " + email + "<br> " +
                     "<b>Phone:</b> " + phone + "<br> " +
-                    "<b>GIS Page:</b> " + '<a target="_blank" href="' + gisPage + '">Link</a>');
+                    gisPage);                    
                 markerMap[feature.properties.NAMELSAD] = marker;
                 return marker;
             }
