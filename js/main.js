@@ -244,7 +244,7 @@ $(document).ready(function() {
 
         // method that we will use to update the control based on feature properties passed
         info.update = function(props) {
-            this._div.innerHTML = '<h4>Legend</h4><i style="background:#bb4c3c"></i><h4>City has no website</h4><i style="background:#47a3da"></i><h4>City has website</h4><br><h4>Click on topleft to search for a city!</h4>';
+            this._div.innerHTML = '<h4>Legend</h4><i style="background:#bb4c3c"></i><h4>City has no website</h4><i style="background:#47a3da"></i><h4>City has website</h4>';
         };
 
         info.addTo(map);
