@@ -149,7 +149,31 @@ $(document).ready(function() {
 
     }
 
+    
+      
+        // expand list items
+var searchclick = $(".list-item").click(function () {
 
+            if ($(this).children("div").hasClass("visible-item")) {
+                $(this).children("div").removeClass("visible-item");
+            } else {
+                // hide all
+                $(".visible-list li div").removeClass("visible-item");
+                // but show this one
+                $(this).children("div").addClass("visible-item");
+                
+                //Matches list id to markermap array
+                var markerId = $(this).attr( 'id' );
+                console.log(markerId);
+                var marker = markerMap[markerId];
+
+                marker.openPopup(marker.getLatLng()); //Opens popup
+                map.setView(marker.getLatLng(),10); //Zooms to and centers map 
+                e.preventDefault()
+            }
+        });
+
+    
 
   // map
 
@@ -243,21 +267,6 @@ $(document).ready(function() {
             }
         }).addTo(markerlayer);    
         
-        var info = L.control();
-
-        info.onAdd = function(map) {
-            this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-            this.update();
-            return this._div;
-        };
-
-        // method that we will use to update the control based on feature properties passed
-        info.update = function(props) {
-            this._div.innerHTML = '<h4>Legend</h4><i style="background:#bb4c3c"></i><h4>City has no website</h4><i style="background:#47a3da"></i><h4>City has website</h4>';
-        };
-
-        info.addTo(map);
-
         // expand lists
         $(".list-title").click(function () {
             // gets bit group from id
@@ -285,7 +294,7 @@ $(document).ready(function() {
           var listItem, textnode;
 
           if(query.length === 0) {
-            // do nothing here
+              // do nothing here
           } else {
             for(var i=0; i<ALL_CONTACTS.length; i++) {
                 check = ALL_CONTACTS[i];
@@ -295,7 +304,7 @@ $(document).ready(function() {
 
                     if (check_name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
                         results.push(ALL_CONTACTS[i]);
-                    }
+                        }
                 }
             }
           }
