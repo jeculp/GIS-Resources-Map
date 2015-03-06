@@ -250,7 +250,7 @@ var searchclick = $(".list-item").click(function () {
                             gisPage = "<b>GIS Page:</b> No GIS page available";
                         }else{
                             gisPage = "<b>GIS Page:</b> " + '<a target="_blank" href="' + gisPage + '">Link</a>';
-                        }
+                        } 
                     }
                 }
 
