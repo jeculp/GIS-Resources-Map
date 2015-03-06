@@ -12,7 +12,7 @@ nav ul {
 nav ul li {
 	padding: 0.2em 2em;
 	display: inline;
-	background-color: transparent;	
+	background-color: transparent;
 }
 
 nav ul li.active {
@@ -32,6 +32,7 @@ nav a {
 	width: 30%;
 	height: 80%;
 	overflow-y: scroll;
+	overflow-x: hidden;
 }
 #big-list .item-info {
 	display: none;
@@ -45,10 +46,10 @@ nav a {
 
 #big-list .item-info p {
     color:white;
-    padding: 12px;  
-    position: relative;  
-    background-color: #58585a;  
-    left: -40px;  
+    padding: 12px;
+    position: relative;
+    background-color: #58585a;
+    left: -40px;
     width: 150%;
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
@@ -189,7 +190,7 @@ nav a {
 	}
 	.container > header {
 	width: auto;
-	height: auto;	
+	height: auto;
 	margin: 0 auto;
 	z-index: 1000;
 	position: relative;
@@ -200,6 +201,6 @@ nav a {
 	font-size: smaller;
 	-webkit-padding-start: 0px;
 	}
-	
+
 }
 
