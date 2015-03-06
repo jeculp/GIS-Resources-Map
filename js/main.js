@@ -109,7 +109,7 @@ $(document).ready(function() {
             var homepage = (array[i].homepage != undefined && array[i].homepage.length > 0) ? '<p><a target="_blank" href="' + array[i].homepage + '">Homepage</a></p>' : '';
             var gis = (array[i].gis_page != undefined && array[i].gis_page.length > 0) ? '<p><a target="_blank" href="' + array[i].gis_page + '">GIS page</a></p>' : '';
             var data = (array[i].data_page != undefined && array[i].data_page.length > 0) ? '<p><a target="_blank" href="' + array[i].data_page + '">Data page</a></p>' : '';
-            var addcontact = (array[i].first_name.length == 0) ? '<p>This information out of date? Click here!</p>' : '';
+            var addcontact = (array[i].first_name.length == 0) ? '<p><a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">This information out of date? Click here!</a></p>' : '';
             // create the more info box
             var div = document.createElement('div');
             div.innerHTML = name +
