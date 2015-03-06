@@ -2,6 +2,9 @@ $(document).ready(function() {
 
     // global
     var ALL_CONTACTS = window.ALL_CONTACTS = [];
+    var markerMap = {}; //Creates marker array to match with list ids
+    var map = L.map('map').setView([36.745487, -119.553223], 6);
+        map.options.minZoom = 6;
 
     function init() {
         $.ajax({
@@ -12,6 +15,7 @@ $(document).ready(function() {
                 processData(data);
                 createSearchHandler();
                 setNavbarHandlers();
+                mapInit();
             }
          });
     }
@@ -90,6 +94,7 @@ $(document).ready(function() {
         for (var i = 0; i < array.length; i++){
             var listItem = document.createElement('li');
             var textnode = document.createTextNode(array[i].display_name);
+            listItem.id = array[i].display_name; //Add id to li
             listItem.appendChild(textnode);
             listItem.className = 'list-item';
 
@@ -98,9 +103,10 @@ $(document).ready(function() {
             var dept = "";
             // var dept = (array[i].agency_department.length > 0) ? '<p>' + array[i].agency_department + '</p>' : '';
             var email = (array[i].email.length > 0) ? '<p><a href="mailto:' + array[i].email + '">' + array[i].email + '</a></p>' : '';
-            var homepage = (array[i].homepage != undefined && array[i].homepage.length > 0) ? '<p><a href="' + array[i].homepage + '">Homepage</a></p>' : '';
-            var gis = (array[i].gis_page != undefined && array[i].gis_page.length > 0) ? '<p><a href="' + array[i].gis_page + '">GIS page</a></p>' : '';
-            var data = (array[i].data_page != undefined && array[i].data_page.length > 0) ? '<p><a href="' + array[i].data_page + '">Data page</a></p>' : '';
+            var homepage = (array[i].homepage != undefined && array[i].homepage.length > 0) ? '<p><a target="_blank" href="' + array[i].homepage + '">Homepage</a></p>' : '';
+            var gis = (array[i].gis_page != undefined && array[i].gis_page.length > 0) ? '<p><a target="_blank" href="' + array[i].gis_page + '">GIS page</a></p>' : '';
+            var data = (array[i].data_page != undefined && array[i].data_page.length > 0) ? '<p><a target="_blank" href="' + array[i].data_page + '">Data page</a></p>' : '';
+            var addcontact = (array[i].first_name.length == 0) ? '<p>This information out of date? Click here!</p>' : '';
             // create the more info box
             var div = document.createElement('div');
             div.innerHTML = name +
@@ -109,7 +115,8 @@ $(document).ready(function() {
                             email +
                             homepage +
                             gis +
-                            data;
+                            data +
+                            addcontact;
             div.className = 'item-info';
             listItem.appendChild(div);
             document.getElementById(list).appendChild(listItem);
@@ -128,12 +135,45 @@ $(document).ready(function() {
                 $(".visible-list li div").removeClass("visible-item");
                 // but show this one
                 $(this).children("div").addClass("visible-item");
+                
+                //Matches list id to markermap array
+                var markerId = $(this).attr( 'id' );
+                console.log(markerId);
+                var marker = markerMap[markerId];
+
+                marker.openPopup(marker.getLatLng()); //Opens popup
+                map.setView(marker.getLatLng(),10); //Zooms to and centers map 
+                e.preventDefault()
             }
         });
 
     }
 
+    
+      
+        // expand list items
+var searchclick = $(".list-item").click(function () {
 
+            if ($(this).children("div").hasClass("visible-item")) {
+                $(this).children("div").removeClass("visible-item");
+            } else {
+                // hide all
+                $(".visible-list li div").removeClass("visible-item");
+                // but show this one
+                $(this).children("div").addClass("visible-item");
+                
+                //Matches list id to markermap array
+                var markerId = $(this).attr( 'id' );
+                console.log(markerId);
+                var marker = markerMap[markerId];
+
+                marker.openPopup(marker.getLatLng()); //Opens popup
+                map.setView(marker.getLatLng(),10); //Zooms to and centers map 
+                e.preventDefault()
+            }
+        });
+
+    
 
   // map
 
@@ -154,89 +194,95 @@ $(document).ready(function() {
         map.addLayer(citysim);
     }
 
-    //This loads the map
-    var map = L.map('map')
-        .setView([36.745487, -119.553223], 6);
-    map.options.minZoom = 6;
-    var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
-        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
-    }).addTo(map).setOpacity(.75);
-
-    var countylines = {
-        "clickable": true,
-        "color": "#47a3da",
-        "fill": false,
-        "dashArray": '3',
-        "weight": .5,
-        "opacity": 1,
-        "fillOpacity": 0.2
-    };
-
-    var countysim = new L.geoJson.ajax("data/countysimple.geojson", {
-        style: countylines,
-    }).addTo(map);
-
-    //Gets and returns colors for Cities that have a web page link in geojson file
+        //Gets and returns colors for Cities that have a web page link in geojson file
     function getcitycolor(d) {
         var d = String(d);
         return d == 'null' ? '#C26263' :
             '#47a3da';
     }
+    
+    function mapInit(){
+        //This loads the map
 
-    //Adds a layer with Incorporated Cities onto map, styling performed within
-    var citysim = new L.geoJson.ajax("data/cities.geojson", {
-        pointToLayer: function(feature, latlng) {
-            return L.circleMarker(latlng, {
-                radius: 3,
-                color: '#bb4c3c',
-                weight: 0.0,
-                fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
-                fillOpacity: .7
-            }).bindPopup("<b>City:</b> " + feature.properties.name + "<br> " +
-                "<b>Name:</b> " + feature.properties["First Name"] + " " + feature.properties["Last Name"] + "<br> " +
-                "<b>Title:</b> " + feature.properties["Title"] + "<br> " +
-                "<b>Agency:</b> " + feature.properties["Agency"] + "<br> " +
-                "<b>email:</b> " + feature.properties["e-mail"] + "<br> " +
-                "<b>Phone:</b> " + feature.properties["Phone"] + "<br> " +
-                "<b>GIS Page:</b> " + '<a href="' + feature.properties["GIS Page"] + '">Link</a>');
-        }
-    }).addTo(map);
+        var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
+        }).addTo(map).setOpacity(.75);
 
-    map.addControl(new L.Control.Search({
-        layer: citysim,
-        propertyName: 'name',
-        zoom: 11
-    })); // This creates a control to search within the geojson
+        var countylines = {
+            "clickable": true,
+            "color": "#47a3da",
+            "fill": false,
+            "dashArray": '3',
+            "weight": .5,
+            "opacity": 1,
+            "fillOpacity": 0.2
+        };
 
-    var info = L.control();
+        var countysim = new L.geoJson.ajax("data/countysimple.geojson", {
+            style: countylines,
+        }).addTo(map);
 
-    info.onAdd = function(map) {
-        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-        this.update();
-        return this._div;
-    };
 
-    // method that we will use to update the control based on feature properties passed
-    info.update = function(props) {
-        this._div.innerHTML = '<h4>Legend</h4><i style="background:#bb4c3c"></i><h4>City has no website</h4><i style="background:#47a3da"></i><h4>City has website</h4><br><h4>Click on topleft to search for a city!</h4>';
-    };
+        
+        var markerlayer = L.layerGroup().addTo(map);
+        
+        //Adds a layer with Incorporated Cities onto map, styling performed within
+        var citysim = new L.geoJson.ajax("data/cities.geojson", {
+            pointToLayer: function(feature, latlng) {         
+                
+                for (var i=0; i<ALL_CONTACTS.length;i++){
 
-    info.addTo(map);
+                    if(ALL_CONTACTS[i].display_name == feature.properties["NAMELSAD"]){                        
+                        var firstname = ALL_CONTACTS[i].first_name;
+                        var lastname = ALL_CONTACTS[i].last_name;
+                        var title = ALL_CONTACTS[i].title;
+                        var agency_department = ALL_CONTACTS[i].agency_department;
+                        var email = ALL_CONTACTS[i].email;
+                        var phone = ALL_CONTACTS[i].phone;
+                        var gisPage  = ALL_CONTACTS[i].gis_page;
 
-    // expand lists
-    $(".list-title").click(function () {
-        // gets bit group from id
-        var group = $(this).attr("id").substring(0,$(this).attr("id").indexOf("-"));
-        // check if it already has visible class
-        if ($("#"+group+"-list").hasClass("visible-list")) {
-            $("#"+group+"-list").removeClass("visible-list")
-        } else {
-            // remove visible class from all
-            $(".group-list").removeClass("visible-list");
-            // add the class to the selected one
-            $("#"+group+"-list").addClass("visible-list");
-        }
-    });
+                        if (gisPage == ""){
+                            gisPage = "<b>GIS Page:</b> No GIS page available";
+                        }else{
+                            gisPage = "<b>GIS Page:</b> " + '<a target="_blank" href="' + gisPage + '">Link</a>';
+                        }
+                    }
+                }
+
+                var marker = new L.circleMarker(latlng, {
+                    radius: 3,
+                    color: '#bb4c3c',
+                    weight: 0.0,
+                    fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
+                    fillOpacity: .7
+                }).bindPopup("<b>City:</b> " + feature.properties.NAMELSAD + "<br> " +
+                    "<b>Name:</b> " + firstname + " " + lastname + "<br> " +
+                    "<b>Title:</b> " + title + "<br> " +
+                    "<b>Agency:</b> " + agency_department + "<br> " +
+                    "<b>email:</b> " + email + "<br> " +
+                    "<b>Phone:</b> " + phone + "<br> " +
+                    gisPage);                    
+                markerMap[feature.properties.NAMELSAD] = marker;
+                return marker;
+            }
+        }).addTo(markerlayer);    
+        
+        // expand lists
+        $(".list-title").click(function () {
+            // gets bit group from id
+            var group = $(this).attr("id").substring(0,$(this).attr("id").indexOf("-"));
+            // check if it already has visible class
+            if ($("#"+group+"-list").hasClass("visible-list")) {
+                $("#"+group+"-list").removeClass("visible-list")
+            } else {
+                // remove visible class from all
+                $(".group-list").removeClass("visible-list");
+                // add the class to the selected one
+                $("#"+group+"-list").addClass("visible-list");
+            }
+        });
+
+    }
 
     function createSearchHandler() {
         $( "form.search" ).submit(function( event ) {
@@ -248,7 +294,7 @@ $(document).ready(function() {
           var listItem, textnode;
 
           if(query.length === 0) {
-            // do nothing here
+              // do nothing here
           } else {
             for(var i=0; i<ALL_CONTACTS.length; i++) {
                 check = ALL_CONTACTS[i];
@@ -258,7 +304,7 @@ $(document).ready(function() {
 
                     if (check_name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
                         results.push(ALL_CONTACTS[i]);
-                    }
+                        }
                 }
             }
           }
