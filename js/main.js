@@ -135,22 +135,22 @@ $(document).ready(function() {
                 $(".visible-list li div").removeClass("visible-item");
                 // but show this one
                 $(this).children("div").addClass("visible-item");
-                
+
                 //Matches list id to markermap array
                 var markerId = $(this).attr( 'id' );
                 console.log(markerId);
                 var marker = markerMap[markerId];
 
                 marker.openPopup(marker.getLatLng()); //Opens popup
-                map.setView(marker.getLatLng(),10); //Zooms to and centers map 
+                map.setView(marker.getLatLng(),10); //Zooms to and centers map
                 e.preventDefault()
             }
         });
 
     }
 
-    
-      
+
+
         // expand list items
 var searchclick = $(".list-item").click(function () {
 
@@ -161,19 +161,19 @@ var searchclick = $(".list-item").click(function () {
                 $(".visible-list li div").removeClass("visible-item");
                 // but show this one
                 $(this).children("div").addClass("visible-item");
-                
+
                 //Matches list id to markermap array
                 var markerId = $(this).attr( 'id' );
                 console.log(markerId);
                 var marker = markerMap[markerId];
 
                 marker.openPopup(marker.getLatLng()); //Opens popup
-                map.setView(marker.getLatLng(),10); //Zooms to and centers map 
+                map.setView(marker.getLatLng(),10); //Zooms to and centers map
                 e.preventDefault()
             }
         });
 
-    
+
 
   // map
 
@@ -200,7 +200,7 @@ var searchclick = $(".list-item").click(function () {
         return d == 'null' ? '#C26263' :
             '#47a3da';
     }
-    
+
     function mapInit(){
         //This loads the map
 
@@ -223,16 +223,16 @@ var searchclick = $(".list-item").click(function () {
         }).addTo(map);
 
 
-        
+
         var markerlayer = L.layerGroup().addTo(map);
-        
+
         //Adds a layer with Incorporated Cities onto map, styling performed within
         var citysim = new L.geoJson.ajax("data/cities.geojson", {
-            pointToLayer: function(feature, latlng) {         
-                
+            pointToLayer: function(feature, latlng) {
+
                 for (var i=0; i<ALL_CONTACTS.length;i++){
 
-                    if(ALL_CONTACTS[i].display_name == feature.properties["NAMELSAD"]){                        
+                    if(ALL_CONTACTS[i].display_name == feature.properties["NAMELSAD"]){
                         var firstname = ALL_CONTACTS[i].first_name;
                         var lastname = ALL_CONTACTS[i].last_name;
                         var title = ALL_CONTACTS[i].title;
@@ -261,27 +261,11 @@ var searchclick = $(".list-item").click(function () {
                     "<b>Agency:</b> " + agency_department + "<br> " +
                     "<b>email:</b> " + email + "<br> " +
                     "<b>Phone:</b> " + phone + "<br> " +
-                    gisPage);                    
+                    gisPage);
                 markerMap[feature.properties.NAMELSAD] = marker;
                 return marker;
             }
-        }).addTo(markerlayer);    
-        
-        // expand lists
-        $(".list-title").click(function () {
-            // gets bit group from id
-            var group = $(this).attr("id").substring(0,$(this).attr("id").indexOf("-"));
-            // check if it already has visible class
-            if ($("#"+group+"-list").hasClass("visible-list")) {
-                $("#"+group+"-list").removeClass("visible-list")
-            } else {
-                // remove visible class from all
-                $(".group-list").removeClass("visible-list");
-                // add the class to the selected one
-                $("#"+group+"-list").addClass("visible-list");
-            }
-        });
-
+        }).addTo(markerlayer);
     }
 
     function createSearchHandler() {
