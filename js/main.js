@@ -127,6 +127,7 @@ $(document).ready(function() {
     function ready() {
         // expand list items
         $(".list-item").click(function (e) {
+            e.preventDefault();
 
             if ($(this).children("div").hasClass("visible-item")) {
                 $(this).children("div").removeClass("visible-item");
@@ -141,9 +142,10 @@ $(document).ready(function() {
                 console.log(markerId);
                 var marker = markerMap[markerId];
 
-                marker.openPopup(marker.getLatLng()); //Opens popup
-                map.setView(marker.getLatLng(),10); //Zooms to and centers map
-                e.preventDefault()
+                if (marker && marker.getLatLng()) {
+                    marker.openPopup(marker.getLatLng()); //Opens popup
+                    map.setView(marker.getLatLng(),10); //Zooms to and centers map
+                }
             }
         });
 
