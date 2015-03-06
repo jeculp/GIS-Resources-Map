@@ -54,6 +54,9 @@ $(document).ready(function() {
             } else if (data[i].type === "Other") {
                 otherArray.push(data[i]);
             }
+            if (data[i] && data[i].display_name) {
+                data[i].id = data[i].display_name.replace(/\s+/g, '');
+            }
         }
 
         //alphabetize arrays & send to addChild function
@@ -94,7 +97,7 @@ $(document).ready(function() {
         for (var i = 0; i < array.length; i++){
             var listItem = document.createElement('li');
             var textnode = document.createTextNode(array[i].display_name);
-            listItem.id = array[i].display_name; //Add id to li
+            listItem.id = array[i].id;
             listItem.appendChild(textnode);
             listItem.className = 'list-item';
 
@@ -272,45 +275,35 @@ var searchclick = $(".list-item").click(function () {
 
     function createSearchHandler() {
         $( "form.search" ).submit(function( event ) {
-          event.preventDefault();
+            event.preventDefault();
 
-          var query = $('#list-search').val();
-          var check, check_name;
-          var results = [];
-          var listItem, textnode;
+            var query = $('#list-search').val();
+            var check, check_name;
+            var results = [];
+            var listItem, textnode;
+            var checkListItemID;
 
-          if(query.length === 0) {
+            // clear sidebar
+            resetAllSections();
+            $('.group-list').addClass("visible-item");
+            $('.list-item').addClass('hidden');
+
+            if(query.length === 0) {
               // do nothing here
-          } else {
-            for(var i=0; i<ALL_CONTACTS.length; i++) {
-                check = ALL_CONTACTS[i];
+            } else {
+                for(var i=0; i<ALL_CONTACTS.length; i++) {
+                    check = ALL_CONTACTS[i];
 
-                if(check && check.display_name){
-                    check_name = check.display_name;
+                    if(check && check.display_name){
+                        check_name = check.display_name;
 
-                    if (check_name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
-                        results.push(ALL_CONTACTS[i]);
+                        if (check_name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+                            checkListItemID = check_name.replace(/\s+/g, '');
+                            $('#' + checkListItemID).removeClass('hidden');
                         }
+                    }
                 }
             }
-          }
-
-          // clear sidebar
-          resetAllSections();
-
-          if(results.length === 0) {
-            $('#results .none').removeClass('hide');
-          } else {
-
-            for(var i=0; i<results.length; i++) {
-                listItem = document.createElement('li');
-                textnode = document.createTextNode(results[i].display_name);
-                listItem.appendChild(textnode);
-                listItem.className = 'list-item';
-                document.getElementById('results-list').appendChild(listItem);
-            }
-          }
-
         });
     }
 
@@ -359,6 +352,7 @@ var searchclick = $(".list-item").click(function () {
     function resetAllSections() {
         $('.list-title').removeClass('active');
         $('.group-list').removeClass('visible-item');
+        $('.list-item').removeClass('hidden');
         $('nav li').removeClass('active');
         $('#results .none').addClass('hide');
         $('#results-list').empty();
