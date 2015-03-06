@@ -126,7 +126,7 @@ $(document).ready(function() {
 
     function ready() {
         // expand list items
-        $(".list-item").click(function () {
+        $(".list-item").click(function (e) {
 
             if ($(this).children("div").hasClass("visible-item")) {
                 $(this).children("div").removeClass("visible-item");
