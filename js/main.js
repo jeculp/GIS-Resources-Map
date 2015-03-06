@@ -133,10 +133,10 @@ $(document).ready(function() {
             e.preventDefault();
 
             if ($(this).children("div").hasClass("visible-item")) {
-                $(this).children("div").removeClass("visible-item");
+               // $(this).children("div").removeClass("visible-item");
             } else {
                 // hide all
-                $(".visible-list li div").removeClass("visible-item");
+                $(".visible-item li div").removeClass("visible-item");
                 // but show this one
                 $(this).children("div").addClass("visible-item");
 
