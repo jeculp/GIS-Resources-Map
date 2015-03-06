@@ -101,7 +101,7 @@ $(document).ready(function() {
             listItem.appendChild(textnode);
             listItem.className = 'list-item';
 
-            var name = (array[i].first_name.length > 0 && array[i].last_name.length > 0) ? '<p>Contact: ' + array[i].firstname + ' ' + array[i].lastname + '</p>' : '';
+            var name = (array[i].first_name.length > 0 && array[i].last_name.length > 0) ? '<p>Contact: ' + array[i].first_name + ' ' + array[i].last_name + '</p>' : '';
             var title = (array[i].title.length > 0) ? '<p>' + array[i].title + '</p>' : '';
             var dept = "";
             // var dept = (array[i].agency_department.length > 0) ? '<p>' + array[i].agency_department + '</p>' : '';
