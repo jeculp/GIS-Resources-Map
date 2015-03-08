@@ -115,6 +115,11 @@ nav a {
     -ms-user-select: none;
     user-select: none;
 }
+
+#big-list .group-list li.list-item.hidden {
+	display: none;
+}
+
 #big-list .group-list .visible-item {
 	display: block;
 }

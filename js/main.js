@@ -54,6 +54,9 @@ $(document).ready(function() {
             } else if (data[i].type === "Other") {
                 otherArray.push(data[i]);
             }
+            if (data[i] && data[i].display_name) {
+                data[i].id = data[i].display_name.replace(/\s+/g, '');
+            }
         }
 
         //alphabetize arrays & send to addChild function
@@ -94,11 +97,11 @@ $(document).ready(function() {
         for (var i = 0; i < array.length; i++){
             var listItem = document.createElement('li');
             var textnode = document.createTextNode(array[i].display_name);
-            listItem.id = array[i].display_name; //Add id to li
+            listItem.id = array[i].id;
             listItem.appendChild(textnode);
             listItem.className = 'list-item';
 
-            var name = (array[i].first_name.length > 0 && array[i].last_name.length > 0) ? '<p>Contact: ' + array[i].firstname + ' ' + array[i].lastname + '</p>' : '';
+            var name = (array[i].first_name.length > 0 && array[i].last_name.length > 0) ? '<p>Contact: ' + array[i].first_name + ' ' + array[i].last_name + '</p>' : '';
             var title = (array[i].title.length > 0) ? '<p>' + array[i].title + '</p>' : '';
             var dept = "";
             // var dept = (array[i].agency_department.length > 0) ? '<p>' + array[i].agency_department + '</p>' : '';
@@ -106,7 +109,7 @@ $(document).ready(function() {
             var homepage = (array[i].homepage != undefined && array[i].homepage.length > 0) ? '<p><a target="_blank" href="' + array[i].homepage + '">Homepage</a></p>' : '';
             var gis = (array[i].gis_page != undefined && array[i].gis_page.length > 0) ? '<p><a target="_blank" href="' + array[i].gis_page + '">GIS page</a></p>' : '';
             var data = (array[i].data_page != undefined && array[i].data_page.length > 0) ? '<p><a target="_blank" href="' + array[i].data_page + '">Data page</a></p>' : '';
-            var addcontact = (array[i].first_name.length == 0) ? '<p>This information out of date? Click here!</p>' : '';
+            var addcontact = (array[i].first_name.length == 0) ? '<p><a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">This information out of date? Click here!</a></p>' : '';
             // create the more info box
             var div = document.createElement('div');
             div.innerHTML = name +
@@ -126,31 +129,33 @@ $(document).ready(function() {
 
     function ready() {
         // expand list items
-        $(".list-item").click(function () {
+        $(".list-item").click(function (e) {
+            e.preventDefault();
 
             if ($(this).children("div").hasClass("visible-item")) {
-                $(this).children("div").removeClass("visible-item");
+               // $(this).children("div").removeClass("visible-item");
             } else {
                 // hide all
-                $(".visible-list li div").removeClass("visible-item");
+                $(".visible-item li div").removeClass("visible-item");
                 // but show this one
                 $(this).children("div").addClass("visible-item");
-                
+
                 //Matches list id to markermap array
                 var markerId = $(this).attr( 'id' );
                 console.log(markerId);
                 var marker = markerMap[markerId];
 
-                marker.openPopup(marker.getLatLng()); //Opens popup
-                map.setView(marker.getLatLng(),10); //Zooms to and centers map 
-                e.preventDefault()
+                if (marker && marker.getLatLng()) {
+                    marker.openPopup(marker.getLatLng()); //Opens popup
+                    map.setView(marker.getLatLng(),10); //Zooms to and centers map
+                }
             }
         });
 
     }
 
-    
-      
+
+
         // expand list items
 var searchclick = $(".list-item").click(function () {
 
@@ -161,19 +166,19 @@ var searchclick = $(".list-item").click(function () {
                 $(".visible-list li div").removeClass("visible-item");
                 // but show this one
                 $(this).children("div").addClass("visible-item");
-                
+
                 //Matches list id to markermap array
                 var markerId = $(this).attr( 'id' );
                 console.log(markerId);
                 var marker = markerMap[markerId];
 
                 marker.openPopup(marker.getLatLng()); //Opens popup
-                map.setView(marker.getLatLng(),10); //Zooms to and centers map 
+                map.setView(marker.getLatLng(),10); //Zooms to and centers map
                 e.preventDefault()
             }
         });
 
-    
+
 
   // map
 
@@ -200,7 +205,7 @@ var searchclick = $(".list-item").click(function () {
         return d == 'null' ? '#C26263' :
             '#47a3da';
     }
-    
+
     function mapInit(){
         //This loads the map
 
@@ -223,16 +228,16 @@ var searchclick = $(".list-item").click(function () {
         }).addTo(map);
 
 
-        
+
         var markerlayer = L.layerGroup().addTo(map);
-        
+
         //Adds a layer with Incorporated Cities onto map, styling performed within
         var citysim = new L.geoJson.ajax("data/cities.geojson", {
-            pointToLayer: function(feature, latlng) {         
-                
+            pointToLayer: function(feature, latlng) {
+
                 for (var i=0; i<ALL_CONTACTS.length;i++){
 
-                    if(ALL_CONTACTS[i].display_name == feature.properties["NAMELSAD"]){                        
+                    if(ALL_CONTACTS[i].display_name == feature.properties["NAMELSAD"]){
                         var firstname = ALL_CONTACTS[i].first_name;
                         var lastname = ALL_CONTACTS[i].last_name;
                         var title = ALL_CONTACTS[i].title;
@@ -245,7 +250,7 @@ var searchclick = $(".list-item").click(function () {
                             gisPage = "<b>GIS Page:</b> No GIS page available";
                         }else{
                             gisPage = "<b>GIS Page:</b> " + '<a target="_blank" href="' + gisPage + '">Link</a>';
-                        }
+                        } 
                     }
                 }
 
@@ -261,70 +266,44 @@ var searchclick = $(".list-item").click(function () {
                     "<b>Agency:</b> " + agency_department + "<br> " +
                     "<b>email:</b> " + email + "<br> " +
                     "<b>Phone:</b> " + phone + "<br> " +
-                    gisPage);                    
+                    gisPage);
                 markerMap[feature.properties.NAMELSAD] = marker;
                 return marker;
             }
-        }).addTo(markerlayer);    
-        
-        // expand lists
-        $(".list-title").click(function () {
-            // gets bit group from id
-            var group = $(this).attr("id").substring(0,$(this).attr("id").indexOf("-"));
-            // check if it already has visible class
-            if ($("#"+group+"-list").hasClass("visible-list")) {
-                $("#"+group+"-list").removeClass("visible-list")
-            } else {
-                // remove visible class from all
-                $(".group-list").removeClass("visible-list");
-                // add the class to the selected one
-                $("#"+group+"-list").addClass("visible-list");
-            }
-        });
-
+        }).addTo(markerlayer);
     }
 
     function createSearchHandler() {
         $( "form.search" ).submit(function( event ) {
-          event.preventDefault();
+            event.preventDefault();
 
-          var query = $('#list-search').val();
-          var check, check_name;
-          var results = [];
-          var listItem, textnode;
+            var query = $('#list-search').val();
+            var check, check_name;
+            var results = [];
+            var listItem, textnode;
+            var checkListItemID;
 
-          if(query.length === 0) {
+            // clear sidebar
+            resetAllSections();
+            $('.group-list').addClass("visible-item");
+            $('.list-item').addClass('hidden');
+
+            if(query.length === 0) {
               // do nothing here
-          } else {
-            for(var i=0; i<ALL_CONTACTS.length; i++) {
-                check = ALL_CONTACTS[i];
+            } else {
+                for(var i=0; i<ALL_CONTACTS.length; i++) {
+                    check = ALL_CONTACTS[i];
 
-                if(check && check.display_name){
-                    check_name = check.display_name;
+                    if(check && check.display_name){
+                        check_name = check.display_name;
 
-                    if (check_name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
-                        results.push(ALL_CONTACTS[i]);
+                        if (check_name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+                            checkListItemID = check_name.replace(/\s+/g, '');
+                            $('#' + checkListItemID).removeClass('hidden');
                         }
+                    }
                 }
             }
-          }
-
-          // clear sidebar
-          resetAllSections();
-
-          if(results.length === 0) {
-            $('#results .none').removeClass('hide');
-          } else {
-
-            for(var i=0; i<results.length; i++) {
-                listItem = document.createElement('li');
-                textnode = document.createTextNode(results[i].display_name);
-                listItem.appendChild(textnode);
-                listItem.className = 'list-item';
-                document.getElementById('results-list').appendChild(listItem);
-            }
-          }
-
         });
     }
 
@@ -373,6 +352,7 @@ var searchclick = $(".list-item").click(function () {
     function resetAllSections() {
         $('.list-title').removeClass('active');
         $('.group-list').removeClass('visible-item');
+        $('.list-item').removeClass('hidden');
         $('nav li').removeClass('active');
         $('#results .none').addClass('hide');
         $('#results-list').empty();
