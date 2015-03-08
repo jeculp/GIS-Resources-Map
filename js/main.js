@@ -96,8 +96,9 @@ $(document).ready(function() {
 
         for (var i = 0; i < array.length; i++){
             var listItem = document.createElement('li');
-            var textnode = document.createTextNode(array[i].display_name);
+            var textnode = document.createElement('span');
             listItem.id = array[i].id;
+            textnode.innerHTML = array[i].display_name
             listItem.appendChild(textnode);
             listItem.className = 'list-item';
 
@@ -109,7 +110,7 @@ $(document).ready(function() {
             var homepage = (array[i].homepage != undefined && array[i].homepage.length > 0) ? '<p><a target="_blank" href="' + array[i].homepage + '">Homepage</a></p>' : '';
             var gis = (array[i].gis_page != undefined && array[i].gis_page.length > 0) ? '<p><a target="_blank" href="' + array[i].gis_page + '">GIS page</a></p>' : '';
             var data = (array[i].data_page != undefined && array[i].data_page.length > 0) ? '<p><a target="_blank" href="' + array[i].data_page + '">Data page</a></p>' : '';
-            var addcontact = (array[i].first_name.length == 0) ? '<p><a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">This information out of date? Click here!</a></p>' : '';
+            var addcontact = (array[i].first_name.length == 0) ? '<p>This information out of date? <a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">Update here.</a></p>' : '';
             // create the more info box
             var div = document.createElement('div');
             div.innerHTML = name +
@@ -120,7 +121,13 @@ $(document).ready(function() {
                             gis +
                             data +
                             addcontact;
+            var totalData = div.innerHTML;
             div.className = 'item-info';
+            if (totalData == '<p>This information out of date? <a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">Update here.</a></p>') {
+                listItem.setAttribute("data-info", "no-data");
+            } else {
+                listItem.setAttribute("data-info", "has-data");
+            }
             listItem.appendChild(div);
             document.getElementById(list).appendChild(listItem);
         }
@@ -250,7 +257,7 @@ var searchclick = $(".list-item").click(function () {
                             gisPage = "<b>GIS Page:</b> No GIS page available";
                         }else{
                             gisPage = "<b>GIS Page:</b> " + '<a target="_blank" href="' + gisPage + '">Link</a>';
-                        } 
+                        }
                     }
                 }
 
