@@ -195,17 +195,17 @@ nav a {
 		float: none;
 	}
 	.container > header {
-	width: auto;
-	height: auto;
-	margin: 0 auto;
-	z-index: 1000;
-	position: relative;
-	padding: 2.875em 1.875em 1.875em;
+		width: auto;
+		height: auto;
+		margin: 0 auto;
+		z-index: 1000;
+		position: relative;
+		padding: 2.875em 1.875em 1.875em;
 	}
 	nav ul {
-	list-style-type: none;
-	font-size: smaller;
-	-webkit-padding-start: 0px;
+		list-style-type: none;
+		font-size: smaller;
+		-webkit-padding-start: 0px;
 	}
 
 }
