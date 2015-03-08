@@ -24,6 +24,9 @@ nav a {
 	color: #47A3DA;
 }
 
+.hidden {
+	display: none;
+}
 /* Sidebar List */
 
 #big-list .list-item[data-info="has-data"] span:after {
@@ -156,6 +159,10 @@ nav a {
 
 #results .none.hide {
 	display: none;
+}
+
+#results-list {
+	margin: 0;
 }
 
 #map {
