@@ -87,9 +87,9 @@ $(document).ready(function() {
     function addChild(array,list) {
         for (var i = 0; i < array.length; i++){
             var listItem = document.createElement('li');
-            var textnode = document.createTextNode(array[i].display_name);
+            var listName = $('<span />').html(array[i].display_name);
             listItem.id = array[i].display_name; //Add id to li
-            listItem.appendChild(textnode);
+            $(listItem).html(listName);
             listItem.className = 'list-item';
 
             var name = (array[i].first_name.length > 0 && array[i].last_name.length > 0) ? '<p>Contact: ' + array[i].firstname + ' ' + array[i].lastname + '</p>' : '';

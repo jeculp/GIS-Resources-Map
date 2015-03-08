@@ -26,12 +26,17 @@ nav a {
 
 /* Sidebar List */
 
-#big-list .list-item[data-info="no-data"]:before {
-	background: #abdda4;
+#big-list .list-item[data-info="has-data"] span:after {
+	content: "\2139";
+	color: rgb(71, 163, 218);
+	display: block;
+	position: absolute;
+	top: 25%;
+	right: 5px;
 }
 
-#big-list .list-item[data-info="has-data"]:before {
-	background: #ededed;
+#big-list .list-item span {
+	color: rgb(85, 85, 85);
 }
 
 #big-list {
@@ -111,10 +116,12 @@ nav a {
 	display: block;
 }
 #big-list .group-list li {
-	padding: 10px 20px;
-	color: #ffffff;
+	padding: 10px 20px 10px 15px;
 	border-bottom: 1px solid #ccc;
 	cursor: pointer;
+	position: relative;
+	background-color: rgb(238, 238, 238);
+	color: rgb(85, 85, 85);
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
