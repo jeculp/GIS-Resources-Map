@@ -5,6 +5,22 @@ $(document).ready(function() {
     var markerMap = {}; //Creates marker array to match with list ids
     var map = L.map('map').setView([36.745487, -119.553223], 6);
         map.options.minZoom = 6;
+	
+	//attempt 2 to get markers to be bigger at a certain zoom level
+	// map.on('zoomend', function() {
+		// if (map.getZoom() > 10) {
+			// marker.setRadius(12);
+		// }	
+		// else {
+			// marker.setRadius(3);
+		// }
+    // });
+	
+	//attempt 1 to get markers to be bigger as map zooms
+	// map.on('zoomend', function() {
+		// var currentZoom = map.getZoom();
+		// marker.setRadius(currentZoom);
+	// });
 
     function init() {
         $.ajax({
@@ -207,7 +223,7 @@ var searchclick = $(".list-item").click(function () {
         var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
             attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
         }).addTo(map).setOpacity(.75);
-
+		
         var countylines = {
             "clickable": true,
             "color": "#47a3da",
@@ -221,8 +237,6 @@ var searchclick = $(".list-item").click(function () {
         var countysim = new L.geoJson.ajax("data/countysimple.geojson", {
             style: countylines,
         }).addTo(map);
-
-
 
         var markerlayer = L.layerGroup().addTo(map);
 
@@ -250,7 +264,7 @@ var searchclick = $(".list-item").click(function () {
                 }
 
                 var marker = new L.circleMarker(latlng, {
-                    radius: 3,
+					radius: 3,
                     color: '#bb4c3c',
                     weight: 0.0,
                     fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
@@ -311,7 +325,7 @@ var searchclick = $(".list-item").click(function () {
 
         });
     }
-
+	
     function setNavbarHandlers() {
         $('nav li.federal').on('click', function(e){
             e.preventDefault();
