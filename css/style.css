@@ -65,7 +65,7 @@ nav a {
 
 #big-list .item-info p {
     color: white;
-    padding: 12px;
+    padding: 12px 0 12px 16px;
     position: relative;
     background-color: #58585a;
     left: -40px;
