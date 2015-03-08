@@ -64,7 +64,7 @@ nav a {
 }
 
 #big-list .item-info p {
-    color:white;
+    color: white;
     padding: 12px;
     position: relative;
     background-color: #58585a;
@@ -72,6 +72,10 @@ nav a {
     width: 150%;
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
+}
+
+#big-list .item-info p a:hover {
+	text-decoration: none;
 }
 
 #list-search {
