@@ -27,9 +27,12 @@ nav a {
 /* Sidebar List */
 
 #big-list .list-item[data-info="no-data"]:before {
-
+	background: #abdda4;
 }
 
+#big-list .list-item[data-info="has-data"]:before {
+	background: #ededed;
+}
 
 #big-list {
 	clear: both;
@@ -109,7 +112,7 @@ nav a {
 }
 #big-list .group-list li {
 	padding: 10px 20px;
-	color: #555;
+	color: #ffffff;
 	border-bottom: 1px solid #ccc;
 	cursor: pointer;
     -webkit-touch-callout: none;

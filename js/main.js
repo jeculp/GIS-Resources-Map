@@ -245,7 +245,7 @@ $(document).ready(function() {
                     "<b>Name:</b> " + firstname + " " + lastname + "<br> " +
                     "<b>Title:</b> " + title + "<br> " +
                     "<b>Agency:</b> " + agency_department + "<br> " +
-                    "<b>email:</b> " + email + "<br> " +
+                    "<b>E-mail:</b> " + email + "<br> " +
                     "<b>Phone:</b> " + phone + "<br> " +
                     gisPage);
                 markerMap[feature.properties.NAMELSAD] = marker;
