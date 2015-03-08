@@ -96,8 +96,9 @@ $(document).ready(function() {
 
         for (var i = 0; i < array.length; i++){
             var listItem = document.createElement('li');
-            var textnode = document.createTextNode(array[i].display_name);
+            var textnode = document.createElement('span');
             listItem.id = array[i].id;
+            textnode.innerHTML = array[i].display_name
             listItem.appendChild(textnode);
             listItem.className = 'list-item';
 
@@ -120,7 +121,13 @@ $(document).ready(function() {
                             gis +
                             data +
                             addcontact;
+            var totalData = div.innerHTML;
             div.className = 'item-info';
+            if (totalData == '<p>This information out of date? Click here!</p>') {
+                listItem.setAttribute("data-info", "no-data");
+            } else {
+                listItem.setAttribute("data-info", "has-data");
+            }
             listItem.appendChild(div);
             document.getElementById(list).appendChild(listItem);
         }
@@ -250,7 +257,7 @@ var searchclick = $(".list-item").click(function () {
                             gisPage = "<b>GIS Page:</b> No GIS page available";
                         }else{
                             gisPage = "<b>GIS Page:</b> " + '<a target="_blank" href="' + gisPage + '">Link</a>';
-                        } 
+                        }
                     }
                 }
 
