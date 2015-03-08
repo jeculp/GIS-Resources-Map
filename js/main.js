@@ -201,7 +201,7 @@ $(document).ready(function() {
             "color": "#47a3da",
             "fill": false,
             "dashArray": '3',
-            "weight": .9,
+            "weight": .5,
             "opacity": 1,
             "fillOpacity": 0.2
         };
@@ -236,7 +236,7 @@ $(document).ready(function() {
                 }
 
                 var marker = new L.circleMarker(latlng, {
-                    radius: 4,
+                    radius: 3,
                     color: '#bb4c3c',
                     weight: 0.0,
                     fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
