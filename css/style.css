@@ -112,7 +112,7 @@ nav a {
 }
 #big-list .group-list {
 	display: none;
-	margin: 10px 0 0 0; /* temporary until loading sped up */
+	margin: 0;
 	padding: 0;
 }
 #big-list .group-list.visible-item {
