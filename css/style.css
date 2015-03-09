@@ -165,6 +165,12 @@ nav a {
 width : 60px;
 }
 
+#big-list .homechild a{
+	text-decoration: underline;
+	color: #47a3da;
+}
+
+
 
 
 /* Search Results */
