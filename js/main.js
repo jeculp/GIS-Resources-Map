@@ -55,7 +55,7 @@ $(document).ready(function() {
                 otherArray.push(data[i]);
             }
             if (data[i] && data[i].display_name) {
-                data[i].id = data[i].display_name.replace(/\s+/g, '');
+                data[i].id = normalizeString(data[i].display_name);
             }
         }
 
@@ -304,14 +304,19 @@ var searchclick = $(".list-item").click(function () {
                     if(check && check.display_name){
                         check_name = check.display_name;
 
-                        if (check_name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
-                            checkListItemID = check_name.replace(/\s+/g, '');
+                        if (normalizeString(check_name).indexOf(normalizeString(query)) > -1) {
+                            checkListItemID = normalizeString(check_name);
                             $('#' + checkListItemID).removeClass('hidden');
                         }
                     }
                 }
             }
         });
+    }
+
+    function normalizeString(inputString) {
+        // lowercase & remove non-alphanumeric characters
+        return inputString.toLowerCase().replace(/\W/g, '');
     }
 
     function setNavbarHandlers() {
