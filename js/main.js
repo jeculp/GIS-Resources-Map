@@ -266,12 +266,24 @@ $(document).ready(function() {
     function setListItemHandlers() {
         $(".list-item").click(function (e) {
             e.preventDefault();
-
-            $(".visible-item li div").removeClass("visible-item");
+            $(".item-info").removeClass("visible-item");
             $(this).children("div").addClass("visible-item");
 
+            var $listItem = $(this);
+            var $theList = $('#big-list');
+
+            var itemHeight = $listItem.height();
+            var itemTopOffset = $listItem.offset().top;
+            var listHeight = $theList[0].scrollHeight; // includes overflow
+            var listVisibleHeight = $theList.height(); // visible area only, excludes the hidden overflow
+
+            // make listItem visible if it is hidden at the bottom of the #big-list
+            if ( itemTopOffset > listVisibleHeight ) {
+                $theList.scrollTop(listHeight - itemHeight);
+            }
+
             //Matches list id to markermap array
-            var markerId = $(this).attr( 'id' );
+            var markerId = $listItem.attr( 'id' );
             var marker = markerMap[markerId];
 
             if (marker && marker.getLatLng()) {
@@ -331,6 +343,8 @@ $(document).ready(function() {
         $('nav li').removeClass('active');
         $('#results .none').addClass('hide');
         $('#results-list').empty();
+        $(".item-info").removeClass("visible-item");
+        $('#big-list').scrollTop(0);
     }
 
 });
