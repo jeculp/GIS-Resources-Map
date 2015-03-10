@@ -15,6 +15,7 @@ $(document).ready(function() {
                 processData(data);
                 createSearchHandler();
                 setNavbarHandlers();
+                setListItemHandlers();
                 mapInit();
             }
          });
@@ -85,10 +86,6 @@ $(document).ready(function() {
                 }
             });
         } // sortArray()
-
-
-        ready();
-
     } // parseData()
 
     // Appends the items to the list
@@ -133,59 +130,6 @@ $(document).ready(function() {
         }
 
     } // addChild()
-
-    function ready() {
-        // expand list items
-        $(".list-item").click(function (e) {
-            e.preventDefault();
-
-            if ($(this).children("div").hasClass("visible-item")) {
-               // $(this).children("div").removeClass("visible-item");
-            } else {
-                // hide all
-                $(".visible-item li div").removeClass("visible-item");
-                // but show this one
-                $(this).children("div").addClass("visible-item");
-
-                //Matches list id to markermap array
-                var markerId = $(this).attr( 'id' );
-                console.log(markerId);
-                var marker = markerMap[markerId];
-
-                if (marker && marker.getLatLng()) {
-                    marker.openPopup(marker.getLatLng()); //Opens popup
-                    map.setView(marker.getLatLng(),10); //Zooms to and centers map
-                }
-            }
-        });
-
-    }
-
-
-
-        // expand list items
-var searchclick = $(".list-item").click(function () {
-
-            if ($(this).children("div").hasClass("visible-item")) {
-                $(this).children("div").removeClass("visible-item");
-            } else {
-                // hide all
-                $(".visible-list li div").removeClass("visible-item");
-                // but show this one
-                $(this).children("div").addClass("visible-item");
-
-                //Matches list id to markermap array
-                var markerId = $(this).attr( 'id' );
-                console.log(markerId);
-                var marker = markerMap[markerId];
-
-                marker.openPopup(marker.getLatLng()); //Opens popup
-                map.setView(marker.getLatLng(),10); //Zooms to and centers map
-                e.preventDefault()
-            }
-        });
-
-
 
   // map
 
@@ -274,7 +218,7 @@ var searchclick = $(".list-item").click(function () {
                     "<b>email:</b> " + email + "<br> " +
                     "<b>Phone:</b> " + phone + "<br> " +
                     gisPage);
-                markerMap[feature.properties.NAMELSAD] = marker;
+                markerMap[normalizeString(feature.properties.NAMELSAD)] = marker;
                 return marker;
             }
         }).addTo(markerlayer);
@@ -317,6 +261,25 @@ var searchclick = $(".list-item").click(function () {
     function normalizeString(inputString) {
         // lowercase & remove non-alphanumeric characters
         return inputString.toLowerCase().replace(/\W/g, '');
+    }
+
+    function setListItemHandlers() {
+        $(".list-item").click(function (e) {
+            e.preventDefault();
+
+            $(".visible-item li div").removeClass("visible-item");
+            $(this).children("div").addClass("visible-item");
+
+            //Matches list id to markermap array
+            var markerId = $(this).attr( 'id' );
+            var marker = markerMap[markerId];
+
+            if (marker && marker.getLatLng()) {
+                marker.openPopup(marker.getLatLng()); //Opens popup
+                map.setView(marker.getLatLng(),10); //Zooms to and centers map
+            }
+        });
+
     }
 
     function setNavbarHandlers() {
