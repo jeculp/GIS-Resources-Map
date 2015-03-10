@@ -153,8 +153,8 @@ $(document).ready(function() {
         //Gets and returns colors for Cities that have a web page link in geojson file
     function getcitycolor(d) {
         var d = String(d);
-        return d == 'null' ? '#C26263' :
-            '#47a3da';
+        return d == 'null' ? '0' :
+            '.7';
     }
 
     function mapInit(){
@@ -207,10 +207,9 @@ $(document).ready(function() {
 
                 var marker = new L.circleMarker(latlng, {
                     radius: 3,
-                    color: '#bb4c3c',
                     weight: 0.0,
-                    fillColor: getcitycolor(feature.properties["GIS Page"]), //this passes an attribute from the json file to a function to return a specified color
-                    fillOpacity: .7
+                    fillColor: '#47a3da',
+                    fillOpacity: getcitycolor(feature.properties["GIS Page"]) //checks to see if data has webpage, returns nofill if no data 
                 }).bindPopup("<b>City:</b> " + feature.properties.NAMELSAD + "<br> " +
                     "<b>Name:</b> " + firstname + " " + lastname + "<br> " +
                     "<b>Title:</b> " + title + "<br> " +
@@ -222,8 +221,20 @@ $(document).ready(function() {
                 return marker;
             }
         }).addTo(markerlayer);
-    }
-
+        }
+    
+    //function to change radius on zoom
+    function changeRadius(rad) {
+        $.each(markerMap, function (key, value){value.setRadius(rad/1.5)}); //takes current zoom and divides by number to return radius size
+      }
+    
+    map.on('zoomend', function() {
+    var currentZoom = map.getZoom();
+    changeRadius(currentZoom);    
+    console.log(currentZoom);
+    });
+    
+     
     function createSearchHandler() {
         $( "form.search" ).submit(function( event ) {
             event.preventDefault();
@@ -348,3 +359,5 @@ $(document).ready(function() {
     }
 
 });
+
+  
