@@ -209,7 +209,7 @@ $(document).ready(function() {
                     radius: 3,
                     weight: 0.0,
                     fillColor: '#47a3da',
-                    fillOpacity: getcitycolor(feature.properties["GIS Page"]) //checks to see if data has webpage, returns nofill if no data 
+                    fillOpacity: getcitycolor(feature.properties["GIS Page"]) //checks to see if data has webpage, returns nofill if no data
                 }).bindPopup("<b>City:</b> " + feature.properties.NAMELSAD + "<br> " +
                     "<b>Name:</b> " + firstname + " " + lastname + "<br> " +
                     "<b>Title:</b> " + title + "<br> " +
@@ -222,19 +222,19 @@ $(document).ready(function() {
             }
         }).addTo(markerlayer);
         }
-    
+
     //function to change radius on zoom
     function changeRadius(rad) {
         $.each(markerMap, function (key, value){value.setRadius(rad/1.5)}); //takes current zoom and divides by number to return radius size
       }
-    
+
     map.on('zoomend', function() {
     var currentZoom = map.getZoom();
-    changeRadius(currentZoom);    
+    changeRadius(currentZoom);
     console.log(currentZoom);
     });
-    
-     
+
+
     function createSearchHandler() {
         $( "form.search" ).submit(function( event ) {
             event.preventDefault();
@@ -276,6 +276,11 @@ $(document).ready(function() {
 
     function setListItemHandlers() {
         $(".list-item").click(function (e) {
+
+            if ($(e.target).is('a')) {
+                return;
+            }
+
             e.preventDefault();
             $(".item-info").removeClass("visible-item");
             $(this).children("div").addClass("visible-item");
@@ -360,4 +365,4 @@ $(document).ready(function() {
 
 });
 
-  
+
