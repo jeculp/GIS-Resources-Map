@@ -231,7 +231,6 @@ $(document).ready(function() {
     map.on('zoomend', function() {
     var currentZoom = map.getZoom();
     changeRadius(currentZoom);
-    console.log(currentZoom);
     });
 
 
