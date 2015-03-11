@@ -27,6 +27,11 @@ nav a {
 .hidden {
 	display: none;
 }
+
+header.clearfix {
+	height: auto;
+	padding: 20px 0 0 40px;
+}
 /* Sidebar List */
 
 #big-list .list-item[data-info="has-data"] span:after {
@@ -52,7 +57,7 @@ nav a {
 	clear: both;
 	float: left;
 	width: 30%;
-	height: 80%;
+	height: 100%;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
@@ -192,7 +197,7 @@ width : 60px;
 
 #map {
 	clear: right;
-	height: 80%;
+	height: 100%;
 	width: 70%;
 	float: right;
 }
@@ -260,18 +265,28 @@ width : 60px;
 		width: 100%;
 		float: none;
 	}
-	.container > header {
-		width: auto;
-		height: auto;
-		margin: 0 auto;
-		z-index: 1000;
-		position: relative;
-		padding: 2.875em 1.875em 1.875em;
+	.container > .header.clearfix {
+		padding: 0;
+	}
+	.container > header > span {
+		letter-spacing: 1px;
+	}
+	.container > header > nav {
+		text-align: left;
 	}
 	nav ul {
 		list-style-type: none;
-		font-size: smaller;
 		-webkit-padding-start: 0px;
+		display: inline;
+		text-align: left;
+	}
+	nav ul li {
+		display: inline-block;
+		width: 47%;
+		background-color: rgb(221, 221, 221);
+		color: white;
+		margin: 1%;
+		text-align: center;
 	}
 
 }

@@ -23,7 +23,7 @@ body {
     color: #47a3da;
 }
 
-.container > header {
+/*.container > header {
 	width: 90%;
 	height: 20%;
 	max-width: 69em;
@@ -31,7 +31,7 @@ body {
 	z-index: 1000;
 	position: relative;
 	padding: 2.875em 1.875em 1.875em;
-}
+}*/
 
 .container {
 	height: 100%;
