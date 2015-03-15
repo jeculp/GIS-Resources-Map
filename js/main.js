@@ -1,5 +1,8 @@
 $(document).ready(function() {
-
+    $( '.reloadhome' ).click(function() {
+  location.reload();
+});
+    
     // global
     var ALL_CONTACTS = window.ALL_CONTACTS = [];
     var markerMap = {}; //Creates marker array to match with list ids
