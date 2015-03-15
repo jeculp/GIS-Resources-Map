@@ -1,19 +1,18 @@
 $(document).ready(function() {
-    console.log("  __  __             _   _                _               ");
-    console.log(" |  \/  |           | | (_)              | |        /\    ");
-    console.log(" | \  / | __ _ _ __ | |_ _ _ __ ___   ___| |       /  \   ");
-    console.log(" | |\/| |/ _` | '_ \| __| | '_ ` _ \ / _ \ |      / /\ \  ");
-    console.log(" | |  | | (_| | |_) | |_| | | | | | |  __/ |____ / ____ \ ");
-    console.log(" |_|  |_|\__,_| .__/ \__|_|_| |_| |_|\___|______/_/    \_\ ");
-    console.log("              | |                                         ");
-    console.log("              |_|                                         ");
-
-
-
-
-
-
-
+    $( '.reloadhome' ).click(function() {
+        location.reload();
+    });
+    
+    console.log("88b           d88                                   88                                  88                  db         ");
+    console.log("888b         d888                            ,d     ``                                  88                 d88b        ");
+    console.log("88`8b       d8`88                            88                                         88                d8``8b       ");
+    console.log("88 `8b     d8` 88  ,adPPYYba,  8b,dPPYba,  MM88MMM  88  88,dPYba,,adPYba,    ,adPPYba,  88               d8`  `8b      ");
+    console.log("88  `8b   d8`  88  ``     `Y8  88P`    `8a   88     88  88P`   `88`    `8a  a8P_____88  88              d8YaaaaY8b     ");
+    console.log("88   `8b d8`   88  ,adPPPPP88  88       d8   88     88  88      88      88  8PP```````  88             d8````````8b    ");
+    console.log("88    `888`    88  88,    ,88  88b,   ,a8`   88,    88  88      88      88  `8b,   ,aa  88            d8`        `8b   ");
+    console.log("88     `8`     88  ``8bbdP`Y8  88`YbbdP``    `Y888  88  88      88      88   ``Ybbd8``  88888888888  d8`          `8b  ");
+    console.log("                               88                                                                                      ");
+    console.log("                               88                                                                                      ");
 
     // global
     var ALL_CONTACTS = window.ALL_CONTACTS = [];
