@@ -120,7 +120,7 @@ header.clearfix {
   user-select: none;
 }
 #big-list .list-title.active {
-	display: block;
+	display: block !important;
 }
 #big-list .group-list {
 	display: none;
