@@ -1,3 +1,11 @@
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+/* entypo */
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+
 body {
 	margin:0;
 	padding:0;
@@ -49,10 +57,12 @@ header.clearfix {
 /* Sidebar List */
 
 #big-list .list-item[data-info="has-data"] span:after {
-	content: "\2139";
+	content: "\e705";
+	font-family: 'entypo', sans-serif;
 	color: #abd9e9;
 	display: block;
 	position: absolute;
+	font-size: 20px;
 	top: 10px;
 	right: 10px;
 }
