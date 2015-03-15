@@ -37,6 +37,9 @@ header.clearfix {
 	height: auto;
 	padding: 20px 40px 0 40px;
 }
+#map-header {
+	display: none;
+}
 /* Sidebar List */
 
 #big-list .list-item[data-info="has-data"] span:after {
@@ -234,6 +237,16 @@ header.clearfix {
 }
 
 @media (max-width:706px) {
+	#map-header {
+		color: white;
+		display: block;
+		text-align: center;
+		padding: 20px;
+		background-color: rgb(71, 163, 218);
+	}
+	#map {
+		border: 10px solid #ffffff;
+	}
   #results-list {
 		-webkit-padding-start: 0px;
   }
@@ -245,10 +258,6 @@ header.clearfix {
 		width: 100%;
 		height: initial;
 	}
-/*	#big-list .list-title {
-		float: left;
-		text-align: center;
-	}*/
 	#big-list .visible-list {
 		position: absolute;
 		margin: 50px 0 0 0;
@@ -293,7 +302,10 @@ header.clearfix {
 		margin: 1%;
 		text-align: center;
 	}
-	nav ul li:hover {
+}
 
+@media (max-width: 420px) {
+	header.clearfix {
+		padding: 15px;
 	}
 }
