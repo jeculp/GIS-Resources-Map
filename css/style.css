@@ -68,7 +68,6 @@ header.clearfix {
 }
 #big-list .item-info {
 	display: none;
-	/*margin: 0 0 0 20px;*/
 	font-size: 14px;
 	line-height: 14px;
 }
@@ -78,10 +77,7 @@ header.clearfix {
 #big-list .item-info p {
   color: white;
   padding: 10px 0 10px 10px;
-  /*position: relative;*/
   background-color: #58585a;
-/*  left: -40px;
-  width: 150%;*/
   -webkit-margin-before: 0em;
   -webkit-margin-after: 0em;
 }
@@ -157,7 +153,6 @@ header.clearfix {
 }
 #big-list .homechild {
 	display: inline-block;
-	/* text-align:center; */
 	vertical-align: top;
 }
 #big-list .homechild img{
