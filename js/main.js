@@ -250,11 +250,9 @@ $(document).ready(function() {
             $('.list-item').addClass('hidden');
 
             if(query.length === 0) {
-              // do nothing here
-            } else {
+               } else {
                 for(var i=0; i<ALL_CONTACTS.length; i++) {
                     check = ALL_CONTACTS[i];
-
                     if(check && check.display_name){
                         check_name = check.display_name;
 
@@ -356,7 +354,7 @@ $(document).ready(function() {
         $('.group-list').removeClass('visible-item');
         $('.list-item').removeClass('hidden');
         $('nav li').removeClass('active');
-        $('#results .none').addClass('hide');
+        $('#results .none').removeClass('hide');
         $('#results-list').empty();
         $(".item-info").removeClass("visible-item");
         $('#big-list').scrollTop(0);
