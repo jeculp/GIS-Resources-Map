@@ -249,21 +249,43 @@ $(document).ready(function() {
             $('.group-list').addClass("visible-item");
             $('.list-item').addClass('hidden');
 
+            // Arrays to show certain groups of categories
+            var feds = [],
+                states = [],
+                counties = [],
+                cities = [],
+                usrgroups = [];
+
             if(query.length === 0) {
               // do nothing here
             } else {
                 for(var i=0; i<ALL_CONTACTS.length; i++) {
                     check = ALL_CONTACTS[i];
-
                     if(check && check.display_name){
                         check_name = check.display_name;
 
                         if (normalizeString(check_name).indexOf(normalizeString(query)) > -1) {
                             checkListItemID = normalizeString(check_name);
+                            // put it into the right array
+                            if (check.type === "Federal") {
+                                feds.push(checkListItemID);
+                            } else if (check.type === "State") {
+                                states.push(checkListItemID);
+                            } else if (check.type === "County") {
+                                counties.push(checkListItemID);
+                            } else if (check.type === "City") {
+                                cities.push(checkListItemID);
+                            } else if (check.type === "Other") {
+                                usrgroups.push(checkListItemID);
+                            }
+
                             $('#' + checkListItemID).removeClass('hidden');
                         }
                     }
                 }
+
+                // now 
+
             }
         });
     }
