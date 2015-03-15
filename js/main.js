@@ -1,4 +1,19 @@
 $(document).ready(function() {
+    console.log("  __  __             _   _                _               ");
+    console.log(" |  \/  |           | | (_)              | |        /\    ");
+    console.log(" | \  / | __ _ _ __ | |_ _ _ __ ___   ___| |       /  \   ");
+    console.log(" | |\/| |/ _` | '_ \| __| | '_ ` _ \ / _ \ |      / /\ \  ");
+    console.log(" | |  | | (_| | |_) | |_| | | | | | |  __/ |____ / ____ \ ");
+    console.log(" |_|  |_|\__,_| .__/ \__|_|_| |_| |_|\___|______/_/    \_\ ");
+    console.log("              | |                                         ");
+    console.log("              |_|                                         ");
+
+
+
+
+
+
+
 
     // global
     var ALL_CONTACTS = window.ALL_CONTACTS = [];
