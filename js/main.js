@@ -205,10 +205,11 @@ $(document).ready(function() {
                     if(ALL_CONTACTS[i].display_name == feature.properties["NAMELSAD"]){
                         var firstname = ALL_CONTACTS[i].first_name;
                         var lastname = ALL_CONTACTS[i].last_name;
-                        var title = ALL_CONTACTS[i].title;
-                        var agency_department = ALL_CONTACTS[i].agency_department;
-                        var email = ALL_CONTACTS[i].email;
-                        var phone = ALL_CONTACTS[i].phone;
+                        var fullname = (ALL_CONTACTS[i].first_name.length > 0 || ALL_CONTACTS[i].last_name.length > 0) ? "<b>Name:</b> " + firstname + " " + lastname + "<br>" : "" ;
+                        var title = (ALL_CONTACTS[i].title.length > 0) ? "<b>Title:</b> " + ALL_CONTACTS[i].title  + "<br>": "";
+                        var agency_department = (ALL_CONTACTS[i].agency_department.length > 0) ? "<b>Agency:</b> " + ALL_CONTACTS[i].agency_department + "<br>": "";
+                        var email = (ALL_CONTACTS[i].email.length > 0) ? "<b>email:</b> " + ALL_CONTACTS[i].email + "<br>" : "";
+                        var phone = (ALL_CONTACTS[i].phone.length > 0) ? "<b>Phone:</b> " + ALL_CONTACTS[i].phone + "<br>" : "";
                         var gisPage  = ALL_CONTACTS[i].gis_page;
 
                         if (gisPage == ""){
@@ -219,17 +220,18 @@ $(document).ready(function() {
                     }
                 }
 
+
                 var marker = new L.circleMarker(latlng, {
                     radius: 3,
                     weight: 0.0,
                     fillColor: '#47a3da',
                     fillOpacity: getcitycolor(feature.properties["GIS Page"]) //checks to see if data has webpage, returns nofill if no data
                 }).bindPopup("<b>City:</b> " + feature.properties.NAMELSAD + "<br> " +
-                    "<b>Name:</b> " + firstname + " " + lastname + "<br> " +
-                    "<b>Title:</b> " + title + "<br> " +
-                    "<b>Agency:</b> " + agency_department + "<br> " +
-                    "<b>email:</b> " + email + "<br> " +
-                    "<b>Phone:</b> " + phone + "<br> " +
+                    fullname +
+                    title +
+                    agency_department +
+                    email +
+                    phone +
                     gisPage);
                 markerMap[normalizeString(feature.properties.NAMELSAD)] = marker;
                 return marker;
