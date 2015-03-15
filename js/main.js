@@ -249,6 +249,13 @@ $(document).ready(function() {
             $('.group-list').addClass("visible-item");
             $('.list-item').addClass('hidden');
 
+            // hide all the cateogry heads
+            $("#federal-title").css("display","none");
+            $("#state-title").css("display","none");
+            $("#county-title").css("display","none");
+            $("#city-title").css("display","none");
+            $("#other-title").css("display","none");
+
             // Arrays to show certain groups of categories
             var feds = [],
                 states = [],
@@ -278,14 +285,46 @@ $(document).ready(function() {
                             } else if (check.type === "Other") {
                                 usrgroups.push(checkListItemID);
                             }
-
-                            $('#' + checkListItemID).removeClass('hidden');
                         }
                     }
                 }
 
-                // now 
-
+                // loop through the groups of items, adding header if large enough
+                // federal
+                if (feds.length > 0) { 
+                    $("#federal-title").css("display","block");
+                    for (var i = 0; i < feds.length; i++) {
+                        $("#"+feds[i]).removeClass('hidden');
+                    }
+                }
+                // states
+                if (states.length > 0) {
+                    $("#state-title").css("display","block");
+                    for (var i = 0; i < states.length; i++) {
+                        $("#"+states[i]).removeClass('hidden');
+                    }
+                }
+                // counties
+                if (counties.length > 0) {
+                    $("#county-title").css("display","block");
+                    for (var i = 0; i < counties.length; i++) {
+                        $("#"+counties[i]).removeClass('hidden');
+                    }
+                }
+                // cities
+                if (cities.length > 0) {
+                    $("#city-title").css("display","block");
+                    for (var i = 0; i < cities.length; i++) {
+                        $("#"+cities[i]).removeClass('hidden');
+                    }
+                }
+                // other
+                if (usrgroups.length > 0) {
+                    $("#other-title").css("display","block");
+                    for (var i = 0; i < usrgroups.length; i++) {
+                        $("#"+usrgroups[i]).removeClass('hidden');
+                    }
+                }
             }
         });
     }
