@@ -8,12 +8,20 @@ Directions
 2. `cd Project-Pizza`
 3. `python -m SimpleHTTPServer 8000`
 4. Go to your browser and open `http://localhost:8000/`
+5. To open on your phone, find your IP address and open `http://[YOUR-IP-ADDRESS]:8000/`
 
 Install gspread from GitHub
 =========
 1. `git clone https://github.com/burnash/gspread.git`
 2. `cd gspread`
 3. `python setup.py install`
+
+Update `gh-pages` branch
+=========
+1. `git push origin master`
+2. `git checkout gh-pages`
+3. `git push origin gh-pages`
+4. Visit at http://maptimela.github.io/Project-Pizza/
 
 Embedding Instructions
 =========
