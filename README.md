@@ -1,11 +1,11 @@
-Project-Pizza
+CGIA GIS Resources Map
 =============
-Monies for Pizzas
+A website allowing a user to find GIS contacts by agency type & name (e.g., State,County, City), using the map to navigate to a city, or by searching for an organization or name.
 
 Directions
 =========
-1. Open Terminal and clone this repository by running `git clone https://github.com/maptimeLA/Project-Pizza.git`
-2. `cd Project-Pizza`
+1. Open Terminal and clone this repository by running `git clone https://github.com/maptimeLA/GIS-Resources-Map.git`
+2. `cd GIS-Resources-Map`
 3. `python -m SimpleHTTPServer 8000`
 4. Go to your browser and open `http://localhost:8000/`
 5. To open on your phone, find your IP address and open `http://[YOUR-IP-ADDRESS]:8000/`
@@ -22,13 +22,13 @@ Update `gh-pages` branch
 2. `git checkout gh-pages`
 3. `git rebase master`
 4. `git push origin gh-pages`
-5. Visit at http://maptimela.github.io/Project-Pizza/
+5. Visit at http://maptimela.github.io/GIS-Resources-Map/
 
 Embedding Instructions
 =========
 To embed the map into your own website, you will only need to add one line of code:
 
-`<iframe src="http://maptimela.github.io/Project-Pizza/" width="100%" height="700px" frameborder="0"></iframe>`
+`<iframe src="http://maptimela.github.io/GIS-Resources-Map/" width="100%" height="700px" frameborder="0"></iframe>`
 
 1.10.2015
 =========
@@ -43,11 +43,11 @@ To embed the map into your own website, you will only need to add one line of co
 - Incorporated city geojson
 - This version tests the leaflet search plugin by stefanocudini
 - So far it only searches the geojson containing cities, but each marker is a circleMarker where the color is styled according to whether the city has a website for their GIS dept or section.
-- Test demo [here](http://maptimela.github.io/Project-Pizza)
+- Test demo [here](http://maptimela.github.io/GIS-Resources-Map)
 
 1.23.2015
 =========
-- Updated files to reflect current demo [here](http://maptimela.github.io/Project-Pizza)
+- Updated files to reflect current demo [here](http://maptimela.github.io/GIS-Resources-Map)
 
 2.05.2015
 =========
