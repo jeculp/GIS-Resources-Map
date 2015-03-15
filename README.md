@@ -20,8 +20,9 @@ Update `gh-pages` branch
 =========
 1. `git push origin master`
 2. `git checkout gh-pages`
-3. `git push origin gh-pages`
-4. Visit at http://maptimela.github.io/Project-Pizza/
+3. `git rebase master`
+4. `git push origin gh-pages`
+5. Visit at http://maptimela.github.io/Project-Pizza/
 
 Embedding Instructions
 =========
