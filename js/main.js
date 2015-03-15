@@ -256,6 +256,9 @@ $(document).ready(function() {
             $("#city-title").css("display","none");
             $("#other-title").css("display","none");
 
+            // hide no results
+            $('#results .none').addClass('hide');
+
             // Arrays to show certain groups of categories
             var feds = [],
                 states = [],
@@ -323,6 +326,10 @@ $(document).ready(function() {
                     for (var i = 0; i < usrgroups.length; i++) {
                         $("#"+usrgroups[i]).removeClass('hidden');
                     }
+                }
+                // if all arrays 0, show "no results"
+                if (feds.length === 0 && states.length === 0 && counties.length === 0 && cities.length === 0 && usrgroups.length === 0) {
+                    $('#results .none').removeClass('hide');
                 }
             }
         });
@@ -416,10 +423,10 @@ $(document).ready(function() {
         $('.group-list').removeClass('visible-item');
         $('.list-item').removeClass('hidden');
         $('nav li').removeClass('active');
-        $('#results .none').removeClass('hide');
         $('#results-list').empty();
         $(".item-info").removeClass("visible-item");
         $('#big-list').scrollTop(0);
+        $(".list-title").css("display","none");
     }
 
 });
