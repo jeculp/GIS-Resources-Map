@@ -134,7 +134,7 @@ $(document).ready(function() {
                             addcontact;
             var totalData = div.innerHTML;
             div.className = 'item-info';
-            if (totalData == '<p>This information out of date FFKIIRF? <a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">Update here.</a></p>') {
+            if (totalData == '<p>This information out of date? <a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">Update here.</a></p>') {
                 listItem.setAttribute("data-info", "no-data");
             } else {
                 listItem.setAttribute("data-info", "has-data");
