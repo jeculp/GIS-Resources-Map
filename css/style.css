@@ -55,7 +55,14 @@ header.clearfix {
 	text-decoration: none;
 }
 /* Sidebar List */
-
+#big-list {
+	clear: both;
+	float: left;
+	width: 30%;
+	height: 86%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
 #big-list .list-item[data-info="has-data"] span:after {
 	content: "\e705";
 	font-family: 'entypo', sans-serif;
@@ -74,14 +81,7 @@ header.clearfix {
 #big-list .list-item:hover {
 	background-color: #ffffbf;
 }
-#big-list {
-	clear: both;
-	float: left;
-	width: 30%;
-	height: 86%;
-	overflow-y: scroll;
-	overflow-x: hidden;
-}
+
 #big-list .item-info {
 	display: none;
 	font-size: 14px;
@@ -101,8 +101,12 @@ header.clearfix {
 #big-list .item-info p a:hover {
 	text-decoration: none;
 }
+form.search {
+	width: 30%;
+	float: left;
+}
 #list-search {
-	width: 100%;
+	width: calc(100% - 1px);
 	height: 40px;
 	line-height: 40px;
 	vertical-align: middle;
@@ -110,8 +114,8 @@ header.clearfix {
 	padding: 5px 10px;
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
 	border-left: none;
-	border-right: none;
 }
 #big-list .list-title {
 	display: none;
@@ -205,7 +209,6 @@ header.clearfix {
 	clear: right;
 	height: 86%;
 	width: 70%;
-	float: right;
 }
 .info {
 	padding: 6px 8px;
@@ -256,15 +259,22 @@ header.clearfix {
 		padding: 20px;
 		background-color: rgb(71, 163, 218);
 	}
+	form.search {
+		width: 100%;
+		float: none;
+	}
+	form.search #list-search {
+		border-right: none;
+	}
 	#map {
 		border: 10px solid #ffffff;
 	}
-  #results-list {
+	#results-list {
 		-webkit-padding-start: 0px;
-  }
-  #results-list h1, h4{
+	}
+	#results-list h1, h4{
 		padding: 5%;
-  }
+	}
 	#big-list {
 		float: none;
 		width: 100%;
