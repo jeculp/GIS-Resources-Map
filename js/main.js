@@ -205,11 +205,11 @@ $(document).ready(function() {
                     if(ALL_CONTACTS[i].display_name == feature.properties["NAMELSAD"]){
                         var firstname = ALL_CONTACTS[i].first_name;
                         var lastname = ALL_CONTACTS[i].last_name;
-                        var fullname = (ALL_CONTACTS[i].first_name.length > 0 || ALL_CONTACTS[i].last_name.length > 0) ? "<b>Name:</b> " + firstname + " " + lastname + "<br>" : "" ;
-                        var title = (ALL_CONTACTS[i].title.length > 0) ? "<b>Title:</b> " + ALL_CONTACTS[i].title  + "<br>": "";
-                        var agency_department = (ALL_CONTACTS[i].agency_department.length > 0) ? "<b>Agency:</b> " + ALL_CONTACTS[i].agency_department + "<br>": "";
-                        var email = (ALL_CONTACTS[i].email.length > 0) ? "<b>email:</b> " + ALL_CONTACTS[i].email + "<br>" : "";
-                        var phone = (ALL_CONTACTS[i].phone.length > 0) ? "<b>Phone:</b> " + ALL_CONTACTS[i].phone + "<br>" : "";
+                        var fullname = "<b>Name:</b> " + firstname + " " + lastname + "<br>";
+                        var title = "<b>Title:</b> " + ALL_CONTACTS[i].title  + "<br>";
+                        var agency_department = "<b>Agency:</b> " + ALL_CONTACTS[i].agency_department + "<br>";
+                        var email = "<b>email:</b> " + ALL_CONTACTS[i].email + "<br>";
+                        var phone = "<b>Phone:</b> " + ALL_CONTACTS[i].phone + "<br>";
                         var gisPage  = ALL_CONTACTS[i].gis_page;
 
                         if (gisPage == ""){
