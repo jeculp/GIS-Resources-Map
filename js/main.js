@@ -232,7 +232,8 @@ $(document).ready(function() {
                     agency_department +
                     email +
                     phone +
-                    gisPage);
+                    gisPage + 
+                    '<br>This information out of date?<br><a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">Update here.</a>');
                 markerMap[normalizeString(feature.properties.NAMELSAD)] = marker;
                 return marker;
             }
