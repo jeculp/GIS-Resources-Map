@@ -191,9 +191,7 @@ $(document).ready(function() {
         var countysim = new L.geoJson.ajax("data/countysimple.geojson", {
             style: countylines,
         }).addTo(map);
-
-
-
+        
         var markerlayer = L.layerGroup().addTo(map);
 
         //Adds a layer with Incorporated Cities onto map, styling performed within
@@ -264,6 +262,22 @@ $(document).ready(function() {
     map.on('zoomend', function() {
     var currentZoom = map.getZoom();
     changeRadius(currentZoom);
+    });
+    
+    //Adds city boundary layer at zoom limits
+    var cityboundaries = new L.geoJson.ajax("data/cityboundaries2015.geojson", {
+            "clickable": true,
+            "color": "#47a3da",
+            "fill": "#47a3da",
+            "weight": 1,
+            "opacity": 1,
+            "fillOpacity": 0.2
+        });
+    
+    map.on('zoomend', function() {
+    var currentZoom = map.getZoom();
+    if (currentZoom > 9){map.addLayer(cityboundaries);}
+    else {map.removeLayer(cityboundaries);}
     });
 
 
