@@ -164,8 +164,8 @@ $(document).ready(function() {
         map.addLayer(citysim);
     }
 
-        //Gets and returns colors for Cities that have a web page link in geojson file
-    function getcitycolor(d) {
+    //Gets and returns colors for Cities that have a web page link in geojson file
+    function setcityfillop(d) {
         var d = String(d);
         return d == 'null' ? '0' :
             '.7';
@@ -235,9 +235,6 @@ $(document).ready(function() {
 
                 var marker = new L.circleMarker(latlng, {
                     radius: 3,
-                    weight: 0.0,
-                    fillColor: '#47a3da',
-                    fillOpacity: getcitycolor(feature.properties["GIS Page"]) //checks to see if data has webpage, returns nofill if no data
                 }).bindPopup("<b>City:</b> " + feature.properties.NAMELSAD + "<br> " +
                     fullname +
                     title +
