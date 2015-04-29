@@ -2,7 +2,7 @@ $(document).ready(function() {
     $( '.reloadhome' ).click(function() {
         location.reload();
     });
-    
+
     console.log("88b           d88                                   88                                  88                  db         ");
     console.log("888b         d888                            ,d     ``                                  88                 d88b        ");
     console.log("88`8b       d8`88                            88                                         88                d8``8b       ");
@@ -210,12 +210,26 @@ $(document).ready(function() {
                         var agency_department = "<b>Agency:</b> " + ALL_CONTACTS[i].agency_department + "<br>";
                         var email = "<b>email:</b> " + ALL_CONTACTS[i].email + "<br>";
                         var phone = "<b>Phone:</b> " + ALL_CONTACTS[i].phone + "<br>";
+                        var homepage = ALL_CONTACTS[i].homepage;
                         var gisPage  = ALL_CONTACTS[i].gis_page;
+                        var applications_page = ALL_CONTACTS[i].applications_page;
+                        var newline = "<br>";
 
-                        if (gisPage == ""){
-                            gisPage = "<b>GIS Page:</b> No GIS page available";
+                        if (homepage == ""){
+                            homepage = "<b>Homepage:</b> Not available" +newline;
                         }else{
-                            gisPage = "<b>GIS Page:</b> " + '<a target="_blank" href="' + gisPage + '">Link</a>';
+                            homepage = "<b>Homepage:</b> " + '<a target="_blank" href="' + homepage + '">Link</a>' +newline;
+                        }
+                        if (gisPage == ""){
+                            gisPage = "<b>GIS Page:</b> No GIS page available" +newline;
+                        }else{
+                            gisPage = "<b>GIS Page:</b> " + '<a target="_blank" href="' + gisPage + '">Link</a>' +newline;
+                        }
+
+                        if (applications_page == ""){
+                            applications_page = "<b>Applications Page:</b> Not available" +newline;
+                        }else{
+                            applications_page = "<b>Applications Page:</b> " + '<a target="_blank" href="' + applications_page + '">Link</a>' +newline;
                         }
                     }
                 }
@@ -232,7 +246,9 @@ $(document).ready(function() {
                     agency_department +
                     email +
                     phone +
-                    gisPage + 
+                    homepage +
+                    gisPage +
+                    applications_page +
                     '<br>This information out of date?<br><a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">Update here.</a>');
                 markerMap[normalizeString(feature.properties.NAMELSAD)] = marker;
                 return marker;
@@ -310,7 +326,7 @@ $(document).ready(function() {
 
                 // loop through the groups of items, adding header if large enough
                 // federal
-                if (feds.length > 0) { 
+                if (feds.length > 0) {
                     $("#federal-title").css("display","block");
                     for (var i = 0; i < feds.length; i++) {
                         $("#"+feds[i]).removeClass('hidden');
