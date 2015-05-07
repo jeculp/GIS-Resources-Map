@@ -19,6 +19,9 @@ $(document).ready(function() {
     var markerMap = {}; //Creates marker array to match with list ids
     var map = L.map('map').setView([36.745487, -119.553223], 6);
         map.options.minZoom = 6;
+    var countysim;
+    var citysim;
+    var cityboundaries;
 
     function init() {
         $.ajax({
@@ -147,37 +150,23 @@ $(document).ready(function() {
 
   // map
 
-    //This Controls the hover over feature functions
-    function style(feature) {
-        return {
-            weight: 2,
-            opacity: 1,
-            color: 'white',
-            dashArray: '3',
-            fillOpacity: 0.7,
-            fillColor: '#47a3da'
-        };
-    }
 
-    //Test Function for adding layer at fitBounds
-    function zoomloadlayer() {
-        map.addLayer(citysim);
-    }
-
-    //Gets and returns colors for Cities that have a web page link in geojson file
-    function setcityfillop(d) {
+    
+    function mapInit(){
+        //Gets and returns colors for Cities that have a web page link in geojson file
+        function setcityfillop(d) {
         var d = String(d);
         return d == 'null' ? '.1' :
             '.7';
-    }
-    
-    function mapInit(){
+        }
         //This loads the map
-
+        
         var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
-            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>,               under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
         }).addTo(map).setOpacity(.75);
 
+        
+        //Styles
         var countylines = {
             "clickable": true,
             "color": "#47a3da",
@@ -185,10 +174,22 @@ $(document).ready(function() {
             "dashArray": '3',
             "weight": .5,
             "opacity": 1,
-            "fillOpacity": 0.05
+            "fillOpacity": .05
         };
-
-        var countysim = new L.geoJson.ajax("data/countysimple.geojson", {
+        
+        
+        //Adds city boundaries
+        cityboundaries = new L.geoJson.ajax("data/cityboundaries2015.geojson", {
+            "clickable": true,
+            "color": "#47a3da",
+            "fill": "#47a3da",
+            "weight": 1,
+            "opacity": 1,
+            "fillOpacity": 0.2
+        });
+        
+        //Adds county boundaries
+        countysim = new L.geoJson.ajax("data/countysimple.geojson", {
             style: countylines,
             onEachFeature: function(feature, layer) {
             for (var i=0; i<ALL_CONTACTS.length;i++){
@@ -238,10 +239,9 @@ $(document).ready(function() {
             }
         }).addTo(map);
         
+        //Adds City Markers
         var markerlayer = L.layerGroup().addTo(map);
-
-        //Adds a layer with Incorporated Cities onto map, styling performed within
-        var citysim = new L.geoJson.ajax("data/cities.geojson", {
+        citysim = new L.geoJson.ajax("data/cities.geojson", {
             pointToLayer: function(feature, latlng) {
 
                 for (var i=0; i<ALL_CONTACTS.length;i++){
@@ -311,20 +311,19 @@ $(document).ready(function() {
     changeRadius(currentZoom);
     });
     
-    //Adds city boundary layer at zoom limits
-    var cityboundaries = new L.geoJson.ajax("data/cityboundaries2015.geojson", {
-            "clickable": true,
-            "color": "#47a3da",
-            "fill": "#47a3da",
-            "weight": 1,
-            "opacity": 1,
-            "fillOpacity": 0.2
-        });
-    
+
+    //Functions when zooming in or out
     map.on('zoomend', function() {
     var currentZoom = map.getZoom();
-    if (currentZoom > 9){map.addLayer(cityboundaries);}
-    else {map.removeLayer(cityboundaries);}
+    if (currentZoom > 9){map.addLayer(cityboundaries);
+                        map.removeLayer(countysim);
+                        map.removeLayer(citysim); 
+                        }
+    else {map.removeLayer(cityboundaries);
+        map.addLayer(countysim);
+        map.addLayer(citysim);
+        citysim.bringToFront();
+         }
     });
 
 
