@@ -193,7 +193,7 @@ $(document).ready(function() {
             onEachFeature: function(feature, layer) {
             for (var i=0; i<ALL_CONTACTS.length;i++){
 
-                    if(ALL_CONTACTS[i].display_name == feature.properties.NAME_PCASE){
+                    if(ALL_CONTACTS[i].display_name == feature.properties.NAME_PCASE+" County"){
                         var firstname = ALL_CONTACTS[i].first_name;
                         var lastname = ALL_CONTACTS[i].last_name;
                         var fullname = "<b>Name:</b> " + firstname + " " + lastname + "<br>";
