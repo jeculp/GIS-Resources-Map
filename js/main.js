@@ -148,10 +148,9 @@ $(document).ready(function() {
 
     } // addChild()
 
-  // map
-
-
     
+    
+  // map
     function mapInit(){
         //Gets and returns colors for Cities that have a web page link in geojson file
         function setcityfillop(d) {
@@ -167,32 +166,120 @@ $(document).ready(function() {
 
         
         //Styles
-        var countylines = {
-            "clickable": true,
-            "color": "#47a3da",
-            "fill": "#47a3da",
-            "dashArray": '3',
-            "weight": .5,
-            "opacity": 1,
-            "fillOpacity": .05
+        function countylines(feature)  {
+                return {
+                fillColor: "#47a3da",
+                weight: .5,
+                opacity: 1,
+                color: '#47a3da',
+                dashArray: '3',
+                fillOpacity: 0.05
+                };
+        };
+        
+        function citylines(feature)  {
+                return {
+                fillColor: "#47a3da",
+                weight: 1,
+                opacity: 1,
+                color: '#47a3da',
+                fillOpacity: .3
+                };
         };
         
         
         //Adds city boundaries
         cityboundaries = new L.geoJson.ajax("data/cityboundaries2015.geojson", {
-            "clickable": true,
-            "color": "#47a3da",
-            "fill": "#47a3da",
-            "weight": 1,
-            "opacity": 1,
-            "fillOpacity": 0.2
+
+            style: citylines,
+            onEachFeature: function(feature, layer) {
+                            layer.on({
+                            mouseover: highlightFeature,
+                            mouseout: resetcityHighlight,
+                            //click: zoomToFeature
+                            });
+            for (var i=0; i<ALL_CONTACTS.length;i++){
+ 
+
+                    if(ALL_CONTACTS[i].display_name == feature.properties.NAME){
+                        var firstname = ALL_CONTACTS[i].first_name;
+                        var lastname = ALL_CONTACTS[i].last_name;
+                        var fullname = "<b>Name:</b> " + firstname + " " + lastname + "<br>";
+                        var title = "<b>Title:</b> " + ALL_CONTACTS[i].title  + "<br>";
+                        var agency_department = "<b>Agency:</b> " + ALL_CONTACTS[i].agency_department + "<br>";
+                        var email = "<b>email:</b> " + ALL_CONTACTS[i].email + "<br>";
+                        var phone = "<b>Phone:</b> " + ALL_CONTACTS[i].phone + "<br>";
+                        var homepage = ALL_CONTACTS[i].homepage;
+                        var gisPage  = ALL_CONTACTS[i].gis_page;
+                        var applications_page = ALL_CONTACTS[i].applications_page;
+                        var newline = "<br>";
+
+                        if (homepage == ""){
+                            homepage = "<b>Homepage:</b> Not available" +newline;
+                        }else{
+                            homepage = "<b>Homepage:</b> " + '<a target="_blank" href="' + homepage + '">Link</a>' +newline;
+                        }
+                        if (gisPage == ""){
+                            gisPage = "<b>GIS Page:</b> No GIS page available" +newline;
+                        }else{
+                            gisPage = "<b>GIS Page:</b> " + '<a target="_blank" href="' + gisPage + '">Link</a>' +newline;
+                        }
+
+                        if (applications_page == ""){
+                            applications_page = "<b>Applications Page:</b> Not available" +newline;
+                        }else{
+                            applications_page = "<b>Applications Page:</b> " + '<a target="_blank" href="' + applications_page + '">Link</a>' +newline;
+                        }
+                    }
+                }    
+                
+            layer.bindPopup("<b>City:</b> " + feature.properties.NAME + "<br> " +
+                    fullname +
+                    title +
+                    agency_department +
+                    email +
+                    phone +
+                    homepage +
+                    gisPage +
+                    applications_page +
+                    '<br>This information out of date?<br><a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">Update here.</a>');
+            }
         });
+        
+    function highlightFeature(e) {
+        var layer = e.target;
+        layer.setStyle({
+        weight: 1,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+    }
+    
+    function resetcityHighlight(e) {
+    cityboundaries.resetStyle(e.target);
+    }
+            
+        
+    function resetHighlight(e) {
+        countysim.resetStyle(e.target);
+        }
+        
+    function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+        }
         
         //Adds county boundaries
         countysim = new L.geoJson.ajax("data/countysimple.geojson", {
             style: countylines,
             onEachFeature: function(feature, layer) {
+                            layer.on({
+                            mouseover: highlightFeature,
+                            mouseout: resetHighlight,
+                            //click: zoomToFeature
+                            });
             for (var i=0; i<ALL_CONTACTS.length;i++){
+ 
 
                     if(ALL_CONTACTS[i].display_name == feature.properties.NAME_PCASE+" County"){
                         var firstname = ALL_CONTACTS[i].first_name;
