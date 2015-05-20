@@ -38,6 +38,8 @@ $(document).ready(function() {
          });
     }
 
+
+
     init();
 
     function processData(data){
@@ -154,12 +156,28 @@ $(document).ready(function() {
     function mapInit(){
         //Gets and returns colors for Cities that have a web page link in geojson file
         function setcityfillop(d) {
-        var d = String(d);
-        return d == 'null' ? '.1' :
-            '.7';
+            var d = String(d);
+            return d == 'null' ? '.1' :
+                '.7';
         }
         //This loads the map
         
+        var cityStyleData = {
+            radius: 3,
+            weight: 1.0,
+            fillColor: "#47a3da", //checks to see if data has webpage, returns nofill if no data,
+            fillOpacity: 0.7,
+            color: "#47a3da"    
+        }
+
+        var cityStyleNoData = {
+            radius: 3,
+            weight: 1.0,
+            fillColor: "#47a3da", //checks to see if data has webpage, returns nofill if no data,
+            fillOpacity: 0.1,
+            color: "#47a3da"    
+        }
+
         var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
             attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>,               under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
         }).addTo(map).setOpacity(.75);
@@ -348,31 +366,26 @@ $(document).ready(function() {
 
                         if (homepage == ""){
                             homepage = "<b>Homepage:</b> Not available" +newline;
-                        }else{
+                        } else {
                             homepage = "<b>Homepage:</b> " + '<a target="_blank" href="' + homepage + '">Link</a>' +newline;
                         }
                         if (gisPage == ""){
                             gisPage = "<b>GIS Page:</b> No GIS page available" +newline;
-                        }else{
+                        } else {
                             gisPage = "<b>GIS Page:</b> " + '<a target="_blank" href="' + gisPage + '">Link</a>' +newline;
                         }
 
                         if (applications_page == ""){
                             applications_page = "<b>Applications Page:</b> Not available" +newline;
-                        }else{
+                        } else {
                             applications_page = "<b>Applications Page:</b> " + '<a target="_blank" href="' + applications_page + '">Link</a>' +newline;
                         }
                     }
                 }
 
+                var cityStyle = (String(feature.properties["GIS Page"]) === 'null') ? cityStyleNoData : cityStyleData;
 
-                var marker = new L.circleMarker(latlng, {
-                    radius: 3,
-                    weight: 1.0,
-                    fillColor: "#47a3da", //checks to see if data has webpage, returns nofill if no data,
-                    fillOpacity: setcityfillop(feature.properties["GIS Page"]),
-                    color: "#47a3da"    
-                }).bindPopup("<b>City:</b> " + feature.properties.NAMELSAD + "<br> " +
+                var marker = new L.circleMarker(latlng, cityStyle).bindPopup("<b>City:</b> " + feature.properties.NAMELSAD + "<br> " +
                     fullname +
                     title +
                     agency_department +
@@ -401,16 +414,17 @@ $(document).ready(function() {
 
     //Functions when zooming in or out
     map.on('zoomend', function() {
-    var currentZoom = map.getZoom();
-    if (currentZoom > 9){map.addLayer(cityboundaries);
-                        map.removeLayer(countysim);
-                        map.removeLayer(citysim); 
-                        }
-    else {map.removeLayer(cityboundaries);
-        map.addLayer(countysim);
-        map.addLayer(citysim);
-        citysim.bringToFront();
-         }
+        var currentZoom = map.getZoom();
+        if (currentZoom > 9){
+            map.addLayer(cityboundaries);
+            map.removeLayer(countysim);
+            // map.removeLayer(citysim); 
+        } else {
+            map.removeLayer(cityboundaries);
+            map.addLayer(countysim);
+            // map.addLayer(citysim);
+            citysim.bringToFront();
+        }
     });
 
 
@@ -544,14 +558,17 @@ $(document).ready(function() {
                 $theList.scrollTop(listHeight - itemHeight);
             }
 
-            //Matches list id to markermap array
+            // Matches list id to markermap array
             var markerId = $listItem.attr( 'id' );
             var marker = markerMap[markerId];
 
             if (marker && marker.getLatLng()) {
-                marker.openPopup(marker.getLatLng()); //Opens popup
-                map.setView(marker.getLatLng(),10); //Zooms to and centers map
+
+                map.setView([marker.getLatLng().lat,marker.getLatLng().lng],10,{animate: true}); //Zooms to and centers map
+                marker.openPopup(); // open popup
             }
+
+
         });
 
     }
