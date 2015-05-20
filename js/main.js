@@ -167,7 +167,8 @@ $(document).ready(function() {
             weight: 1.0,
             fillColor: "#47a3da", //checks to see if data has webpage, returns nofill if no data,
             fillOpacity: 0.7,
-            color: "#47a3da"    
+            color: "#47a3da",
+            className: 'citymarker'
         }
 
         var cityStyleNoData = {
@@ -175,7 +176,8 @@ $(document).ready(function() {
             weight: 1.0,
             fillColor: "#47a3da", //checks to see if data has webpage, returns nofill if no data,
             fillOpacity: 0.1,
-            color: "#47a3da"    
+            color: "#47a3da",
+            className: 'citymarker'   
         }
 
         var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
@@ -407,8 +409,8 @@ $(document).ready(function() {
       }
 
     map.on('zoomend', function() {
-    var currentZoom = map.getZoom();
-    changeRadius(currentZoom);
+        var currentZoom = map.getZoom();
+        changeRadius(currentZoom);
     });
     
 
@@ -418,11 +420,12 @@ $(document).ready(function() {
         if (currentZoom > 9){
             map.addLayer(cityboundaries);
             map.removeLayer(countysim);
-            // map.removeLayer(citysim); 
+            $('.citymarker').css({"display":"none"}); // hide cities
         } else {
+            $('.citymarker').css({"display":"block"}); // show cities
             map.removeLayer(cityboundaries);
             map.addLayer(countysim);
-            // map.addLayer(citysim);
+            map.addLayer(citysim);
             citysim.bringToFront();
         }
     });
