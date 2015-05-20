@@ -10,11 +10,11 @@
 { "type": "Feature", "properties": { "Longitude": -118.127014, "Latitude": 34.095286, "Name_0": "California", "NAMELSAD": "Alhambra", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -118.127014, 34.095286 ] } },
 { "type": "Feature", "properties": { "Longitude": -117.725556, "Latitude": 33.575000, "Name_0": "California", "NAMELSAD": "Aliso Viejo", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -117.725556, 33.575 ] } },
 { "type": "Feature", "properties": { "Longitude": -120.542456, "Latitude": 41.487114, "Name_0": "California", "NAMELSAD": "Alturas", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -120.542456, 41.487114 ] } },
-{ "type": "Feature", "properties": { "Longitude": -120.824103, "Latitude": 38.419356, "Name_0": "California", "NAMELSAD": "Amador City", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -120.824103, 38.419356 ] } },
+{ "type": "Feature", "properties": { "Longitude": -120.824103, "Latitude": 38.419356, "Name_0": "California", "NAMELSAD": "Amador", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -120.824103, 38.419356 ] } },
 { "type": "Feature", "properties": { "Longitude": -122.260803, "Latitude": 38.174917, "Name_0": "California", "NAMELSAD": "American Canyon", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -122.260803, 38.174917 ] } },
 { "type": "Feature", "properties": { "Longitude": -117.914503, "Latitude": 33.835292, "Name_0": "California", "NAMELSAD": "Anaheim", "GIS Page": "http:\/\/gis.anaheim.net\/" }, "geometry": { "type": "Point", "coordinates": [ -117.914503, 33.835292 ] } },
 { "type": "Feature", "properties": { "Longitude": -122.297783, "Latitude": 40.448208, "Name_0": "California", "NAMELSAD": "Anderson", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -122.297783, 40.448208 ] } },
-{ "type": "Feature", "properties": { "Longitude": -120.538531, "Latitude": 38.067783, "Name_0": "California", "NAMELSAD": "Angels Camp", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -120.538531, 38.067783 ] } },
+{ "type": "Feature", "properties": { "Longitude": -120.538531, "Latitude": 38.067783, "Name_0": "California", "NAMELSAD": "Angels", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -120.538531, 38.067783 ] } },
 { "type": "Feature", "properties": { "Longitude": -121.805789, "Latitude": 38.004922, "Name_0": "California", "NAMELSAD": "Antioch", "GIS Page": "http:\/\/www.ci.antioch.ca.us\/CityGov\/PublicWorks\/GIS\/" }, "geometry": { "type": "Point", "coordinates": [ -121.805789, 38.004922 ] } },
 { "type": "Feature", "properties": { "Longitude": -118.035344, "Latitude": 34.139728, "Name_0": "California", "NAMELSAD": "Arcadia", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -118.035344, 34.139728 ] } },
 { "type": "Feature", "properties": { "Longitude": -124.082839, "Latitude": 40.866517, "Name_0": "California", "NAMELSAD": "Arcata", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -124.082839, 40.866517 ] } },
@@ -461,6 +461,8 @@
 { "type": "Feature", "properties": { "Longitude": -117.813111, "Latitude": 33.888625, "Name_0": "California", "NAMELSAD": "Yorba Linda", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -117.813111, 33.888625 ] } },
 { "type": "Feature", "properties": { "Longitude": -122.634472, "Latitude": 41.735419, "Name_0": "California", "NAMELSAD": "Yreka", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -122.634472, 41.735419 ] } },
 { "type": "Feature", "properties": { "Longitude": -121.616911, "Latitude": 39.140447, "Name_0": "California", "NAMELSAD": "Yuba City", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -121.616911, 39.140447 ] } },
-{ "type": "Feature", "properties": { "Longitude": -117.043086, "Latitude": 34.033625, "Name_0": "California", "NAMELSAD": "Yucaipa", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -117.043086, 34.033625 ] } }
+{ "type": "Feature", "properties": { "Longitude": -117.043086, "Latitude": 34.033625, "Name_0": "California", "NAMELSAD": "Yucaipa", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -117.043086, 34.033625 ] } },
+{ "type": "Feature", "properties": { "Longitude": null, "Latitude": null, "Name_0": "California", "NAMELSAD": "Apple Valley", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -117.18572436309975, 34.500493507180188 ] } },
+{ "type": "Feature", "properties": { "Longitude": null, "Latitude": null, "Name_0": "California", "NAMELSAD": "Atherton", "GIS Page": null }, "geometry": { "type": "Point", "coordinates": [ -122.19822830023217, 37.461280287005223 ] } }
 ]
 }
