@@ -300,10 +300,6 @@ form.search {
 	.container > .header.clearfix {
 		padding: 0;
 	}
-	.container > header > span {
-		letter-spacing: 1px;
-		text-indent: 0;
-	}
 	.container > header > nav {
 		text-align: left;
 	}
