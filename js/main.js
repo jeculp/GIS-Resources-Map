@@ -268,7 +268,6 @@ $(document).ready(function() {
                     '<br>This information out of date?<br><a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">Update here.</a>');
             }
         });
-        
        
     function highlightFeature(e) {
         var layer = e.target;
@@ -277,7 +276,18 @@ $(document).ready(function() {
         fillOpacity: 0.7
     });
     }
+   
     function resetcityHighlight(e) {
+    if(e.target._popupContent.indexOf("No GIS page available") <=0){    
+    cityboundaries.resetStyle(e.target);} 
+        else {
+            e.target.setStyle(
+                {
+                fillOpacity:.1,
+                color:'#47a3da'
+                }
+            )}
+            }
             
         
     function resetHighlight(e) {
