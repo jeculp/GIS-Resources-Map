@@ -203,14 +203,16 @@ $(document).ready(function() {
                 weight: 1,
                 opacity: 1,
                 color: '#47a3da',
-                fillOpacity: .3
+                fillOpacity:.5,
                 };
         };
+        
+
         
         
         //Adds city boundaries
         cityboundaries = new L.geoJson.ajax("data/cityboundaries2015.geojson", {
-
+            //var cityStyle = (String(feature.properties["GIS Page"]) === 'null') ? cityStyleNoData : cityStyleData;
             style: citylines,
             onEachFeature: function(feature, layer) {
                             layer.on({
@@ -219,8 +221,8 @@ $(document).ready(function() {
                             //click: zoomToFeature
                             });
             for (var i=0; i<ALL_CONTACTS.length;i++){
- 
-
+    
+                
                     if(ALL_CONTACTS[i].display_name == feature.properties.NAME){
                         var firstname = ALL_CONTACTS[i].first_name;
                         var lastname = ALL_CONTACTS[i].last_name;
@@ -241,6 +243,7 @@ $(document).ready(function() {
                         }
                         if (gisPage == ""){
                             gisPage = "<b>GIS Page:</b> No GIS page available" +newline;
+                            layer.setStyle({fillOpacity:.1})
                         }else{
                             gisPage = "<b>GIS Page:</b> " + '<a target="_blank" href="' + gisPage + '">Link</a>' +newline;
                         }
@@ -266,19 +269,15 @@ $(document).ready(function() {
             }
         });
         
+       
     function highlightFeature(e) {
         var layer = e.target;
         layer.setStyle({
-        weight: 1,
         color: '#666',
-        dashArray: '',
         fillOpacity: 0.7
     });
     }
-    
     function resetcityHighlight(e) {
-    cityboundaries.resetStyle(e.target);
-    }
             
         
     function resetHighlight(e) {
