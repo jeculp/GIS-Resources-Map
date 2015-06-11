@@ -1,5 +1,6 @@
-import gspread, csv, datetime, shutil
+import gspread, csv, datetime, shutil, json
 from datetime import timedelta, date
+from oauth2client.client import SignedJwtAssertionCredentials
 
 #create backup file
 yesterdays_string = r"../data/backup/gis_contacts_"
@@ -8,10 +9,14 @@ yesterdays_sheet = yesterdays_string + str(yesterday) + ".csv"
 shutil.copyfile(r"../data/gis_contacts.csv",yesterdays_sheet)
 
 #pass credentials to google docs
-gc = gspread.login('chandlersterling1@gmail.com','mhtqwlguwhpxcrux')
+json_key = json.load(open('json_key.json'))
+scope = ['https://spreadsheets.google.com/feeds']
 
-#open sheet by key
-sht1 = gc.open_by_key('0AgDW4THnpFhkdExhY1hmeXpGc25CYXlOenRGVzZ6YUE')
+credentials = SignedJwtAssertionCredentials(json_key['client_email'], json_key['private_key'], scope)
+gc = gspread.authorize(credentials)
+
+#open sheet by name
+sht1 =gc.open("CA Contact Lists - MaptimeLA")
 
 #open worksheet
 worksheet = sht1.sheet1
