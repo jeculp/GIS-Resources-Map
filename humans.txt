@@ -47,6 +47,6 @@ Location: Pasadena, CA
 Thanks to everyone who helped!
 
 /* SITE */
-Last Update: xx/xx/xxxx
+Last Update: 6/15/2015
 Standards: ....
 Components: Modernizr, jQuery, Leaflet, Papa Parse
