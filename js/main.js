@@ -20,6 +20,7 @@ $(document).ready(function() {
     var map = L.map('map').setView([36.745487, -119.553223], 6);
         map.options.minZoom = 6;
     var countysim;
+    var countyHasNoData = {}; // tracks whether a county has (contact info) data available or not, key = county name (name ends in " County"), value = boolean
     var citysim;
     var cityboundaries;
 
@@ -30,6 +31,7 @@ $(document).ready(function() {
             dataType: "text",
             success: function(data) {
                 processData(data);
+                setCountyHasNoData();
                 createSearchHandler();
                 setNavbarHandlers();
                 setListItemHandlers();
@@ -150,8 +152,19 @@ $(document).ready(function() {
 
     } // addChild()
 
-    
-    
+    // setCountyHasNoData sets up the data in global countyHasNoData hash
+    function setCountyHasNoData() {
+        for (var i=0; i<ALL_CONTACTS.length;i++){
+            var contact = ALL_CONTACTS[i];
+
+            if (contact.display_name && contact.display_name.length > 0 && (contact.display_name.indexOf("County") > -1)) {
+                var name = contact.display_name;
+                var hasNoContactInfo = contact.email === "" && contact.phone === "";
+                countyHasNoData[name] = hasNoContactInfo;
+            }
+        }
+    }
+
   // map
     function mapInit(){
         //Gets and returns colors for Cities that have a web page link in geojson file
@@ -161,7 +174,7 @@ $(document).ready(function() {
                 '.7';
         }
         //This loads the map
-        
+
         var cityStyleData = {
             radius: 3,
             weight: 1.0,
@@ -177,26 +190,38 @@ $(document).ready(function() {
             fillColor: "#47a3da", //checks to see if data has webpage, returns nofill if no data,
             fillOpacity: 0.1,
             color: "#47a3da",
-            className: 'citymarker'   
+            className: 'citymarker'
         }
 
         var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
             attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>,               under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
         }).addTo(map).setOpacity(.75);
 
-        
+
         //Styles
         function countylines(feature)  {
-                return {
-                fillColor: "#47a3da",
+            var countyName = feature.properties.NAME_PCASE + " County";
+            var fillColor, fillOpacity;
+            var countyHasNoContactInfo = countyHasNoData[countyName];
+
+            if (countyHasNoContactInfo) {
+                fillColor = "#fff";
+                fillOpacity = 0;
+            } else {
+                fillColor = "#47a3da";
+                fillOpacity = 0.05;
+            }
+
+            return {
+                fillColor: fillColor,
                 weight: .5,
                 opacity: 1,
                 color: '#47a3da',
                 dashArray: '3',
-                fillOpacity: 0.05
-                };
+                fillOpacity: fillOpacity
+            };
         };
-        
+
         function citylines(feature)  {
                 return {
                 fillColor: "#47a3da",
@@ -206,10 +231,10 @@ $(document).ready(function() {
                 fillOpacity:.5,
                 };
         };
-        
 
-        
-        
+
+
+
         //Adds city boundaries
         cityboundaries = new L.geoJson.ajax("data/cityboundaries2015.geojson", {
             //var cityStyle = (String(feature.properties["GIS Page"]) === 'null') ? cityStyleNoData : cityStyleData;
@@ -221,8 +246,8 @@ $(document).ready(function() {
                             //click: zoomToFeature
                             });
             for (var i=0; i<ALL_CONTACTS.length;i++){
-    
-                
+
+
                     if(ALL_CONTACTS[i].display_name == feature.properties.NAME){
                         var firstname = ALL_CONTACTS[i].first_name;
                         var lastname = ALL_CONTACTS[i].last_name;
@@ -254,8 +279,8 @@ $(document).ready(function() {
                             applications_page = "<b>Applications Page:</b> " + '<a target="_blank" href="' + applications_page + '">Link</a>' +newline;
                         }
                     }
-                }    
-                
+                }
+
             layer.bindPopup("<b>City:</b> " + feature.properties.NAME + "<br> " +
                     fullname +
                     title +
@@ -268,7 +293,7 @@ $(document).ready(function() {
                     '<br>This information out of date?<br><a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">Update here.</a>');
             }
         });
-       
+
     function highlightFeature(e) {
         var layer = e.target;
         layer.setStyle({
@@ -276,10 +301,10 @@ $(document).ready(function() {
         fillOpacity: 0.7
     });
     }
-   
+
     function resetcityHighlight(e) {
-    if(e.target._popupContent.indexOf("No GIS page available") <=0){    
-    cityboundaries.resetStyle(e.target);} 
+    if(e.target._popupContent.indexOf("No GIS page available") <=0){
+    cityboundaries.resetStyle(e.target);}
         else {
             e.target.setStyle(
                 {
@@ -288,16 +313,16 @@ $(document).ready(function() {
                 }
             )}
             }
-            
-        
+
+
     function resetHighlight(e) {
         countysim.resetStyle(e.target);
         }
-        
+
     function zoomToFeature(e) {
         map.fitBounds(e.target.getBounds());
         }
-        
+
         //Adds county boundaries
         countysim = new L.geoJson.ajax("data/countysimple.geojson", {
             style: countylines,
@@ -308,7 +333,7 @@ $(document).ready(function() {
                             //click: zoomToFeature
                             });
             for (var i=0; i<ALL_CONTACTS.length;i++){
- 
+
 
                     if(ALL_CONTACTS[i].display_name == feature.properties.NAME_PCASE+" County"){
                         var firstname = ALL_CONTACTS[i].first_name;
@@ -340,8 +365,8 @@ $(document).ready(function() {
                             applications_page = "<b>Applications Page:</b> " + '<a target="_blank" href="' + applications_page + '">Link</a>' +newline;
                         }
                     }
-                }    
-                
+                }
+
             layer.bindPopup("<b>County:</b> " + feature.properties.NAME_PCASE + "<br> " +
                     fullname +
                     title +
@@ -354,7 +379,7 @@ $(document).ready(function() {
                     '<br>This information out of date?<br><a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">Update here.</a>');
             }
         }).addTo(map);
-        
+
         //Adds City Markers
         var markerlayer = L.layerGroup().addTo(map);
         citysim = new L.geoJson.ajax("data/cities.geojson", {
@@ -421,7 +446,7 @@ $(document).ready(function() {
         var currentZoom = map.getZoom();
         changeRadius(currentZoom);
     });
-    
+
 
     //Functions when zooming in or out
     map.on('zoomend', function() {
