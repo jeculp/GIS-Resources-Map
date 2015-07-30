@@ -159,7 +159,7 @@ $(document).ready(function() {
 
             if (contact.display_name && contact.display_name.length > 0 && (contact.display_name.indexOf("County") > -1)) {
                 var name = contact.display_name;
-                var hasNoContactInfo = contact.email === "" && contact.phone === "";
+                var hasNoContactInfo = contact.first_name === "" && contact.last_name === "";
                 countyHasNoData[name] = hasNoContactInfo;
             }
         }
