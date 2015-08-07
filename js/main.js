@@ -20,7 +20,7 @@ $(document).ready(function() {
     var map = L.map('map').setView([36.745487, -119.553223], 6);
         map.options.minZoom = 6;
     var countysim;
-    var countyHasNoData = {}; // tracks whether a county has (contact info) data available or not, key = county name (name ends in " County"), value = boolean
+    var contactHasNoData = {}; // tracks whether a contact has (contact info) data available or not, key = contact name, value = boolean
     var citysim;
     var cityboundaries;
 
@@ -31,7 +31,7 @@ $(document).ready(function() {
             dataType: "text",
             success: function(data) {
                 processData(data);
-                setCountyHasNoData();
+                setContactHasNoData();
                 createSearchHandler();
                 setNavbarHandlers();
                 setListItemHandlers();
@@ -152,15 +152,15 @@ $(document).ready(function() {
 
     } // addChild()
 
-    // setCountyHasNoData sets up the data in global countyHasNoData hash
-    function setCountyHasNoData() {
+    // setcontactHasNoData sets up the data in global contactHasNoData hash
+    function setContactHasNoData() {
         for (var i=0; i<ALL_CONTACTS.length;i++){
             var contact = ALL_CONTACTS[i];
 
-            if (contact.display_name && contact.display_name.length > 0 && (contact.display_name.indexOf("County") > -1)) {
+            if (contact.display_name && contact.display_name.length > 0 ) {
                 var name = contact.display_name;
                 var hasNoContactInfo = contact.first_name === "" && contact.last_name === "";
-                countyHasNoData[name] = hasNoContactInfo;
+                contactHasNoData[name] = hasNoContactInfo;
             }
         }
     }
@@ -202,7 +202,7 @@ $(document).ready(function() {
         function countylines(feature)  {
             var countyName = feature.properties.NAME_PCASE + " County";
             var fillColor, fillOpacity;
-            var countyHasNoContactInfo = countyHasNoData[countyName];
+            var countyHasNoContactInfo = contactHasNoData[countyName];
 
             if (countyHasNoContactInfo) {
                 fillColor = "#fff";
@@ -223,17 +223,24 @@ $(document).ready(function() {
         };
 
         function citylines(feature)  {
-                return {
-                fillColor: "#47a3da",
+            var cityName = feature.properties.NAME;
+            var fillColor;
+            var cityHasNoContactInfo = contactHasNoData[cityName];
+
+            if (cityHasNoContactInfo) {
+                fillColor = "#fff";
+            } else {
+                fillColor = "#47a3da";
+            }
+
+            return {
+                fillColor: fillColor,
                 weight: 1,
                 opacity: 1,
                 color: '#47a3da',
-                fillOpacity:.5,
-                };
+                fillOpacity:0.5,
+            };
         };
-
-
-
 
         //Adds city boundaries
         cityboundaries = new L.geoJson.ajax("data/cityboundaries2015.geojson", {
