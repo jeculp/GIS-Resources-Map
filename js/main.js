@@ -223,13 +223,13 @@ $(document).ready(function() {
         };
 
         function citylines(feature)  {
-                return {
+            return {
                 fillColor: "#47a3da",
                 weight: 1,
                 opacity: 1,
                 color: '#47a3da',
                 fillOpacity:.5,
-                };
+            };
         };
 
 
@@ -245,7 +245,7 @@ $(document).ready(function() {
                             mouseout: resetcityHighlight,
                             //click: zoomToFeature
                             });
-            for (var i=0; i<ALL_CONTACTS.length;i++){
+                for (var i=0; i<ALL_CONTACTS.length;i++){
 
 
                     if(ALL_CONTACTS[i].display_name == feature.properties.NAME){
@@ -281,7 +281,7 @@ $(document).ready(function() {
                     }
                 }
 
-            layer.bindPopup("<b>City:</b> " + feature.properties.NAME + "<br> " +
+                layer.bindPopup("<b>City:</b> " + feature.properties.NAME + "<br> " +
                     fullname +
                     title +
                     agency_department +
@@ -327,10 +327,19 @@ $(document).ready(function() {
         countysim = new L.geoJson.ajax("data/countysimple.geojson", {
             style: countylines,
             onEachFeature: function(feature, layer) {
+                var countyID = layer.feature.properties.NAME_PCASE.toLowerCase().replace(' ','') + 'county';
+                // when county id is clicked
+                $("#"+countyID).click(function(event) {
+                    console.log('you clicked '+countyID);
+                    map.fitBounds(layer.getBounds());
+                    console.log(layer.getBounds());
+                    // event.preventDefault();
+                }); 
+                
                             layer.on({
                             mouseover: highlightFeature,
                             mouseout: resetHighlight,
-                            //click: zoomToFeature
+
                             });
             for (var i=0; i<ALL_CONTACTS.length;i++){
 
@@ -600,11 +609,13 @@ $(document).ready(function() {
             var marker = markerMap[markerId];
 
             if (marker && marker.getLatLng()) {
-
                 map.setView([marker.getLatLng().lat,marker.getLatLng().lng],10,{animate: true}); //Zooms to and centers map
                 marker.openPopup(); // open popup
             }
 
+            // if (markerId.indexOf('county') != -1) {
+            //     console.log("you clicked a county!");
+            // }
 
         });
 
