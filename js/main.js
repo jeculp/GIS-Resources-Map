@@ -339,7 +339,7 @@ $(document).ready(function() {
                 $("#"+countyID).click(function(event) {
                     console.log('you clicked '+countyID);
                     map.fitBounds(layer.getBounds());
-                    console.log(layer.getBounds());
+                    // console.log(layer.getBounds());
                     // event.preventDefault();
                 }); 
                 
