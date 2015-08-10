@@ -337,11 +337,8 @@ $(document).ready(function() {
                 var countyID = layer.feature.properties.NAME_PCASE.toLowerCase().replace(' ','') + 'county';
                 // when county id is clicked
                 $("#"+countyID).click(function(event) {
-                    console.log('you clicked '+countyID);
                     map.fitBounds(layer.getBounds(),{maxZoom: 8});
                     layer.openPopup();
-                    // console.log(layer.getBounds());
-                    // event.preventDefault();
                 }); 
                 
                 layer.on({
@@ -619,10 +616,6 @@ $(document).ready(function() {
                 map.setView([marker.getLatLng().lat,marker.getLatLng().lng],10,{animate: true}); //Zooms to and centers map
                 marker.openPopup(); // open popup
             }
-
-            // if (markerId.indexOf('county') != -1) {
-            //     console.log("you clicked a county!");
-            // }
 
         });
 
