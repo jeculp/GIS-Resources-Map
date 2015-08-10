@@ -328,7 +328,7 @@ $(document).ready(function() {
 
     function zoomToFeature(e) {
         map.fitBounds(e.target.getBounds());
-        }
+    }
 
         //Adds county boundaries
         countysim = new L.geoJson.ajax("data/countysimple.geojson", {
@@ -338,17 +338,17 @@ $(document).ready(function() {
                 // when county id is clicked
                 $("#"+countyID).click(function(event) {
                     console.log('you clicked '+countyID);
-                    map.fitBounds(layer.getBounds());
+                    map.fitBounds(layer.getBounds(),{maxZoom: 9});
                     // console.log(layer.getBounds());
                     // event.preventDefault();
                 }); 
                 
-                            layer.on({
-                            mouseover: highlightFeature,
-                            mouseout: resetHighlight,
+                layer.on({
+                    mouseover: highlightFeature,
+                    mouseout: resetHighlight,
 
-                            });
-            for (var i=0; i<ALL_CONTACTS.length;i++){
+                });
+	            for (var i=0; i<ALL_CONTACTS.length;i++){
 
 
                     if(ALL_CONTACTS[i].display_name == feature.properties.NAME_PCASE+" County"){
@@ -393,7 +393,7 @@ $(document).ready(function() {
                     gisPage +
                     applications_page +
                     '<br>This information out of date?<br><a href="https://docs.google.com/forms/d/1D_6IMIDp3e6xzMrgH06rnLaNkm-jgEwVOQ8Ro2y4AkY/viewform" target="_blank">Update here.</a>');
-            }
+            } // onEachFeature
         }).addTo(map);
 
         //Adds City Markers
