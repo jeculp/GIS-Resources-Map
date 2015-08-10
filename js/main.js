@@ -338,15 +338,15 @@ $(document).ready(function() {
                 // when county id is clicked
                 $("#"+countyID).click(function(event) {
                     console.log('you clicked '+countyID);
-                    map.fitBounds(layer.getBounds(),{maxZoom: 9});
+                    map.fitBounds(layer.getBounds(),{maxZoom: 8});
+                    layer.openPopup();
                     // console.log(layer.getBounds());
                     // event.preventDefault();
                 }); 
                 
                 layer.on({
                     mouseover: highlightFeature,
-                    mouseout: resetHighlight,
-
+                    mouseout: resetHighlight
                 });
 	            for (var i=0; i<ALL_CONTACTS.length;i++){
 
