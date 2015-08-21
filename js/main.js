@@ -24,6 +24,9 @@ $(document).ready(function() {
     var citysim;
     var cityboundaries;
 
+
+    var countyCentroids = [{"lng":-122.5366816,"lat":41.58968795,"county":"siskiyou"}, {"lng":-123.8899247,"lat":41.73994992,"county":"delnorte"}, {"lng":-120.7206515,"lat":41.58516037,"county":"modoc"}, {"lng":-123.8641933,"lat":40.69769468,"county":"humboldt"}, {"lng":-123.1051426,"lat":40.64672324,"county":"trinity"}, {"lng":-122.0370162,"lat":40.75881081,"county":"shasta"}, {"lng":-120.5890627,"lat":40.66947743,"county":"lassen"}, {"lng":-122.2252265,"lat":40.12045534,"county":"tehama"}, {"lng":-120.8381152,"lat":40.00224361,"county":"plumas"}, {"lng":-121.5929202,"lat":39.66194744,"county":"butte"}, {"lng":-123.3785645,"lat":39.436311,"county":"mendocino"}, {"lng":-122.3824784,"lat":39.59749241,"county":"glenn"}, {"lng":-120.5053974,"lat":39.57804778,"county":"sierra"}, {"lng":-121.341521,"lat":39.26711113,"county":"yuba"}, {"lng":-122.7455076,"lat":39.0977424,"county":"lake"}, {"lng":-120.779702,"lat":39.34777011,"county":"nevada"}, {"lng":-122.232684,"lat":39.17929818,"county":"colusa"}, {"lng":-120.6952731,"lat":39.10904184,"county":"placer"}, {"lng":-121.6879415,"lat":39.03343522,"county":"sutter"}, {"lng":-120.5178479,"lat":38.77542129,"county":"eldorado"}, {"lng":-121.8969613,"lat":38.68696758,"county":"yolo"}, {"lng":-119.8169037,"lat":38.59444829,"county":"alpine"}, {"lng":-122.3272815,"lat":38.50756884,"county":"napa"}, {"lng":-122.8870565,"lat":38.52807795,"county":"sonoma"}, {"lng":-121.3184884,"lat":38.46539335,"county":"sacramento"}, {"lng":-118.8811807,"lat":37.93314536,"county":"mono"}, {"lng":-120.6451459,"lat":38.44232883,"county":"amador"}, {"lng":-120.54516,"lat":38.2016097,"county":"calaveras"}, {"lng":-119.94757,"lat":38.02482502,"county":"tuolumne"}, {"lng":-122.7199862,"lat":38.07302983,"county":"marin"}, {"lng":-121.2630036,"lat":37.93446409,"county":"sanjoaquin"}, {"lng":-121.912773,"lat":38.2890738,"county":"solano"}, {"lng":-121.9118881,"lat":37.91338972,"county":"contracosta"}, {"lng":-120.9917255,"lat":37.55504696,"county":"stanislaus"}, {"lng":-121.8773402,"lat":37.64288125,"county":"alameda"}, {"lng":-119.8985583,"lat":37.57576665,"county":"mariposa"}, {"lng":-122.4300983,"lat":37.746708,"county":"sanfrancisco"}, {"lng":-119.7479641,"lat":37.21288345,"county":"madera"}, {"lng":-122.3220076,"lat":37.42426013,"county":"sanmateo"}, {"lng":-120.7050631,"lat":37.18711003,"county":"merced"}, {"lng":-119.6448418,"lat":36.75484323,"county":"fresno"}, {"lng":-121.6829577,"lat":37.227335,"county":"santaclara"}, {"lng":-117.4009716,"lat":36.50847442,"county":"inyo"}, {"lng":-121.9845385,"lat":37.05475688,"county":"santacruz"}, {"lng":-121.0601999,"lat":36.60571773,"county":"sanbenito"}, {"lng":-121.2271719,"lat":36.21805195,"county":"monterey"}, {"lng":-118.7931193,"lat":36.22142632,"county":"tulare"}, {"lng":-119.8037558,"lat":36.07843551,"county":"kings"}, {"lng":-118.7299935,"lat":35.34697619,"county":"kern"}, {"lng":-116.1739686,"lat":34.84493269,"county":"sanbernardino"}, {"lng":-120.3991097,"lat":35.38931175,"county":"sanluisobispo"}, {"lng":-119.0757298,"lat":34.47193847,"county":"ventura"}, {"lng":-115.9941072,"lat":33.74760232,"county":"riverside"}, {"lng":-120.0125184,"lat":34.67169706,"county":"santabarbara"}, {"lng":-117.756341,"lat":33.70405276,"county":"orange"}, {"lng":-116.7382821,"lat":33.03654358,"county":"sandiego"}, {"lng":-118.2227689,"lat":34.32161489,"county":"losangeles"}, {"lng":-115.3664041,"lat":33.04094176,"county":"imperial"}];
+
     function init() {
         $.ajax({
             type: "GET",
@@ -334,11 +337,18 @@ $(document).ready(function() {
         countysim = new L.geoJson.ajax("data/countysimple.geojson", {
             style: countylines,
             onEachFeature: function(feature, layer) {
-                var countyID = layer.feature.properties.NAME_PCASE.toLowerCase().replace(' ','') + 'county';
+                var countyName = layer.feature.properties.NAME_PCASE.toLowerCase().replace(' ','');
+                var countyID = countyName + 'county';
                 // when county id is clicked
                 $("#"+countyID).click(function(event) {
-                    map.fitBounds(layer.getBounds(),{maxZoom: 8});
-                    layer.openPopup();
+                    // console.log(layer.getBounds());
+                    for (var j = 0; j < countyCentroids.length; j++) {
+                        if (countyCentroids[j].county === countyName) {
+                            // centers map and opens popup at pre-calculated centroid
+                            map.setView([countyCentroids[j].lat,countyCentroids[j].lng],8,{animate: true}); //Zooms to and centers map
+                            layer.openPopup([countyCentroids[j].lat,countyCentroids[j].lng]);
+                        }
+                    }
                 }); 
                 
                 layer.on({
