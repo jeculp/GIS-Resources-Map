@@ -1,5 +1,5 @@
 CGIA GIS Resources Map
-=============
+==============
 A website allowing a user to find GIS contacts by agency type & name (e.g., State,County, City), using the map to navigate to a city, or by searching for an organization or name.
 
 Directions
